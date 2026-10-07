@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catalog UI Smoke</title>
+  <style>body{font:16px system-ui;margin:24px}#results{padding:0;list-style:none}li.pass{color:#245b31}li.fail{color:#a52c20}.fixture{position:absolute;left:-10000px;width:1200px}</style>
+</head>
+<body>
+  <h1>Catalog UI smoke checks</h1>
+  <p>This page mocks fetch only for checking the real Catalog UI consumer.</p>
+  <ol id="results" aria-live="polite"></ol>
+  <div class="fixture">
+    <select id="category-filter"><option value="">All</option></select>
+    <select id="origin-filter"><option value="">All</option></select>
+    <select id="sort-filter"><option value="newest">Newest</option><option value="price_asc">Price ascending</option><option value="price_desc">Price descending</option></select>
+    <input id="search-input"><ul id="suggestions" hidden></ul>
+    <div id="catalog-status" hidden></div><section id="product-grid"></section>
+    <section id="product-detail" tabindex="-1" hidden><button id="detail-close">Close</button><div id="detail-content"></div></section>
+  </div>
+  <script>
+    window.MockCatalog = { mode: 'success', calls: [] };
+    const product = {
+      id: '1', slug: 'demo-product', name: '<img src=x onerror=alert(1)> demo',
+      description: 'Demo copy', origin: { slug: 'demo-origin', name: 'Demo origin', region: 'Demo region' },
+      categories: [{ slug: 'demo-category', name: 'Demo category' }],
+      flavor_tags: [{ slug: 'floral', name: 'Floral' }],
+      flavor_profile: { acidity: 3, body: 3, sweetness: 4, bitterness: 2, aroma: 4 },
+      images: [], minimum_price_vnd: 185000, available: true,
+      variants: [{ id: '2', label: '250g', weight_g: 250, price_vnd: 185000, available: true }],
+      freshness: { roast_date: '2026-10-02', best_enjoyed_until: '2026-11-01', age_days: 5, label: 'Rất tươi', message: null }
+    };
+    window.fetch = async url => {
+      const path = new URL(url, location.href);
+      window.MockCatalog.calls.push(path.pathname + path.search);
+      if (window.MockCatalog.mode === 'error') return { ok: false, json: async () => ({ error: { message: 'Mock network error' } }) };
+      if (path.pathname.endsWith('/categories')) return { ok: true, json: async () => ({ data: [{ slug: 'demo-category', name: 'Demo category' }] }) };
+      if (path.pathname.endsWith('/origins')) return { ok: true, json: async () => ({ data: [{ slug: 'demo-origin', name: 'Demo origin', region: 'Demo region' }] }) };
+      if (path.pathname.endsWith('/search/suggestions')) return { ok: true, json: async () => ({ data: [{ slug: product.slug, name: product.name }] }) };
+      if (path.pathname.endsWith('/products/demo-product')) return { ok: true, json: async () => ({ data: product }) };
+      if (window.MockCatalog.mode === 'empty') return { ok: true, json: async () => ({ data: [], meta: { page: 1, per_page: 20, total_items: 0, total_pages: 0 } }) };
+      return { ok: true, json: async () => ({ data: [product], meta: { page: 1, per_page: 20, total_items: 1, total_pages: 1 } }) };
+    };
+  </script>
+  <script src="../../public/catalog/api-client.js"></script>
+  <script src="../../public/catalog/catalog.js"></script>
+  <script>
+    const results = document.querySelector('#results');
+    function check(name, condition) {
+      const item = document.createElement('li');
+      item.className = condition ? 'pass' : 'fail';
+      item.textContent = `${condition ? 'PASS' : 'FAIL'} — ${name}`;
+      results.append(item);
+      if (!condition) throw new Error(name);
+    }
+    const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+    (async () => {
+      await wait(50);
+      check('renders API product list', document.querySelectorAll('.product-card').length === 1);
+      check('renders API values as text, not markup', document.querySelector('#product-grid img') === null);
+      check('uses approved placeholder label', document.querySelector('#product-grid').textContent.includes('PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.'));
+      document.querySelector('.product-card button').click();
+      await wait(30);
+      check('loads product detail from API', document.querySelector('#detail-content').textContent.includes('Quy cách'));
+      check('renders freshness from API', document.querySelector('#detail-content').textContent.includes('Rất tươi'));
+      document.querySelector('#search-input').value = 'ca';
+      document.querySelector('#search-input').dispatchEvent(new Event('input', { bubbles: true }));
+      await wait(300);
+      check('calls suggestions after the debounce', window.MockCatalog.calls.some(call => call.includes('/search/suggestions?q=ca')));
+      window.MockCatalog.mode = 'empty';
+      document.querySelector('#sort-filter').value = 'price_asc';
+      document.querySelector('#sort-filter').dispatchEvent(new Event('change', { bubbles: true }));
+      await wait(30);
+      check('shows empty state', document.querySelector('#catalog-status').textContent.includes('Chưa có sản phẩm'));
+      window.MockCatalog.mode = 'error';
+      document.querySelector('#sort-filter').dispatchEvent(new Event('change', { bubbles: true }));
+      await wait(30);
+      check('shows error state', document.querySelector('#catalog-status').classList.contains('error'));
+    })().catch(error => {
+      const item = document.createElement('li');
+      item.className = 'fail';
+      item.textContent = `FAIL — ${error.message}`;
+      results.append(item);
+    });
+  </script>
+</body>
+</html>
