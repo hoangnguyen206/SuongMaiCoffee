@@ -1,0 +1,49 @@
+name: khanh_catalog
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:8080:80"
+    environment:
+      APP_ENV: local
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: ${DB_NAME:-khanh_catalog}
+      DB_USER: ${DB_USER:-khanh_catalog}
+      DB_PASSWORD: ${DB_PASSWORD:-local_catalog_only}
+      DB_CONNECT_TIMEOUT: "5"
+      CATALOG_TEST_DATABASE_URL: postgresql://${DB_USER:-khanh_catalog}:${DB_PASSWORD:-local_catalog_only}@db:5432/${DB_NAME:-khanh_catalog}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - php
+        - -r
+        - "exit((string) (new PDO('pgsql:host=' . getenv('DB_HOST') . ';port=' . getenv('DB_PORT') . ';dbname=' . getenv('DB_NAME'), getenv('DB_USER'), getenv('DB_PASSWORD'), [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]))->query('SELECT 1')->fetchColumn() === '1' ? 0 : 1);"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME:-khanh_catalog}
+      POSTGRES_USER: ${DB_USER:-khanh_catalog}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-local_catalog_only}
+    volumes:
+      - catalog_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+
+volumes:
+  catalog_postgres_data:
+    name: khanh_catalog_postgres_data

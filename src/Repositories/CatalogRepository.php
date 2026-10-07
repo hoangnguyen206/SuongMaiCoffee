@@ -134,7 +134,7 @@ final class CatalogRepository implements CatalogReadRepository
             'WHERE p.is_active = TRUE AND (' .
             'p.name ILIKE :name_query ESCAPE CHR(92) OR o.name ILIKE :origin_query ESCAPE CHR(92) OR o.region ILIKE :region_query ESCAPE CHR(92) OR EXISTS (' .
             'SELECT 1 FROM product_flavor_tags pft JOIN flavor_tags ft ON ft.id = pft.flavor_tag_id AND ft.is_active = TRUE ' .
-            'WHERE pft.product_id = p.id AND ft.name ILIKE :tag_query ESCAPE CHR(92)) ' .
+            'WHERE pft.product_id = p.id AND ft.name ILIKE :tag_query ESCAPE CHR(92))) ' .
             'ORDER BY p.name, p.id LIMIT :limit'
         );
         $pattern = '%' . $this->escapeLikePattern($query) . '%';

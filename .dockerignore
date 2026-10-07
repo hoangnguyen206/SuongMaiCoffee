@@ -1,0 +1,10 @@
+**/.git
+**/.gitignore
+**/.env
+**/.env.*
+!**/.env.example
+**/node_modules
+**/vendor
+**/storage
+**/*.log
+_apply_review.py
