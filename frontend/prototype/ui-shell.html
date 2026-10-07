@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2B1B14">
+  <meta name="description" content="Prototype độc lập của giao diện Sương Mai Coffee Roasters.">
+  <title>Sương Mai — UI Shell</title>
+  <link rel="stylesheet" href="ui-shell.css">
+  <script src="mock-adapter.js" defer></script>
+  <script src="ui-shell.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Bỏ qua điều hướng, đến nội dung chính</a>
+
+  <header class="site-header">
+    <div class="header-inner page-container">
+      <a class="brand" href="#home" aria-label="Sương Mai Coffee Roasters — trang mẫu">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span class="brand-copy">
+          <span class="brand-name">Sương Mai</span>
+          <span class="brand-note">COFFEE ROASTERS</span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="menu-toggle-icon" aria-hidden="true"><span></span><span></span></span>
+        <span class="menu-toggle-label">Mở menu</span>
+      </button>
+
+      <nav class="primary-navigation" id="primary-navigation" aria-label="Điều hướng chính">
+        <a href="#story">Câu chuyện</a>
+        <a href="#craft">Hạt cà phê</a>
+        <a href="#preview">Giao diện mẫu</a>
+        <a class="nav-contact" href="#footer">Liên hệ <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="page-container">
+    <section class="intro" id="home" aria-labelledby="page-title">
+      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span> Prototype giao diện · Frontend</p>
+      <h1 id="page-title">Một nhịp chậm,<br><em>một tách cà phê.</em></h1>
+      <p class="intro-copy">Khung giao diện tĩnh để thử bố cục, điều hướng và các trạng thái hiển thị. Đây là prototype độc lập, chưa kết nối ứng dụng hay dịch vụ thật.</p>
+      <a class="text-link" href="#preview">Khám phá bản xem trước <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section class="feature-panel" id="story" aria-labelledby="feature-title">
+      <div class="feature-art" role="img" aria-label="Vùng minh họa tạm thời, chưa phải hình ảnh chính thức">
+        <span class="art-sun" aria-hidden="true"></span>
+        <span class="art-hill art-hill-back" aria-hidden="true"></span>
+        <span class="art-hill art-hill-front" aria-hidden="true"></span>
+        <span class="art-caption">ĐÀ LẠT · SƯƠNG SỚM</span>
+      </div>
+      <div class="feature-copy" id="craft">
+        <p class="eyebrow">Từ vùng cao nguyên</p>
+        <h2 id="feature-title">Bắt đầu từ<br>điều giản dị.</h2>
+        <p>Prototype này dùng nội dung và minh họa trung tính để kiểm tra cách trình bày. Mọi chi tiết thương hiệu, sản phẩm và hình ảnh chính thức sẽ chờ nội dung được duyệt.</p>
+        <div class="placeholder-note" role="note">PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.</div>
+      </div>
+    </section>
+
+    <section class="preview-section" id="preview" aria-labelledby="preview-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Trạng thái giao diện</p>
+          <h2 id="preview-title">Xem thử các trạng thái</h2>
+        </div>
+        <p class="section-aside">Chọn một trạng thái để xem cách khối nội dung phản hồi.</p>
+      </div>
+
+      <div class="preview-layout">
+        <div class="state-picker" role="group" aria-label="Chọn trạng thái xem trước">
+          <button class="state-option" type="button" data-state="loading" aria-pressed="false">Đang tải</button>
+          <button class="state-option" type="button" data-state="success" aria-pressed="true">Thành công</button>
+          <button class="state-option" type="button" data-state="empty" aria-pressed="false">Trống</button>
+          <button class="state-option" type="button" data-state="error" aria-pressed="false">Lỗi</button>
+          <button class="state-option" type="button" data-state="placeholder" aria-pressed="false">Placeholder</button>
+        </div>
+
+        <div class="preview-card" aria-live="polite" aria-atomic="true">
+          <div class="preview-card-topline">
+            <span class="preview-label">MẪU HIỂN THỊ</span>
+            <span class="preview-dot" aria-hidden="true"></span>
+          </div>
+          <div class="preview-content" id="preview-content" data-state="success">
+            <div class="state-icon" aria-hidden="true"><span>✓</span></div>
+            <div class="state-copy">
+              <h3 id="state-title">Sẵn sàng khám phá</h3>
+              <p id="state-description">Nội dung mẫu đã được hiển thị. Kết nối dữ liệu thật sẽ được bổ sung sau khi contract liên quan được duyệt.</p>
+              <p class="state-placeholder" id="state-placeholder" hidden>PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.</p>
+            </div>
+          </div>
+          <div class="preview-card-footer"><span id="state-caption">Trạng thái: Thành công</span><span>UI preview <span aria-hidden="true">·</span> local only</span></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="prototype-note" aria-label="Giới hạn prototype">
+      <span class="note-mark" aria-hidden="true">i</span>
+      <p><strong>Prototype độc lập.</strong> Không có endpoint, tài khoản, giỏ hàng hoặc đặt hàng. Dữ liệu và trạng thái ở đây chỉ phục vụ xem trước UI.</p>
+    </aside>
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="footer-inner page-container">
+      <a class="brand brand-footer" href="#home" aria-label="Sương Mai — về đầu trang">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span class="brand-copy"><span class="brand-name">Sương Mai</span><span class="brand-note">COFFEE ROASTERS</span></span>
+      </a>
+      <p class="footer-message">Prototype giao diện — không phải website thương mại đã vận hành.</p>
+      <a class="back-to-top" href="#home">Lên đầu trang <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+
+  <noscript><p class="noscript-message">Bật JavaScript để sử dụng menu mobile và các nút xem trạng thái. Nội dung chính vẫn có thể đọc được.</p></noscript>
+</body>
+</html>
