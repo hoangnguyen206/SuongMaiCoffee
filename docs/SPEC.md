@@ -183,7 +183,7 @@ Các ID dưới đây giữ nguyên ID nguồn. “Phạm vi” là baseline can
 | FR-BT-03 | Roadmap | Admin tạo/sửa batch, lựa chọn batch khi order chuyển sang roasting. |
 | FR-BT-04 | Roadmap | QR cho batch. |
 
-Dữ liệu batch tối thiểu không được suy ra tồn kho từ `produced_qty_g`. Quan hệ batch–variant–inventory cần proposal rõ và phê duyệt P1 trước implementation.
+Trong MVP, FR-BT-01 chỉ yêu cầu dữ liệu roast-batch tối thiểu phục vụ product detail/freshness của FR-CT-06. Full batch-management workflow không thuộc MVP trừ khi được duyệt riêng. Dữ liệu batch tối thiểu không được suy ra tồn kho từ `produced_qty_g`. Quan hệ batch–variant–inventory cần proposal rõ và phê duyệt P1 trước implementation.
 
 ### 3.8. Nội dung — CN
 
@@ -266,7 +266,7 @@ Luồng hợp lệ: `pending → confirmed → roasting → shipping → complet
 
 ### BR-08 — Trạng thái thanh toán
 
-`unpaid → paid | failed`; `refunded` khi hoàn tiền order đã trả. COD thành `paid` khi order `completed`; chuyển khoản do Staff/Admin có quyền xác nhận thủ công theo P1 permissions/API contract. **[Gốc]**
+`unpaid → paid | failed`; `refunded` khi hoàn tiền order đã trả. COD thành `paid` khi order `completed`; xác nhận chuyển khoản Admin-only theo DEC-028. **[Gốc + quyết định quyền đã duyệt]**
 
 ### BR-09 — Mã nghiệp vụ
 

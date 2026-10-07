@@ -224,7 +224,7 @@ Nguồn: [Gốc] BR-02, BR-07, §9.1–9.3, T05–T08.
 1. Guest mở `/tra-cuu-don`.
 2. Nhập mã đơn và số điện thoại.
 3. Hệ thống kiểm tra cặp thông tin và chỉ trả về đơn phù hợp.
-4. Hiển thị trạng thái, timeline và thông tin cần thiết; không làm lộ dữ liệu đơn của người khác.
+4. Hiển thị dữ liệu allowlist đã được duyệt cho Guest lookup; không trả PII hoặc làm lộ dữ liệu đơn của người khác. Chi tiết response field-by-field phải theo P1 contract được sign-off.
 
 Nguồn: [Gốc] FR-OR-05; [Đã duyệt] đưa vào MVP.
 
@@ -362,12 +362,12 @@ Nguồn: [Gốc] §2.12; trạng thái widget và FR-AD-12: [Đã duyệt].
 - **BR-05 — Thứ tự tính tiền đã chốt:** giá hàng → giảm subscription → coupon → điểm → phí vận chuyển. Phần trăm giảm làm tròn xuống đến đồng. Coupon fixed không vượt giá trị hàng đủ điều kiện. Coupon mặc định cộng dồn với subscription, trừ khi điều kiện coupon loại trừ. **[Đã duyệt]**
 - **BR-06 — Điểm:** Nếu module điểm được triển khai, tích 1 điểm cho mỗi 10.000đ của tạm tính sau giảm khi đơn hoàn tất; 1 điểm = 100đ; dùng tối đa 20% tiền hàng sau giảm subscription/coupon và trước phí vận chuyển. **[Gốc + Đã duyệt cách tính giới hạn]**
 
-**Phạm vi coupon cần lưu trong thiết kế:** coupon áp dụng cho sản phẩm/danh mục nào, có điều kiện loại trừ subscription hay không và giá trị hàng đủ điều kiện được tính ra sao. Nếu chưa có quyết định riêng, triển khai theo nguyên tắc coupon áp dụng toàn đơn và cộng dồn với subscription. **[Đề xuất triển khai mặc định]**
+**Theo DEC-024:** coupon dùng category allowlist; allowlist rỗng không giới hạn category; quota chỉ release khi hủy trước `paid`, còn order đã `paid` giữ quota kể cả refund. Còn chờ review: cách xử lý sản phẩm thuộc nhiều category, phân bổ discount vào snapshot và canonical Guest identity. Không dùng fallback mặc định để thay quyết định còn mở; subscription/points chưa bật trong MVP.
 
 ### 6.2. Trạng thái đơn và thanh toán
 
 - **BR-07:** `pending → confirmed → roasting → shipping → completed`; chỉ hủy từ `pending` hoặc `confirmed`; không nhảy cóc/quay lui, trừ hủy; mọi chuyển trạng thái ghi `order_status_history`. **[Gốc]**
-- **BR-08:** `unpaid → paid/failed`; `refunded` khi hoàn tiền đơn đã trả; COD chuyển `paid` khi hoàn tất; chuyển khoản do nhân viên xác nhận thủ công. **[Gốc]**
+- **BR-08:** `unpaid → paid/failed`; `refunded` khi hoàn tiền đơn đã trả; COD chuyển `paid` khi hoàn tất; xác nhận chuyển khoản Admin-only theo DEC-028. **[Gốc + quyết định quyền đã duyệt]**
 - **BR-09:** Mã đơn `SM-YYMMDD-NNNN`, mã lô `SM-YYMMDD-{MÃ SP}`, mã báo giá `BG-YYMM-NNN`. **[Gốc]**
 
 ### 6.3. Giỏ hàng và snapshot
@@ -375,7 +375,7 @@ Nguồn: [Gốc] §2.12; trạng thái widget và FR-AD-12: [Đã duyệt].
 - **BR-15:** Khóa dòng giỏ là `(biến thể + kiểu xay)`; số lượng tối đa mỗi dòng là 20; đơn sỉ đặt qua báo giá. **[Gốc]**
 - **BR-16:** Sản phẩm đã từng có đơn chỉ được ẩn, không xóa cứng; đơn lưu snapshot tên, giá và biến thể tại thời điểm mua. **[Gốc]**
 
-### 6.4. Quiz — BR-10 đã chốt cho roadmap
+### 6.4. Quiz — BR-10 gốc, chỉ áp dụng nếu được duyệt đưa vào release
 
 1. Hồ sơ khách là vector 5 trục `(chua, đậm, ngọt, đắng, thơm)`, mỗi trục khởi tạo bằng 3.
 2. Mỗi đáp án cộng/trừ theo các cột `*_delta`.
@@ -395,7 +395,7 @@ Nguồn: [Gốc] §2.12; trạng thái widget và FR-AD-12: [Đã duyệt].
 
 7. Sắp xếp giảm dần theo `match%`; nếu hòa điểm, sắp theo thứ tự ưu tiên đã cấu hình, sau đó `product_id` tăng dần.
 
-Nguồn nền: [Gốc] BR-10, FR-QZ-02, §10.4. Công thức đầy đủ và quy tắc hòa: [Đã duyệt].
+Nguồn nền: [Gốc] BR-10, FR-QZ-02, §10.4. Công thức là nội dung roadmap, không phải quyết định triển khai MVP; cần approval riêng trước khi thực hiện.
 
 ### 6.5. Độ tươi — BR-11 đã chốt cách hiển thị
 

@@ -35,8 +35,8 @@ Subscription, Wholesale, full Quiz, Brew Lab, blog, review, wishlist, newsletter
 | FR-AU-07 | TC-AUTH-05, TC-SEC-01 | Security/API | P5/P8 | Must |
 | FR-AU-08, BR-15 | TC-CART-06 | Integration/E2E | P6 | Must |
 | FR-CT-01–04 | TC-CAT-01–02 | API/E2E | P4 | Must |
-| FR-CT-05 | TC-SEARCH-01–03 | API/UI/Performance | P4 | Selected S |
-| FR-CT-06, FR-BT-01 | TC-PRODUCT-01, TC-FRESH-01–04 | API/UI/Boundary | P4 | Must |
+| FR-CT-05 | TC-SEARCH-01–04 | API/UI/Performance | P4 | Selected S |
+| FR-CT-06, FR-BT-01 | TC-PRODUCT-01, TC-FRESH-01–04 | API/UI/Boundary | P4 | Must; MVP batch data only, after P1 schema approval |
 | FR-CA-01–04/06/07 | TC-CART-01–05 | API/Integration/E2E | P6 | Must |
 | BR-01–06 | TC-PRICE-01–03 | Unit/Integration | P6/P7 | Must, applicable modules only |
 | FR-CO-01–07 | TC-ORDER-01–03 | Integration/E2E | P7 | Must |
@@ -63,7 +63,7 @@ Subscription, Wholesale, full Quiz, Brew Lab, blog, review, wishlist, newsletter
 | T03 / TC-PRICE-02 | Apply `WELCOME10` to 300,000đ eligible order | Discount 30,000đ; invalid repeat is rejected per coupon conditions | BR-04/05 |
 | T04 / TC-CART-02 | Requested quantity exceeds stock | Clear validation/business error; no order created | BR-02 |
 | T05 / TC-CART-03 | One line quantity exceeds 20 | Reject; never silently exceed maximum | BR-15 |
-| T06 / TC-CART-04 | Guest cart merges on login | Identity follows approved contract; distinct grind stays separate; no line lost | FR-AU-08 |
+| T06 / TC-CART-04 | Guest cart merges on login | After P1 API contract approval: identity follows contract; distinct grind stays separate; conflicts reject atomically without clamp and cart remains unchanged | FR-AU-08 |
 | T07 / TC-PRICE-03 | Subscription/points features are not enabled | No phantom subscription/points discount; total is deterministic | BR-05/06, MVP scope |
 | T08 / TC-CART-05 | Duplicate add/update request | Result follows approved idempotency/duplicate policy; no unintended duplicate | API contract gate |
 
@@ -86,24 +86,25 @@ Subscription, Wholesale, full Quiz, Brew Lab, blog, review, wishlist, newsletter
 
 | ID | Scenario | Expected result | Trace |
 |---|---|---|---|
-| T19 / TC-PRODUCT-01 | Product detail has an available batch | Show newest available batch per approved data model | FR-CT-06, FR-BT-01 |
+| T19 / TC-PRODUCT-01 | Product detail has an available batch | After P1 schema/API approval, show newest available batch using only MVP-minimal batch data; does not test full batch-management workflow | FR-CT-06, FR-BT-01 |
 | T20 / TC-FRESH-01 | Roast date was 5 days ago | “Rất tươi”; best-enjoyed date is roast date +30 | BR-11 |
 | T21 / TC-FRESH-02 | Roast date was 21 days ago | “Tươi”; no safety claim | BR-11 |
 | T22 / TC-FRESH-03 | Roast date is at +30 boundary | Show approved past/at-best-enjoyed-date message | BR-11 |
 | T23 / TC-FRESH-04 | Batch past +30 or unavailable | No “Còn tốt” through +45; no inventory inferred from `produced_qty_g` | BR-02/11 |
 | T24 / TC-SEARCH-01 | Sufficient-length Vietnamese query with diacritics | Suggestions within approved scope and limit | FR-CT-05 |
-| T25 / TC-SEARCH-02 | Equivalent query without diacritics | Match behavior follows approved normalization | FR-CT-05 |
-| T26 / TC-SEARCH-03 | Empty/too-short query | No unnecessary query; response follows empty/minimum-query contract | FR-CT-05 |
+| T25 / TC-SEARCH-02 | Equivalent query without diacritics | Run only after Vietnamese normalization behavior is approved under OPEN-007 | FR-CT-05 |
+| T26 / TC-SEARCH-03 | Empty/too-short query | UI does not issue a search below the approved minimum; normalized short-query API behavior awaits OPEN-007 approval | FR-CT-05 |
+| T57 / TC-SEARCH-04 | Search response latency | Benchmark only after profile/fixture/CI gate are approved; report p95 against the approved measurement scope | FR-CT-05 |
 
 ### 5.4. Guest order lookup
 
 | ID | Scenario | Expected result | Trace |
 |---|---|---|---|
-| T27 / TC-LOOKUP-01 | Correct order code and phone | Only corresponding order and permitted fields are returned | FR-OR-05 |
+| T27 / TC-LOOKUP-01 | Correct order code and phone | After field-level permission sign-off, returns only the approved allowlisted fields; never returns PII per DEC-030 | FR-OR-05 |
 | T28 / TC-LOOKUP-02 | Incorrect phone | Neutral error; does not reveal whether an order exists | FR-OR-05/security |
-| T29 / TC-LOOKUP-03 | Malformed order code | Validation error without data disclosure | FR-OR-05 |
-| T30 / TC-LOOKUP-04 | Requests exceed lookup limit | Server enforces approved rate limit/cooldown | Security contract |
-| T31 / TC-LOOKUP-05 | Repeated code enumeration | Anti-enumeration and rate limit are enforced server-side | Security contract |
+| T29 / TC-LOOKUP-03 | Malformed order code | Validation error without data disclosure; whether malformed requests count toward the limit awaits OPEN-008 approval | FR-OR-05 |
+| T30 / TC-LOOKUP-04 | Requests exceed lookup limit | Baseline 5/15m IP-hash limit and 15m cooldown; exact window/counting mechanics run after OPEN-008 sign-off | Security contract |
+| T31 / TC-LOOKUP-05 | Repeated code enumeration | Neutral mismatch and approved baseline rate limit enforced server-side; trusted-proxy/store-failure mechanics after OPEN-008 sign-off | Security contract |
 
 ### 5.5. Authentication and security
 
@@ -133,6 +134,12 @@ Subscription, Wholesale, full Quiz, Brew Lab, blog, review, wishlist, newsletter
 | T48 / TC-CONFIG-01 | Staff edits system configuration | Rejected | FR-AD-12, permissions |
 | T49 / TC-CONFIG-02 | Admin saves valid shipping/bank/QR config | Persists and is used by checkout | FR-AD-12 |
 | T50 / TC-CONFIG-03 | Invalid/negative/conflicting configuration | Rejected atomically; no partial config update | FR-AD-12 |
+| T51 / TC-REFUND-01 | Cancel a paid order | After P1 schema/API/permission sign-off: exactly one refund case; order is not marked refunded and inventory is not restocked before confirmed success | DEC-029 |
+| T52 / TC-REFUND-02 | Refund attempt fails, then retry | After P1 sign-off: failed attempt remains append-only; retry creates a new attempt; failure does not restock; paid-order coupon quota remains held | DEC-024, DEC-029 |
+| T53 / TC-REFUND-03 | Refund attempt succeeds; duplicate result/retry is submitted | After P1 sign-off: success, payment/case state and allocation reversals/lot balances/ledger movements commit atomically; each allocation is restocked once | DEC-029, DEC-031 |
+| T54 / TC-PII-01 | Guest lookup response | Contains no PII; verify every returned field against the signed-off allowlist before acceptance | DEC-030 |
+| T55 / TC-PII-02 | Staff order list/detail responses | After field-level permission sign-off: full address/phone only in order detail when needed for delivery; test other fields against the signed-off matrix | DEC-030 |
+| T56 / TC-INV-01 | Batch/unbatched inventory allocation and reversal | After P1 schema sign-off: `pool_kind`/batch consistency, lot-source allocation, ledger movements and one reversal per allocation follow approved schema | DEC-031 |
 
 ## 6. Non-functional tests
 

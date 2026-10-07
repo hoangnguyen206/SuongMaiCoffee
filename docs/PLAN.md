@@ -4,7 +4,7 @@
 >
 > **Nguồn tiến độ duy nhất:** [docs/PROGRESS.md](PROGRESS.md). `PLAN.md` không lưu bản sao trạng thái động; cột trạng thái bên dưới luôn trỏ về `PROGRESS.md`.
 >
-> **Trạng thái tài liệu:** kế hoạch đã được duyệt ở cấp phạm vi. P0 chưa bắt đầu. Việc ghi tên người cụ thể hoặc tạo branch thực tế chỉ thực hiện khi milestone tương ứng được khởi động.
+> **Trạng thái tài liệu:** kế hoạch đã được duyệt ở cấp phạm vi. P0 hoàn tất theo `docs/PROGRESS.md` và đã sign-off; các trạng thái thực tế chỉ ghi trong PROGRESS. Việc ghi tên người cụ thể hoặc tạo branch thực tế chỉ thực hiện khi milestone tương ứng được khởi động.
 
 ## 1. Quy ước điều hành
 
@@ -14,16 +14,17 @@
 |---|---|---|
 | [docs/PROGRESS.md](PROGRESS.md) | **Nguồn duy nhất của tiến độ và trạng thái thực tế** | Đang sử dụng |
 | [docs/PRD.md](PRD.md) | PRD và các quyết định sản phẩm đã được duyệt | Đã tạo |
-| [docs/SPEC.md](SPEC.md) | Đặc tả chuẩn/canonical sau khi hoàn tất P0 | Chưa tạo; deliverable của P0 |
+| [docs/TECH_STACK.md](TECH_STACK.md) | Đề xuất PHP/PostgreSQL/container và toolchain P1 | Đã tạo proposal; compatibility/tooling approval còn mở |
+| [docs/SPEC.md](SPEC.md) | Đặc tả chuẩn/canonical sau khi hoàn tất P0 | Đã tạo; P0 Done theo `docs/PROGRESS.md` |
 | [docs/source/](source/) | Nguồn đặc tả gốc, phải được giữ nguyên | Đã có; không chỉnh sửa |
-| [docs/traceability.md](traceability.md) | Ma trận truy xuất nguồn → PRD → test → triển khai | Chưa tạo; deliverable của P1 |
-| [docs/decisions.md](decisions.md) | Nhật ký quyết định và các điểm đã chốt | Chưa tạo; deliverable của P1 |
-| [docs/database-schema-proposal.md](database-schema-proposal.md) | Đề xuất schema/migration PostgreSQL để duyệt | Chưa tạo; deliverable của P1 |
-| [docs/permissions-matrix.md](permissions-matrix.md) | Ma trận quyền backend theo vai trò và thao tác | Chưa tạo; deliverable của P1 |
-| [docs/api-contract.md](api-contract.md) | Hợp đồng route/request/response/error/CSRF | Chưa tạo; deliverable của P1 |
+| [docs/traceability.md](traceability.md) | Ma trận truy xuất nguồn → PRD → test → triển khai | Chưa tạo; deliverable P1 |
+| [docs/DECISIONS.md](DECISIONS.md) | Nhật ký quyết định và các điểm đã chốt | Đã có; decision log P0/P1 |
+| [docs/database-schema-proposal.md](database-schema-proposal.md) | Đề xuất schema/migration PostgreSQL để duyệt | Đã tạo proposal; chờ review/approval, không phải DDL |
+| [docs/permissions-matrix.md](permissions-matrix.md) | Ma trận quyền backend theo vai trò và thao tác | Đã tạo proposal; chờ review/approval |
+| [docs/API_CONTRACT.md](API_CONTRACT.md) | Hợp đồng route/request/response/error/CSRF | Draft P1 đã tạo; chờ review và approval |
 | [docs/view-contract.md](view-contract.md) | Hợp đồng dữ liệu giữa backend và template/frontend | Chưa tạo; deliverable của P1 |
 
-Các tài liệu có trạng thái “chưa tạo” là liên kết kế hoạch, không phải bằng chứng rằng file đã tồn tại.
+Các proposal đã tạo vẫn cần review/sign-off; chúng không phải contract triển khai đã duyệt. Tài liệu ghi “chưa tạo” là deliverable dự kiến, không phải file hiện hữu.
 
 ### 1.2. Vai trò và nhánh dự kiến
 
@@ -47,14 +48,14 @@ Nguyên tắc ownership bắt buộc:
 
 ### 1.3. Trạng thái
 
-Chỉ cập nhật trạng thái thực tế trong [docs/PROGRESS.md](PROGRESS.md), theo các giá trị:
+| Trạng thái | Ý nghĩa |
+|---|---|
+| `Todo` | Chưa bắt đầu. |
+| `In progress` | Đang thực hiện. |
+| `Blocked` | Có blocker cần ghi trong `PROGRESS.md`. |
+| `Done` | Hoàn thành và có evidence/test tương ứng. |
 
-- `Not started` — chưa bắt đầu.
-- `In progress` — đang thực hiện.
-- `Blocked` — có blocker, phải ghi rõ trong `PROGRESS.md`.
-- `Review` — chờ review/approval.
-- `Done` — hoàn thành và có evidence/test tương ứng.
-- `Deferred` — hoãn ngoài phạm vi hiện tại, phải nêu quyết định.
+Trạng thái động chỉ cập nhật trong [`docs/PROGRESS.md`](PROGRESS.md).
 
 ## 2. Phạm vi và gate bắt buộc
 
@@ -77,15 +78,15 @@ Không bắt đầu code nghiệp vụ trước khi đạt tối thiểu các đ
 2. P1 duyệt PostgreSQL major version tương thích local/container, CI và Render managed PostgreSQL.
 3. P1 duyệt schema/migration và quan hệ batch–variant–inventory; không suy luận tồn batch từ `produced_qty_g`.
 4. P1 duyệt permissions matrix, API contract và view contract.
-5. P1 duyệt BR-10, finance/freshness rules, search/guest lookup limitations và coupon redemption model.
+5. P1 duyệt finance/freshness rules, search/guest lookup limitations và coupon redemption model; BR-10 chỉ là gate nếu Quiz được đưa vào scope release.
 6. Chỉ thiết kế/tạo các bảng cần cho MVP; không dựng trước full 39-table schema.
 
 ## 3. Milestone tổng quan
 
 | Milestone | Mục tiêu | Phụ trách chính | Nhánh dự kiến | Trạng thái thực tế |
 |---|---|---|---|---|
-| P0 | Chuẩn hóa source và lập traceability | TL/PD | `docs/p0-spec-normalization` | Xem [PROGRESS.md](PROGRESS.md) |
-| P1 | Chốt contract/schema/permissions trước code | TL/PD + BE/DB + FE + QA/INT | `docs/p1-contracts`, `backend/p1-contracts`, `frontend/p1-contracts` | Xem [PROGRESS.md](PROGRESS.md) |
+| P0 | Chuẩn hóa source và lập traceability | TL/PD | `docs/p0-spec-normalization` (quy ước dự kiến) | Done theo [PROGRESS.md](PROGRESS.md) |
+| P1 | Chốt contract/schema/permissions trước code | TL/PD + BE/DB + FE + QA/INT | `docs/p1-contracts`, `backend/p1-contracts`, `frontend/p1-contracts` | In progress theo [PROGRESS.md](PROGRESS.md) |
 | P2 | Bootstrap nền tảng PHP MVC/PostgreSQL | BE/DB + FE | `backend/p2-bootstrap`, `frontend/p2-bootstrap` | Xem [PROGRESS.md](PROGRESS.md) |
 | P3 | Public content và shell giao diện | FE + BE | `frontend/p3-public-content`, `backend/p3-public-content` | Xem [PROGRESS.md](PROGRESS.md) |
 | P4 | Catalog, search, product detail và freshness | BE/DB + FE | `backend/p4-catalog`, `frontend/p4-catalog` | Xem [PROGRESS.md](PROGRESS.md) |
@@ -99,21 +100,21 @@ Không bắt đầu code nghiệp vụ trước khi đạt tối thiểu các đ
 
 ### P0 — Chuẩn hóa đặc tả và traceability
 
-**Mục tiêu:** tạo đặc tả chuẩn `docs/SPEC.md` và nối requirement gốc với PRD, quyết định, test và milestone mà không làm mất hoặc tự ý thay đổi yêu cầu.
+**Mục tiêu:** tạo đặc tả chuẩn `docs/SPEC.md` từ source mà không làm mất hoặc tự ý thay đổi yêu cầu. P0 đã hoàn tất theo [docs/PROGRESS.md](PROGRESS.md); checklist sau là deliverables đã nghiệm thu, không phải đầu việc còn mở.
 
 **Đầu việc/deliverables:**
 
-- [ ] Đọc và chuẩn hóa format/title/heading/link của source.
-- [ ] Tạo [docs/SPEC.md](SPEC.md), giữ nguyên ý nghĩa requirement và ID gốc.
-- [ ] Ghi rõ các quyết định đã được user chốt, không trộn proposal chưa duyệt vào requirement.
-- [ ] Lập khung traceability để hoàn thiện ở P1.
-- [ ] Xác nhận source file trong `docs/source/` không bị chỉnh sửa.
+- [x] Đọc và chuẩn hóa format/title/heading/link của source.
+- [x] Tạo [docs/SPEC.md](SPEC.md), giữ nguyên ý nghĩa requirement và ID gốc.
+- [x] Ghi rõ quyết định đã chốt; không trộn proposal chưa duyệt vào requirement.
+- [x] Lập baseline traceability; mở rộng traceability thuộc P1.
+- [x] Xác nhận source trong `docs/source/` không bị chỉnh sửa.
 
 **Phụ thuộc:** PRD đã duyệt; các quyết định scope/stack/finance/freshness đã chốt.
 
 **Hợp đồng liên quan:** [PRD](PRD.md), [SPEC](SPEC.md), [source specification](source/).
 
-**Hoàn thành khi:** `SPEC.md` tồn tại, source vẫn nguyên vẹn, các override đã được đánh dấu rõ và TL/PD sign-off.
+**Hoàn thành:** `SPEC.md` tồn tại, source vẫn nguyên vẹn, override được đánh dấu; trạng thái/evidence được ghi tại [docs/PROGRESS.md](PROGRESS.md).
 
 **Không làm trong P0:** không tạo migration, schema-dependent seed, route/controller/service nghiệp vụ hoặc code order.
 
@@ -123,19 +124,17 @@ Không bắt đầu code nghiệp vụ trước khi đạt tối thiểu các đ
 
 **Đầu việc/deliverables:**
 
-- [ ] Chốt PostgreSQL major version và compatibility matrix.
-- [ ] Tạo `database-schema-proposal.md`: bảng MVP, khóa, FK, constraint, index, nullable/delete behavior, migration boundary.
-- [ ] Mô tả rõ product/variant/roast-batch/inventory relationship.
-- [ ] Chốt coupon redemption persistence và anti-enumeration/rate-limit cho guest lookup.
-- [ ] Tạo `permissions-matrix.md`, backend enforcement và forbidden actions.
-- [ ] Tạo `api-contract.md`: routes, methods, auth, CSRF, request/response/error/status codes.
+- [x] Tạo `TECH_STACK.md` proposal với PostgreSQL 17 candidate/toolchain commands; compatibility tests và exact resolved versions còn mở.
+- [x] Tạo `database-schema-proposal.md` proposal; chưa approval và không phải DDL.
+- [x] Tạo `permissions-matrix.md` proposal; chi tiết chờ review/sign-off.
+- [ ] Chốt batch/variant/lot, coupon, cart merge, search và guest lookup semantics còn mở.
+- [x] Tạo `API_CONTRACT.md` Draft P1 để review; routes, methods, auth, CSRF, request/response/error details vẫn cần reconcile và approval sau schema/permissions review.
 - [ ] Tạo `view-contract.md`: template inputs, empty/loading/error states và ownership boundaries.
-- [ ] Cập nhật `traceability.md` và `decisions.md`.
-- [ ] Review/approval của TL/PD, BE/DB, FE và QA/INT.
-
+- [ ] Cập nhật traceability sau khi contracts được duyệt.
+- [ ] Review/approval toàn bộ P1 của TL/PD, BE/DB, FE và QA/INT.
 **Phụ thuộc:** P0 `SPEC.md` hoàn thành.
 
-**Hợp đồng liên quan:** [SPEC](SPEC.md), [PRD](PRD.md), [traceability](traceability.md), [decisions](decisions.md), [database schema](database-schema-proposal.md), [permissions](permissions-matrix.md), [API](api-contract.md), [view](view-contract.md).
+**Hợp đồng liên quan:** [SPEC](SPEC.md), [PRD](PRD.md), [traceability](traceability.md), [decisions](DECISIONS.md), [database schema](database-schema-proposal.md), [permissions](permissions-matrix.md), [API](API_CONTRACT.md), [view](view-contract.md).
 
 **Hoàn thành khi:** các contract được duyệt; PostgreSQL/schema/permission/API/view decisions đủ để viết code mà không mở lại các điểm gate.
 
@@ -143,7 +142,7 @@ Không bắt đầu code nghiệp vụ trước khi đạt tối thiểu các đ
 
 ### P2 — Bootstrap nền tảng
 
-**Mục tiêu:** dựng skeleton PHP 8.1+ custom MVC, public entry point, config an toàn, PostgreSQL connection và test harness tối thiểu.
+**Mục tiêu:** dựng skeleton PHP 8.4 custom MVC, public entry point, config an toàn, PostgreSQL connection và test harness tối thiểu.
 
 **Đầu việc/deliverables:**
 
@@ -156,7 +155,7 @@ Không bắt đầu code nghiệp vụ trước khi đạt tối thiểu các đ
 
 **Phụ thuộc:** P1 approval.
 
-**Hợp đồng liên quan:** [database schema](database-schema-proposal.md), [permissions](permissions-matrix.md), [API](api-contract.md), [view](view-contract.md).
+**Hợp đồng liên quan:** [database schema](database-schema-proposal.md), [permissions](permissions-matrix.md), [API](API_CONTRACT.md), [view](view-contract.md).
 
 **Hoàn thành khi:** ứng dụng khởi động local, kết nối PostgreSQL hợp lệ, test harness chạy và error handling không lộ PHP/config error.
 
@@ -193,7 +192,7 @@ Không bắt đầu code nghiệp vụ trước khi đạt tối thiểu các đ
 
 **Phụ thuộc:** P2, P3 và schema/API/view contracts được duyệt.
 
-**Hợp đồng liên quan:** [SPEC](SPEC.md), [PRD](PRD.md), [database schema](database-schema-proposal.md), [API](api-contract.md), [view](view-contract.md).
+**Hợp đồng liên quan:** [SPEC](SPEC.md), [PRD](PRD.md), [database schema](database-schema-proposal.md), [API](API_CONTRACT.md), [view](view-contract.md).
 
 **Hoàn thành khi:** catalog/search/detail chạy với dữ liệu PostgreSQL hợp lệ, freshness không đưa claim an toàn ngoài phạm vi và test boundary dates đạt.
 
@@ -213,7 +212,7 @@ Không bắt đầu code nghiệp vụ trước khi đạt tối thiểu các đ
 
 **Phụ thuộc:** P2; P1 permissions/API/view contracts.
 
-**Hợp đồng liên quan:** [permissions](permissions-matrix.md), [API](api-contract.md), [view](view-contract.md), [PRD](PRD.md).
+**Hợp đồng liên quan:** [permissions](permissions-matrix.md), [API](API_CONTRACT.md), [view](view-contract.md), [PRD](PRD.md).
 
 **Hoàn thành khi:** auth/account acceptance tests đạt và các endpoint protected bị từ chối đúng role/session.
 
@@ -226,17 +225,17 @@ Không bắt đầu code nghiệp vụ trước khi đạt tối thiểu các đ
 - [ ] Guest cart ở session; logged-in cart persisted.
 - [ ] Line identity `(variant_id, grind_option_id)`.
 - [ ] Quantity max 20 mỗi dòng, backend enforced.
-- [ ] Pricing: hàng → subscription discount → coupon → points → shipping.
+- [ ] Pricing MVP: giá hàng → coupon → shipping; subscription/points chỉ áp dụng nếu module tương lai được bật.
 - [ ] VND integer; percentage discount floor; fixed coupon không vượt eligible merchandise; một coupon/order.
-- [ ] Points cap 20% của eligible merchandise sau subscription/coupon, trước shipping.
+- [ ] Không triển khai points earning/redemption trong MVP; giữ BR-06 là quy tắc có điều kiện cho module tương lai.
 - [ ] Chốt và implement cart merge: identical lines, stock exceeded, >20, API error/clamp, final UI message/displayed quantity.
 - [ ] Không seed subscription giả; feature absent thì dashboard/status hiển thị “Chưa triển khai”.
 
 **Phụ thuộc:** P1 finance rules/schema/API; P5 identity/session.
 
-**Hợp đồng liên quan:** [PRD](PRD.md), [SPEC](SPEC.md), [database schema](database-schema-proposal.md), [API](api-contract.md), [view](view-contract.md), [permissions](permissions-matrix.md).
+**Hợp đồng liên quan:** [PRD](PRD.md), [SPEC](SPEC.md), [database schema](database-schema-proposal.md), [API](API_CONTRACT.md), [view](view-contract.md), [permissions](permissions-matrix.md).
 
-**Hoàn thành khi:** unit/integration tests cho từng bước giá, boundary quantity, coupon/points và mọi nhánh merge đều có kết quả deterministic.
+**Hoàn thành khi:** unit/integration tests cho các bước pricing thuộc MVP, boundary quantity, coupon và mọi nhánh merge sau khi P1 contract được duyệt đều có kết quả deterministic.
 
 ### P7 — Checkout, orders và guest lookup
 
@@ -256,7 +255,7 @@ Không bắt đầu code nghiệp vụ trước khi đạt tối thiểu các đ
 
 **Phụ thuộc:** P1 schema/permissions/API; P5 auth; P6 cart/pricing.
 
-**Hợp đồng liên quan:** [SPEC](SPEC.md), [PRD](PRD.md), [database schema](database-schema-proposal.md), [permissions](permissions-matrix.md), [API](api-contract.md), [view](view-contract.md).
+**Hợp đồng liên quan:** [SPEC](SPEC.md), [PRD](PRD.md), [database schema](database-schema-proposal.md), [permissions](permissions-matrix.md), [API](API_CONTRACT.md), [view](view-contract.md).
 
 **Hoàn thành khi:** order transaction/lifecycle/cancel/lookup tests đạt, stock không âm do flow hợp lệ và không lộ thông tin order khi lookup sai.
 
@@ -275,7 +274,7 @@ Không bắt đầu code nghiệp vụ trước khi đạt tối thiểu các đ
 
 **Phụ thuộc:** P4–P7; P1 permissions/schema/API; chỉ triển khai các admin capability thuộc MVP.
 
-**Hợp đồng liên quan:** [permissions](permissions-matrix.md), [API](api-contract.md), [view](view-contract.md), [database schema](database-schema-proposal.md), [PRD](PRD.md).
+**Hợp đồng liên quan:** [permissions](permissions-matrix.md), [API](API_CONTRACT.md), [view](view-contract.md), [database schema](database-schema-proposal.md), [PRD](PRD.md).
 
 **Hoàn thành khi:** role matrix tests, upload validation, config validation và admin acceptance tests đạt.
 
@@ -325,7 +324,7 @@ Các hạng mục sau không tự động được thêm vào P0–P9:
 - Loyalty point implementation ngoài các rule/contract cần cho MVP.
 - Full 39-table schema trước nhu cầu MVP.
 
-Mọi thay đổi phạm vi phải được ghi trong [docs/PROGRESS.md](PROGRESS.md) và [docs/decisions.md](decisions.md), sau đó cập nhật kế hoạch khi được duyệt.
+Mọi thay đổi phạm vi phải được ghi trong [docs/PROGRESS.md](PROGRESS.md) và [docs/DECISIONS.md](DECISIONS.md), sau đó cập nhật kế hoạch khi được duyệt.
 
 ## 7. Cập nhật kế hoạch
 

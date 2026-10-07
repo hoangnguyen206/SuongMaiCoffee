@@ -10,9 +10,12 @@ Tài liệu và kế hoạch cho website thương mại điện tử Sương Mai
 - [Tiến độ](docs/PROGRESS.md) — nguồn duy nhất của trạng thái/task/evidence.
 - [Quyết định](docs/DECISIONS.md) — decision log và các điểm đang mở.
 - [Kế hoạch kiểm thử](docs/TEST_PLAN.md) — acceptance criteria và traceability tới test.
+- [Đề xuất stack](docs/TECH_STACK.md) — proposal P1 PHP/PostgreSQL/container và toolchain.
+- [Đề xuất schema](docs/database-schema-proposal.md) — proposal P1 cho data model MVP, chưa phải migration.
+- [Đề xuất ma trận quyền](docs/permissions-matrix.md) — proposal P1 về authorization theo thao tác.
 - [Đặc tả nguồn gốc](docs/source/S%C6%AF%C6%A0NG%20MAI%20COFFEE%20ROASTERS_%20%C4%90%E1%BA%B6C%20T%E1%BA%A2%20D%E1%BB%B0%20%C3%81N%20WEBSITE.md) — nguồn bất biến; không sửa, đổi tên hoặc di chuyển.
 
-Các contract `TECH_STACK.md`, `API_CONTRACT.md` và `DATA_MODEL.md` chưa có trong repository tại thời điểm cập nhật README này. Không coi các file dự kiến đó là đã được duyệt hoặc đã tồn tại.
+`docs/API_CONTRACT.md` đã có bản Draft P1 để review; `docs/view-contract.md` và `docs/traceability.md` chưa có. Draft và các proposal P1 chưa phải approval cuối cùng hay cho phép viết implementation.
 
 ## MVP
 
