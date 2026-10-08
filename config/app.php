@@ -14,4 +14,7 @@ return [
         'sslmode' => getenv('DB_SSLMODE') ?: null,
         'connect_timeout' => max(1, (int) (getenv('DB_CONNECT_TIMEOUT') ?: 3)),
     ],
+    'auth' => [
+        'rate_limit_key' => getenv('AUTH_RATE_LIMIT_KEY') ?: null,
+    ],
 ];

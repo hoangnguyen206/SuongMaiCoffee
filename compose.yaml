@@ -15,6 +15,7 @@ services:
       DB_USER: ${DB_USER:-khanh_catalog}
       DB_PASSWORD: ${DB_PASSWORD:-local_catalog_only}
       DB_CONNECT_TIMEOUT: "5"
+      AUTH_RATE_LIMIT_KEY: ${AUTH_RATE_LIMIT_KEY:-local_auth_rate_limit_key_change_before_deploy_2026}
       CATALOG_TEST_DATABASE_URL: postgresql://${DB_USER:-khanh_catalog}:${DB_PASSWORD:-local_catalog_only}@db:5432/${DB_NAME:-khanh_catalog}
     depends_on:
       db:

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Đăng nhập hoặc tạo tài khoản Sương Mai Coffee Roasters.">
+  <title>Tài khoản — Sương Mai</title>
+  <link rel="stylesheet" href="/account/account.css">
+  <script src="/account/account-api.js" defer></script>
+  <script src="/account/account.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#account-main">Bỏ qua điều hướng, đến nội dung chính</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Sương Mai — trang chủ">Sương Mai <span>COFFEE ROASTERS</span></a>
+      <nav aria-label="Điều hướng chính"><a href="/catalog/">Cửa hàng</a><a href="/account/" aria-current="page">Tài khoản</a></nav>
+    </div>
+  </header>
+  <main id="account-main" class="container account-main">
+    <section class="intro" aria-labelledby="account-title">
+      <p class="eyebrow">Tài khoản khách hàng</p>
+      <h1 id="account-title">Chào mừng bạn trở lại</h1>
+      <p>Đăng nhập hoặc tạo tài khoản để quản lý thông tin cá nhân.</p>
+    </section>
+    <p id="account-status" class="status" role="status" aria-live="polite" hidden></p>
+    <section id="auth-panel" class="panel" aria-label="Đăng nhập hoặc đăng ký">
+      <div class="tabs" role="group" aria-label="Chọn thao tác tài khoản">
+        <button id="show-login" class="tab is-active" type="button" aria-pressed="true">Đăng nhập</button>
+        <button id="show-register" class="tab" type="button" aria-pressed="false">Tạo tài khoản</button>
+      </div>
+      <form id="login-form" novalidate>
+        <h2>Đăng nhập</h2>
+        <label>Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+        <label>Mật khẩu<input name="password" type="password" autocomplete="current-password" required></label>
+        <button class="button" type="submit">Đăng nhập</button>
+      </form>
+      <form id="register-form" hidden novalidate>
+        <h2>Tạo tài khoản</h2>
+        <label>Họ và tên<input name="full_name" autocomplete="name" maxlength="120" required></label>
+        <label>Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+        <label>Số điện thoại<input name="phone" type="tel" autocomplete="tel" maxlength="32" required></label>
+        <label>Mật khẩu<input name="password" type="password" autocomplete="new-password" minlength="8" required><span class="hint">Tối thiểu 8 ký tự, gồm chữ và số.</span></label>
+        <button class="button" type="submit">Tạo tài khoản</button>
+      </form>
+    </section>
+    <section id="profile-panel" class="panel" aria-labelledby="profile-title" hidden>
+      <div class="profile-heading">
+        <div><p class="eyebrow">Đã đăng nhập</p><h2 id="profile-title">Thông tin cá nhân</h2></div>
+        <button id="logout-button" class="button button-quiet" type="button">Đăng xuất</button>
+      </div>
+      <form id="profile-form" novalidate>
+        <label>Họ và tên<input name="full_name" autocomplete="name" maxlength="120" required></label>
+        <label>Email<input name="email" type="email" autocomplete="email" readonly></label>
+        <label>Số điện thoại<input name="phone" type="tel" autocomplete="tel" maxlength="32" required></label>
+        <p id="profile-role" class="hint"></p>
+        <button class="button" type="submit">Lưu thông tin</button>
+      </form>
+      <details class="password-section">
+        <summary>Đổi mật khẩu</summary>
+        <form id="password-form" novalidate>
+          <label>Mật khẩu hiện tại<input name="current_password" type="password" autocomplete="current-password" required></label>
+          <label>Mật khẩu mới<input name="new_password" type="password" autocomplete="new-password" minlength="8" required><span class="hint">Tối thiểu 8 ký tự, gồm chữ và số.</span></label>
+          <button class="button" type="submit">Cập nhật mật khẩu</button>
+        </form>
+      </details>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>Sương Mai Coffee Roasters</span><span class="placeholder">PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.</span></div></footer>
+</body>
+</html>

@@ -183,12 +183,15 @@ Không bắt đầu code nghiệp vụ trước khi đạt tối thiểu các đ
 
 **Đầu việc/deliverables:**
 
-- [ ] Category/listing/filter/sort theo API contract.
-- [ ] Autocomplete search cho `FR-CT-05`, có giới hạn và escaping.
-- [ ] Product/variant/grind presentation.
+- [ ] Category/listing/filter/sort theo API contract đầy đủ.
+- [ ] Autocomplete search cho `FR-CT-05`, có giới hạn và escaping; performance/normalization acceptance còn theo P1.
+- [ ] Product/variant/grind presentation đầy đủ theo contract.
 - [ ] Minimal roast-batch data cho `FR-CT-06`; không triển khai full batch management.
-- [ ] Freshness: newest available batch, `roast_date + 30 days`, badge ≤7/≤21 ngày; sau ngày 30 chỉ nêu đã quá recommended date.
-- [ ] Empty/error/loading states.
+- [ ] Freshness: newest available batch, `roast_date + 30 days`, badge ≤7/≤21 ngày; sau ngày 30 chỉ nêu đã quá recommended date; boundary tests.
+- [ ] Empty/error/loading states theo acceptance đầy đủ.
+- [x] Read-only Catalog slice được duyệt và tích hợp: listing, category/origin filters, sort subset, search suggestions, product detail/freshness demo và local PostgreSQL Docker environment; xem `docs/PROGRESS.md` P4-01 cho evidence.
+
+Slice trên là một checkpoint có phạm vi hẹp, không thay thế P4 Definition of Done. P4 vẫn mở cho các acceptance chưa được xác minh/hoàn tất, gồm filter/sort contract đầy đủ, grind/options, freshness boundaries, empty state qua điều kiện dữ liệu hợp lệ và search performance/normalization. API contract vẫn là Draft P1.
 
 **Phụ thuộc:** P2, P3 và schema/API/view contracts được duyệt.
 
