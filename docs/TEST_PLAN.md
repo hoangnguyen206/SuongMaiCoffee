@@ -52,6 +52,31 @@ Subscription, Wholesale, full Quiz, Brew Lab, blog, review, wishlist, newsletter
 | NFR-09 | TC-NFR-05 | Unit/UI | P2–P9 | Must |
 | NFR-11/12 | TC-DB-01–03 | Integration/Deploy smoke | P2/P9 | Must |
 
+## 4.1. Evidence thực thi Catalog slice (2026-10-07)
+
+Các kết quả dưới đây ghi nhận slice Catalog read-only trên Docker local (PHP 8.4.26, PostgreSQL 17.11) và browser smoke bằng Chrome headless. Đây là evidence triển khai/slice, không phải sign-off API contract P1, full P4 acceptance, CI/Render compatibility hoặc MCP Playwright run. Empty/error state dùng các kỹ thuật kiểm tra riêng được ghi rõ bên dưới.
+
+| Test/acceptance | Kết quả | Evidence và giới hạn |
+|---|---|---|
+| TC-CAT-01/02 — Catalog listing và dữ liệu public | Pass theo kết quả được báo cáo | Hai sản phẩm demo placeholder tải từ Catalog API/PostgreSQL; categories/origins/products HTTP 200. Không phải dữ liệu thương mại/tồn kho thật. |
+| TC-CAT-01/02 — Category/origin filter và sort | Pass theo Chrome headless smoke được báo cáo | Category/origin filter và giá tăng/giảm hoạt động với dữ liệu thật. Chỉ xác minh filter/sort được implement trong slice; không xác nhận mọi filter/sort còn trong Draft API. |
+| TC-PRODUCT-01 — Product detail/variants | Pass một phần theo kết quả được báo cáo | Search suggestion mở product detail và hiển thị variants. Freshness demo có batch 5 ngày; boundary acceptance TC-FRESH-01–04 chưa xác minh đầy đủ. |
+| TC-SEARCH-01 — Suggestions với query có dấu | Pass theo kết quả được báo cáo | Query `cà` trả suggestions qua HTTP/API 200 và browser smoke; xác nhận luồng có dấu, không chứng minh normalization dấu/không dấu. |
+| TC-SEARCH-02 — Tìm kiếm tương đương không dấu | Not run | Vietnamese diacritic normalization còn mở theo OPEN-007; không suy diễn hành vi. |
+| TC-SEARCH-03 — Query rỗng/ngắn | Pass ở service/contract smoke; browser UI guard chưa được ghi nhận như test riêng | PHP Catalog contract/integration checks giới hạn query dưới 2 ký tự; acceptance cho toàn bộ normalized API behavior còn theo OPEN-007. |
+| TC-SEARCH-04 — Search p95 | Not run | Chưa có fixture/profile/CI gate được duyệt; không có benchmark evidence. |
+| TC-NFR-02 / responsive Catalog | Pass theo Chrome headless smoke được báo cáo | 1440px và 390px; không tràn ngang. TC-NFR-01 375px + hamburger của site-wide shell không được suy ra từ đây. |
+| TC-NFR-06 — Loading state | Pass theo Chrome headless smoke được báo cáo | Loading message quan sát được trước khi response API hoàn tất. |
+| TC-NFR-06 — Empty state | Mock-only | UI empty message được render khi browser smoke cung cấp mock response rỗng; chưa xác minh với filter hợp lệ trên dữ liệu PostgreSQL thật. Không tạo data mới để đạt trạng thái này. |
+| TC-NFR-06 — Error state | Pass cho UI error path theo Chrome headless smoke được báo cáo | Request products bị chặn; UI hiển thị `Failed to fetch`. Đây là lỗi mạng được mô phỏng, không phải lỗi backend 5xx. |
+| Browser console/network | Không có lỗi nghiêm trọng theo kết quả được báo cáo | Không runtime exception hoặc 5xx trong luồng bình thường; `/favicon.ico` trả 404 và được ghi nhận là lỗi asset đã biết. |
+| TC-DB-01 — Migration/seed/integration local | Pass theo kết quả được báo cáo | Migration, demo seed và PostgreSQL integration chạy trong Docker local; không kết nối production. Integration test tạo/dọn schema riêng. |
+| TC-DB-02 — PostgreSQL compatibility | Local smoke only | PostgreSQL 17 container và app health/query được báo healthy; CI, Render và version approval chưa xác minh. |
+| PHP/JS/static regression smoke | Pass theo kết quả được báo cáo | PHP syntax, bootstrap smoke, Catalog contract smoke, router smoke, JavaScript syntax và `git diff --check`. |
+| Playwright MCP | Chưa xác minh/chưa chạy | MCP Playwright không có kết quả chạy được xác nhận trong phiên; browser evidence là Chrome headless, không phải MCP Playwright. |
+
+Empty/error UI smoke có dùng response rỗng giả lập và request bị chặn có chủ ý; không thay thế test với filter/data hợp lệ. Các kết quả browser, migration/seed và integration trong bảng là **theo kết quả kiểm thử được báo cáo**; không diễn giải thành acceptance toàn MVP.
+
 ## 5. MVP acceptance tests
 
 ### 5.1. Cart, pricing, coupon and merge

@@ -29,6 +29,24 @@ PostgreSQL là DBMS duy nhất. PostgreSQL major version và chi tiết stack/sc
 
 Asset/nội dung chưa được duyệt phải ghi `PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.` Subscription không triển khai trong MVP; dashboard phải hiển thị “Chưa triển khai”, không seed số liệu giả.
 
+## Local Catalog demo
+
+Requirements: Docker Engine/Desktop with Docker Compose. The Compose project uses a local PostgreSQL 17 container and publishes the app only on `127.0.0.1:8080`; it does not connect to Render or production. The included `.env.example` values are local demo defaults only. Do not use them for production.
+
+From the repository root, start the demo and initialize its local database:
+
+```powershell
+docker compose up -d --build
+docker compose exec app php database/migrate.php
+docker compose exec app php database/seed.php
+```
+
+- Catalog UI: <http://127.0.0.1:8080/catalog/>
+- Health/API: <http://127.0.0.1:8080/api/v1/health>, <http://127.0.0.1:8080/api/v1/products>
+- Search suggestions: <http://127.0.0.1:8080/api/v1/search/suggestions?q=c%C3%A0>
+
+Demo records are learning placeholders, not real inventory or approved brand assets. Stop the local services without deleting the database volume with `docker compose stop`. See [PROGRESS.md](docs/PROGRESS.md) for the verified slice status and remaining acceptance.
+
 ## Trạng thái
 
 Xem [docs/PROGRESS.md](docs/PROGRESS.md) để biết trạng thái hiện tại; README này không lưu bản sao tiến độ động.
