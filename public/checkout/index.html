@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prototype mock độc lập cho luồng checkout ba bước.">
+  <title>Thanh toán — Mock UI</title>
+  <link rel="stylesheet" href="checkout.css">
+  <script src="checkout-mock.js" defer></script>
+  <script src="checkout.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Bỏ qua điều hướng, đến nội dung chính</a>
+  <header class="site-header">
+    <div class="page-container header-inner">
+      <a class="brand" href="#main-content" aria-label="Sương Mai — checkout mock">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span class="brand-copy"><strong>Sương Mai</strong><span>COFFEE ROASTERS</span></span>
+      </a>
+      <div class="mock-badge" aria-label="Đây là mock UI, không kết nối dữ liệu thật"><span class="status-dot" aria-hidden="true"></span> MOCK UI · LOCAL ONLY</div>
+    </div>
+  </header>
+
+  <main id="main-content" class="page-container">
+    <section class="checkout-heading" aria-labelledby="checkout-title">
+      <p class="eyebrow"><span aria-hidden="true"></span> Prototype checkout</p>
+      <h1 id="checkout-title">Hoàn tất đơn hàng</h1>
+      <p class="intro">Một bản xem trước ba bước: giao hàng → vận chuyển &amp; thanh toán → xác nhận. Không có dữ liệu nào được gửi đi.</p>
+    </section>
+
+    <nav class="stepper" aria-label="Các bước checkout">
+      <ol>
+        <li class="step is-current" data-step-indicator="1"><span class="step-number">1</span><span class="step-label">Giao hàng</span></li>
+        <li class="step" data-step-indicator="2"><span class="step-number">2</span><span class="step-label">Vận chuyển &amp;<br> thanh toán</span></li>
+        <li class="step" data-step-indicator="3"><span class="step-number">3</span><span class="step-label">Xác nhận</span></li>
+      </ol>
+    </nav>
+
+    <div class="mock-banner" role="status">
+      <span class="banner-icon" aria-hidden="true">i</span>
+      <p><strong>Chế độ MOCK.</strong> Fixture minh họa, chưa nối API. Không nhập thông tin thật; tổng tiền bên phải không phải phép tính đã được kiểm chứng.</p>
+    </div>
+
+    <div class="checkout-grid">
+      <section class="checkout-panel" aria-labelledby="step-title">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker" id="step-kicker">BƯỚC 1 / 3</p>
+            <h2 id="step-title" tabindex="-1">Thông tin giao hàng</h2>
+          </div>
+          <span class="panel-status">MOCK</span>
+        </div>
+
+        <form id="checkout-form" novalidate>
+          <fieldset class="step-panel is-active" data-step-panel="1" aria-labelledby="step-title">
+            <legend class="visually-hidden">Thông tin giao hàng</legend>
+            <p class="field-note">Dùng dữ liệu giả lập để xem trạng thái biểu mẫu. Không nhập PII thật.</p>
+            <div class="field-grid">
+              <div class="field field-wide">
+                <label for="recipient-name">Tên người nhận <span aria-hidden="true">*</span></label>
+                <input id="recipient-name" name="recipient_name" type="text" autocomplete="off" placeholder="Ví dụ: Nguyễn An" data-mock-field>
+                <small class="field-error" data-error-for="recipient-name"></small>
+              </div>
+              <div class="field">
+                <label for="recipient-phone">Số điện thoại <span aria-hidden="true">*</span></label>
+                <input id="recipient-phone" name="phone" type="tel" inputmode="tel" autocomplete="off" placeholder="Ví dụ: 09xx xxx xxx" data-mock-field>
+                <small class="field-error" data-error-for="recipient-phone"></small>
+              </div>
+              <div class="field">
+                <label for="recipient-email">Email nhận thông báo</label>
+                <input id="recipient-email" name="email" type="email" autocomplete="off" placeholder="you@example.test" data-mock-field>
+                <small class="field-error" data-error-for="recipient-email"></small>
+              </div>
+              <div class="field field-wide">
+                <label for="address-line">Địa chỉ nhận hàng <span aria-hidden="true">*</span></label>
+                <input id="address-line" name="address_line1" type="text" autocomplete="off" placeholder="Số nhà, tên đường (dữ liệu mẫu)" data-mock-field>
+                <small class="field-error" data-error-for="address-line"></small>
+              </div>
+              <div class="field">
+                <label for="province">Tỉnh / thành phố <span aria-hidden="true">*</span></label>
+                <select id="province" name="province_city" data-mock-field>
+                  <option value="">Chọn tỉnh / thành phố</option>
+                  <option value="mock-lam-dong">[MOCK] Lâm Đồng</option>
+                  <option value="mock-hcm">[MOCK] Thành phố mẫu</option>
+                </select>
+                <small class="field-error" data-error-for="province"></small>
+              </div>
+              <div class="field">
+                <label for="district">Quận / huyện <span aria-hidden="true">*</span></label>
+                <select id="district" name="district" data-mock-field>
+                  <option value="">Chọn quận / huyện</option>
+                  <option value="mock-01">[MOCK] Khu vực 01</option>
+                  <option value="mock-02">[MOCK] Khu vực 02</option>
+                </select>
+                <small class="field-error" data-error-for="district"></small>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="step-panel" data-step-panel="2" aria-labelledby="step-title">
+            <legend class="visually-hidden">Vận chuyển và thanh toán</legend>
+            <p class="field-note">Các lựa chọn dưới đây chỉ thay đổi giao diện mock, không tạo quote hay payment intent.</p>
+            <div class="choice-group">
+              <span class="choice-label" id="shipping-label">Phương thức vận chuyển</span>
+              <div class="choice-list" role="radiogroup" aria-labelledby="shipping-label">
+                <label class="choice-card is-selected"><input type="radio" name="shipping_method" value="standard" checked><span><strong>Giao hàng tiêu chuẩn</strong><small>Fixture mock · thời gian chưa được xác nhận</small></span><b class="choice-price">MOCK</b></label>
+                <label class="choice-card"><input type="radio" name="shipping_method" value="pickup"><span><strong>Nhận tại điểm mẫu</strong><small>Fixture mock · chưa phải điểm nhận thật</small></span><b class="choice-price">MOCK</b></label>
+              </div>
+            </div>
+            <div class="choice-group">
+              <span class="choice-label" id="payment-label">Phương thức thanh toán</span>
+              <div class="choice-list" role="radiogroup" aria-labelledby="payment-label">
+                <label class="choice-card is-selected"><input type="radio" name="payment_method" value="cod" checked><span><strong>Thanh toán khi nhận hàng</strong><small>COD · trạng thái mock</small></span><span class="choice-icon" aria-hidden="true">₫</span></label>
+                <label class="choice-card"><input type="radio" name="payment_method" value="bank"><span><strong>Chuyển khoản ngân hàng</strong><small>QR / hướng dẫn sẽ theo contract thật</small></span><span class="choice-icon" aria-hidden="true">↗</span></label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="step-panel" data-step-panel="3" aria-labelledby="step-title">
+            <legend class="visually-hidden">Xác nhận</legend>
+            <div class="confirmation-intro"><span class="confirmation-icon" aria-hidden="true">✓</span><div><p class="panel-kicker">BƯỚC CUỐI / MOCK</p><h3>Kiểm tra trước khi gửi</h3><p>Đây chỉ là màn hình review cục bộ. Nút bên dưới không tạo order.</p></div></div>
+            <dl class="review-list" id="review-list"><div><dt>Người nhận</dt><dd id="review-recipient">Chưa nhập dữ liệu mock</dd></div><div><dt>Địa chỉ</dt><dd id="review-address">Chưa nhập dữ liệu mock</dd></div><div><dt>Vận chuyển</dt><dd id="review-shipping">Giao hàng tiêu chuẩn · MOCK</dd></div><div><dt>Thanh toán</dt><dd id="review-payment">Thanh toán khi nhận hàng · MOCK</dd></div></dl>
+            <p class="privacy-note"><span aria-hidden="true">⌁</span> Không lưu hoặc log nội dung biểu mẫu. Khi rời trang, dữ liệu nhập sẽ biến mất.</p>
+          </fieldset>
+
+          <div class="form-actions">
+            <button class="button button-secondary" id="back-button" type="button" hidden>Quay lại</button>
+            <button class="button button-primary" id="next-button" type="button">Tiếp tục <span aria-hidden="true">→</span></button>
+          </div>
+          <p class="form-feedback" id="form-feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <aside class="order-summary" aria-labelledby="summary-title">
+        <div class="summary-header"><div><p class="panel-kicker">TÓM TẮT MOCK</p><h2 id="summary-title">Giỏ hàng mẫu</h2></div><span class="item-count">2 món</span></div>
+        <div class="summary-items">
+          <article class="summary-item"><div class="item-art" aria-hidden="true">SM</div><div><h3>Hạt cà phê mẫu</h3><p>250g · Nguyên hạt · x1</p></div><strong>MOCK</strong></article>
+          <article class="summary-item"><div class="item-art item-art-light" aria-hidden="true">SM</div><div><h3>Phin lọc mẫu</h3><p>Phiên bản demo · x1</p></div><strong>MOCK</strong></article>
+        </div>
+        <dl class="summary-totals"><div><dt>Tạm tính</dt><dd>— MOCK</dd></div><div><dt>Vận chuyển</dt><dd>— MOCK</dd></div><div class="total-row"><dt>Tổng cộng</dt><dd>CHƯA TÍNH</dd></div></dl>
+        <p class="summary-disclaimer">Không hiển thị phép tính giá thật trong prototype. Giá, giảm giá, phí ship và tổng đơn phải do server tính lại khi tích hợp.</p>
+      </aside>
+    </div>
+
+    <p class="prototype-label">PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC. · CHECKOUT UI MOCK · KHÔNG PHẢI FLOW VẬN HÀNH</p>
+  </main>
+  <footer class="site-footer"><div class="page-container footer-inner"><span>Sương Mai Coffee Roasters · Prototype độc lập</span><a href="#main-content">Về đầu trang ↑</a></div></footer>
+  <noscript><p class="noscript">Bật JavaScript để dùng chuyển bước trong prototype. Không có dữ liệu nào được gửi đi.</p></noscript>
+</body>
+</html>
