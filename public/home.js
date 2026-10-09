@@ -12,9 +12,9 @@
       const tags = (product.flavor_tags || []).slice(0, 2).map(tag => `<span class="product-tag">${escapeHtml(tag.name)}</span>`).join('');
       const origin = product.origin?.region || product.origin?.name || 'Đà Lạt';
       const availability = product.available ? '' : '<span class="product-unavailable">Tạm hết hàng</span>';
-      const image = product.images?.[0]?.url;
       const assetSlug = String(product.slug || 'product').replace(/[^a-z0-9-]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'product';
-      const imageMarkup = image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" loading="lazy" width="600" height="600" data-product-image>` : '<span class="product-media-mark" aria-hidden="true">SM</span>';
+      const image = product.images?.[0]?.url || `/assets/products/${encodeURIComponent(assetSlug)}.svg`;
+      const imageMarkup = `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" loading="lazy" width="600" height="600" data-product-image>`;
       return `<article class="product-card reveal is-visible"><a href="/catalog/?product=${encodeURIComponent(product.slug)}" aria-label="Xem ${escapeHtml(product.name)}"><div class="product-media" data-asset-slot="/assets/products/${assetSlug}.webp">${imageMarkup}</div></a><div class="product-card-copy"><p class="product-origin">${escapeHtml(origin)}</p><h3>${escapeHtml(product.name)}</h3><div class="product-meta">${tags || '<span class="product-tag">Cà phê rang xay</span>'}</div><div class="product-bottom"><span class="product-price">Từ ${money(product.minimum_price_vnd)}</span>${availability}<a class="product-link" href="/catalog/?product=${encodeURIComponent(product.slug)}">Xem chi tiết <span aria-hidden="true">↗</span></a></div></div></article>`;
     }).join('');
     productGrid.querySelectorAll('[data-product-image]').forEach(image => image.addEventListener('error', () => { const fallback = document.createElement('span'); fallback.className = 'product-media-mark'; fallback.textContent = 'SM'; fallback.setAttribute('aria-hidden', 'true'); image.replaceWith(fallback); }, { once: true }));

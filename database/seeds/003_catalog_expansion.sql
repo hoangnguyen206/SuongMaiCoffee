@@ -74,6 +74,7 @@ INSERT INTO products (origin_id, slug, name, description, acidity, body, sweetne
 SELECT o.id, v.slug, v.name, v.description, v.acidity, v.body, v.sweetness, v.bitterness, v.aroma
 FROM origins o JOIN (VALUES
  ('cau-dat-demo','cau-dat-filter-demo','Cầu Đất Filter — Kẹo bơ','PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC. Hương kẹo bơ và cam.',3,3,4,2,4),
+ ('cau-dat-demo','cau-dat-natural-demo','Cầu Đất Natural — Mận & cacao','PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC. Hương mận, cacao và hậu ngọt.',4,4,4,2,4),
  ('cau-dat-demo','cau-dat-washed-demo','Cầu Đất Washed — Mơ & trà','PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC. Hương mơ và trà nhẹ.',4,2,4,1,4),
  ('son-la-demo','son-la-honey-demo','Sơn La Honey — Mận đỏ','PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC. Vị mận đỏ và mật ong.',4,3,5,1,4),
  ('son-la-demo','son-la-dark-demo','Sơn La Dark — Cacao','PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC. Cacao và hạt rang.',2,5,3,4,3),
@@ -88,7 +89,7 @@ ON CONFLICT (slug) DO UPDATE SET name=EXCLUDED.name, description=EXCLUDED.descri
 
 INSERT INTO product_categories (product_id, category_id)
 SELECT p.id, c.id FROM products p JOIN categories c ON c.slug='pour-over'
-WHERE p.slug IN ('cau-dat-filter-demo','cau-dat-washed-demo','son-la-honey-demo','guji-jasmine-demo','sidamo-citrus-demo','kirinyaga-berry-demo') ON CONFLICT DO NOTHING;
+WHERE p.slug IN ('cau-dat-filter-demo','cau-dat-washed-demo','cau-dat-natural-demo','son-la-honey-demo','guji-jasmine-demo','sidamo-citrus-demo','kirinyaga-berry-demo') ON CONFLICT DO NOTHING;
 INSERT INTO product_categories (product_id, category_id)
 SELECT p.id, c.id FROM products p JOIN categories c ON c.slug='ca-phe-bot-demo'
 WHERE p.slug IN ('son-la-dark-demo','dak-lak-phin-demo') ON CONFLICT DO NOTHING;
@@ -108,7 +109,15 @@ WHERE p.slug IN ('cau-dat-filter-demo','cau-dat-washed-demo','son-la-honey-demo'
 INSERT INTO product_variants (product_id, sku, label, weight_g, price_vnd)
 SELECT p.id, upper(replace(p.slug,'-','_'))||'_'||v.weight_g::text, v.label, v.weight_g, v.price_vnd FROM products p
 CROSS JOIN (VALUES ('250g',250,195000::BIGINT),('500g',500,372000::BIGINT)) v(label,weight_g,price_vnd)
-WHERE p.slug IN ('cau-dat-filter-demo','cau-dat-washed-demo','son-la-honey-demo','son-la-dark-demo','dak-lak-phin-demo','dak-lak-blend-demo','guji-jasmine-demo','sidamo-citrus-demo','kirinyaga-berry-demo','kiambu-caramel-demo') ON CONFLICT (sku) DO NOTHING;
+WHERE p.slug IN ('cau-dat-filter-demo','cau-dat-natural-demo','cau-dat-washed-demo','son-la-honey-demo','son-la-dark-demo','dak-lak-phin-demo','dak-lak-blend-demo','guji-jasmine-demo','sidamo-citrus-demo','kirinyaga-berry-demo','kiambu-caramel-demo') ON CONFLICT (sku) DO NOTHING;
 INSERT INTO inventory_lots (product_id, variant_id, pool_kind, roast_batch_id, quantity_on_hand)
 SELECT p.id, v.id, 'unbatched', NULL, 12 FROM products p JOIN product_variants v ON v.product_id=p.id
-WHERE p.slug IN ('cau-dat-filter-demo','cau-dat-washed-demo','son-la-honey-demo','son-la-dark-demo','dak-lak-phin-demo','dak-lak-blend-demo','guji-jasmine-demo','sidamo-citrus-demo','kirinyaga-berry-demo','kiambu-caramel-demo') ON CONFLICT DO NOTHING;
+WHERE p.slug IN ('cau-dat-filter-demo','cau-dat-natural-demo','cau-dat-washed-demo','son-la-honey-demo','son-la-dark-demo','dak-lak-phin-demo','dak-lak-blend-demo','guji-jasmine-demo','sidamo-citrus-demo','kirinyaga-berry-demo','kiambu-caramel-demo') ON CONFLICT DO NOTHING;
+
+-- Keep quick filter tabs useful with at least five matching demo products.
+INSERT INTO product_flavor_tags (product_id, flavor_tag_id)
+SELECT p.id, t.id FROM products p JOIN flavor_tags t ON t.slug = 'caramel-demo'
+WHERE p.slug IN ('cau-dat-filter-demo','cau-dat-espresso-demo','dak-lak-blend-demo','kiambu-caramel-demo','son-la-dark-demo') ON CONFLICT DO NOTHING;
+INSERT INTO product_flavor_tags (product_id, flavor_tag_id)
+SELECT p.id, t.id FROM products p JOIN flavor_tags t ON t.slug = 'nhai-demo'
+WHERE p.slug IN ('yirgacheffe-floral-demo','guji-jasmine-demo','sidamo-citrus-demo','cau-dat-washed-demo','nyeri-berry-demo') ON CONFLICT DO NOTHING;

@@ -5,6 +5,7 @@
   const accountLink = nav.querySelector('[data-account-link]');
   const adminLink = nav.querySelector('[data-admin-link]');
   const logoutButton = nav.querySelector('[data-logout]');
+  const cartLink = nav.querySelector('.nav-cart');
   let csrfToken = '';
 
   async function request(path, options = {}) {
@@ -25,8 +26,9 @@
       accountLink.textContent = `Xin chào, ${session.user.full_name}`;
       accountLink.href = '/account/';
       accountLink.setAttribute('aria-label', 'Mở tài khoản của bạn');
-      if (session.user.role === 'admin' && adminLink) adminLink.hidden = false;
+      if (adminLink) adminLink.hidden = session.user.role !== 'admin';
       if (logoutButton) logoutButton.hidden = false;
+      if (cartLink) cartLink.classList.add('nav-cart-authenticated');
     }
     const notice = sessionStorage.getItem('accountNotice');
     if (notice) {

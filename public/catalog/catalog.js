@@ -45,12 +45,24 @@
     if (items.some(item => item.slug === current)) select.value = current;
   }
 
+  function productAsset(product) {
+    const slug = String(product.slug || 'coffee').replace(/[^a-z0-9-]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase();
+    return `/assets/products/${slug || 'coffee'}.svg`;
+  }
+
   function renderCard(product) {
     const article = document.createElement('article');
     article.className = 'product-card';
-    const art = text('div', '', 'product-placeholder');
+    const art = document.createElement('div');
+    art.className = 'product-placeholder product-art';
     art.setAttribute('role', 'img');
-    art.setAttribute('aria-label', placeholderLabel);
+    art.setAttribute('aria-label', `${placeholderLabel}: ${product.name || 'Sản phẩm'}`);
+    const image = document.createElement('img');
+    image.src = productAsset(product);
+    image.alt = '';
+    image.loading = 'lazy';
+    image.addEventListener('error', () => image.remove(), { once: true });
+    art.append(image);
     article.append(art);
 
     const content = document.createElement('div');
@@ -125,9 +137,15 @@
       if (requestId !== activeRequest) return;
       const layout = document.createElement('div');
       layout.className = 'detail-layout';
-      const art = text('div', '', 'product-placeholder');
+      const art = document.createElement('div');
+      art.className = 'product-placeholder product-art';
       art.setAttribute('role', 'img');
-      art.setAttribute('aria-label', placeholderLabel);
+      art.setAttribute('aria-label', `${placeholderLabel}: ${product.name || 'Sản phẩm'}`);
+      const image = document.createElement('img');
+      image.src = productAsset(product);
+      image.alt = '';
+      image.addEventListener('error', () => image.remove(), { once: true });
+      art.append(image);
       layout.append(art);
 
       const copy = document.createElement('div');
@@ -145,7 +163,7 @@
       addMeta(meta, 'Danh mục', categoryNames);
       addMeta(meta, 'Hương vị', tagNames);
       addMeta(meta, 'Vùng trồng', product.origin?.region);
-      addMeta(meta, 'Hình ảnh', product.images?.length ? 'Có sẵn' : 'Đang hoàn thiện');
+      addMeta(meta, 'Hình ảnh', product.images?.length ? 'Có sẵn' : 'Có sẵn (SVG demo)');
       copy.append(meta);
 
       const profile = product.flavor_profile;
@@ -324,13 +342,13 @@
       originSelect.value = '';
       if (flavorSelect) flavorSelect.value = '';
     } else if (key === 'coffee') {
-      categorySelect.value = [...categorySelect.options].find(option => /hạt|xay/i.test(option.textContent || ''))?.value || '';
+      categorySelect.value = [...categorySelect.options].find(option => /pour over/i.test(option.textContent || ''))?.value || '';
     } else if (key === 'origin') {
-      originSelect.value = originSelect.options[1]?.value || '';
+      originSelect.value = [...originSelect.options].find(option => /cầu đất/i.test(option.textContent || ''))?.value || '';
     } else if (key === 'nutty') {
-      flavorSelect.value = [...flavorSelect.options].find(option => /chocolate|hạt|caramel/i.test(option.textContent || ''))?.value || '';
+      flavorSelect.value = [...flavorSelect.options].find(option => /hạt phỉ|caramel/i.test(option.textContent || ''))?.value || '';
     } else if (key === 'floral') {
-      flavorSelect.value = [...flavorSelect.options].find(option => /hoa|quả|cam|trái/i.test(option.textContent || ''))?.value || '';
+      flavorSelect.value = [...flavorSelect.options].find(option => /hoa nhài|trà đen/i.test(option.textContent || ''))?.value || '';
     }
     loadProducts();
   }));

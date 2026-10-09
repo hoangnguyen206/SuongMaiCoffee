@@ -98,3 +98,5 @@ input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible
 .account-nav-notice { width: min(var(--shell), calc(100% - 32px)); margin: 14px auto 0; padding: 10px 14px; border-left: 3px solid var(--clay); border-radius: 8px; background: var(--paper); color: var(--muted); font-size: .85rem; }
 @media (max-width: 1000px) { .catalog-toolbar { grid-template-columns: 1fr; } .catalog-filter-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .catalog-filter-grid { grid-template-columns: 1fr; } .filter-reset { justify-self: start; } }
+.product-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.product-art::after { content: 'PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.'; position: absolute; right: 10px; bottom: 10px; left: 10px; color: rgba(255,255,255,.9); font: 700 .56rem/1.3 var(--sans); letter-spacing: .08em; text-align: center; text-shadow: 0 1px 4px rgba(24,44,26,.5); }
