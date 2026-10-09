@@ -4,6 +4,7 @@ services:
     runtime: docker
     plan: free
     dockerfilePath: ./Dockerfile
+    preDeployCommand: php database/migrate.php && SEED_DEMO_DATA=true php database/seed.php && if [ -n "$ADMIN_EMAIL" ] && [ -n "$ADMIN_NAME" ] && [ -n "$ADMIN_PHONE" ] && [ -n "$ADMIN_PASSWORD" ]; then php database/provision_admin.php; fi
     healthCheckPath: /api/v1/health
     envVars:
       - key: APP_ENV
@@ -16,6 +17,14 @@ services:
         value: "1"
       - key: DB_CONNECT_TIMEOUT
         value: "5"
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_NAME
+        sync: false
+      - key: ADMIN_PHONE
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
       - key: DATABASE_URL
         fromDatabase:
           name: suongmai-coffee-db

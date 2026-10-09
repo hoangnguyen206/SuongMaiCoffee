@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 use App\Database\ConnectionFactory;
 
-if ((getenv('APP_ENV') ?: 'production') === 'production') {
-    fwrite(STDERR, "Development seeds are disabled in production.
-");
+$seedDemoData = filter_var(getenv('SEED_DEMO_DATA') ?: '0', FILTER_VALIDATE_BOOLEAN);
+if ((getenv('APP_ENV') ?: 'production') === 'production' && !$seedDemoData) {
+    fwrite(STDERR, "Demo seeds are disabled unless SEED_DEMO_DATA=true.\n");
     exit(1);
 }
 

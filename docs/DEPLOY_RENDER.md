@@ -33,17 +33,18 @@ Thiết lập tối thiểu:
 
 Khi dùng `DATABASE_URL`, không cần đặt `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` hoặc `DB_PASSWORD`. Không dùng host `db` của Docker Compose local trên Render.
 
-## 5. Migration và nạp dữ liệu ban đầu
+## 5. Migration, dữ liệu demo và tài khoản admin
 
-Migration không chạy tự động khi container restart. Sau khi Web Service và database sẵn sàng, chạy migration bằng Shell/one-off command của Render:
+Blueprint chạy migration và seed catalog demo trước mỗi deploy khi `SEED_DEMO_DATA=true`. Đây là dữ liệu placeholder để kiểm tra catalog/giỏ hàng, không phải dữ liệu thương mại chính thức.
 
-```sh
-php database/migrate.php
-```
+Thiết lập các biến Secret trên Render để tạo tài khoản admin test:
 
-Không chạy `database/seed.php` trên production: script này tạo dữ liệu danh mục, coupon và tài khoản phát triển; bản thân script từ chối chạy khi `APP_ENV=production`. Seed chỉ dành cho local hoặc staging cô lập. Trên production, hãy nạp danh mục đã được duyệt và tạo tài khoản quản trị riêng bằng quy trình bảo mật.
+- `ADMIN_EMAIL` — email đăng nhập, ví dụ `admin@suongmai.example`
+- `ADMIN_NAME` — tên hiển thị
+- `ADMIN_PHONE` — số điện thoại hợp lệ
+- `ADMIN_PASSWORD` — mật khẩu tự đặt, ít nhất 8 ký tự gồm chữ và số
 
-Migration và seed đều không chạy tự động khi container khởi động/restart.
+Khi đủ bốn biến, pre-deploy sẽ chạy `database/provision_admin.php` và cập nhật tài khoản admin theo các giá trị đó. Không ghi mật khẩu vào repository hoặc chat công khai.
 
 ## 6. Kiểm tra sau deploy
 

@@ -133,6 +133,8 @@ body > header > a, .brand { color: var(--forest); }
 body > header > a span, .brand span { color: var(--leaf); font-family: var(--sans); }
 body input, body select, body textarea { font-family: var(--sans); }
 body button, body .button { background-color: var(--forest); color: var(--paper); }
+body .tabs .tab { background: transparent; color: var(--forest); }
+body .tabs .tab.is-active { background: var(--forest); color: var(--paper); }
 body .button-quiet, body .button-secondary, body .secondary { background: transparent; color: var(--forest); border-color: var(--forest); }
 body .status.success { color: var(--success); }
 body .status.error { color: var(--danger); }
