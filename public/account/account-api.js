@@ -31,6 +31,7 @@
     },
     register: payload => request('/auth/register', { method: 'POST', body: payload }),
     login: payload => request('/auth/login', { method: 'POST', body: payload }),
+    mergeCart: () => request('/cart/merge', { method: 'POST', body: {} }),
     logout: () => request('/auth/logout', { method: 'POST', body: {} }),
     profile: () => request('/account/me'),
     updateProfile: payload => request('/account/me', { method: 'PATCH', body: payload }),

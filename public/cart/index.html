@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Xem và cập nhật giỏ hàng của bạn.">
+  <title>Giỏ hàng — Sương Mai</title>
+  <link rel="stylesheet" href="/cart/cart.css">
+  <script src="/cart/cart-api.js" defer></script>
+  <script src="/cart/cart.js" defer></script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../shared/site-theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#cart-main">Bỏ qua điều hướng, đến nội dung chính</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Sương Mai — trang chủ">Sương Mai <span>COFFEE ROASTERS</span></a>
+      <nav aria-label="Điều hướng chính"><a href="/catalog/">Cửa hàng</a><a href="/account/">Tài khoản</a><a href="/cart/" aria-current="page">Giỏ hàng</a></nav>
+    </div>
+  </header>
+  <main id="cart-main" class="container cart-main">
+    <section class="intro" aria-labelledby="cart-title">
+      <p class="eyebrow">Đơn hàng của bạn</p>
+      <h1 id="cart-title">Giỏ hàng</h1>
+      <p id="cart-mode" class="mode-indicator">Đang xác định chế độ giỏ hàng…</p>
+    </section>
+    <p id="cart-status" class="status" role="status" aria-live="polite" hidden></p>
+    <section id="cart-content" class="panel" aria-label="Nội dung giỏ hàng" aria-busy="true">
+      <p class="loading">Đang tải giỏ hàng…</p>
+    </section>
+    <p class="hint">Bạn có thể thêm sản phẩm từ <a href="/catalog/">cửa hàng</a>, rồi quay lại đây để hoàn tất đơn hàng.</p>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>Sương Mai Coffee Roasters</span><span class="placeholder">Rang tại Đà Lạt · giao hàng tận nơi</span></div></footer>
+</body>
+</html>

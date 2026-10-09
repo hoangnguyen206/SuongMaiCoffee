@@ -1,16 +1,17 @@
 # CLAUDE.md — Sương Mai Coffee Roasters
 
-## 1. Mục đích và thứ tự đọc
+## 1. Mục đích và cách đọc tài liệu
 
-Đây là repository của website thương mại điện tử Sương Mai Coffee Roasters. Trước khi thay đổi tài liệu hoặc code:
+Đây là repository của website thương mại điện tử Sương Mai Coffee Roasters. Làm việc theo chế độ **CODE-FIRST** để hoàn thiện MVP nhanh và nhất quán với code hiện có.
+
+Trước khi thay đổi, đọc các tài liệu cần thiết cho task:
 
 1. Đọc file này.
-2. Đọc `docs/SPEC.md`.
-3. Đọc contract liên quan nếu đã tồn tại.
-4. Kiểm tra `docs/PROGRESS.md` để xác nhận task/milestone được phép làm.
-5. Kiểm tra `docs/DECISIONS.md` để biết quyết định hiện hành.
+2. Đọc phần liên quan trong `docs/SPEC.md` và `docs/PRD.md`.
+3. Đọc `docs/API_CONTRACT.md`, `docs/database-schema-proposal.md` hoặc tài liệu kỹ thuật khác khi cần hiểu chức năng.
+4. Đọc `docs/DECISIONS.md` và `docs/PROGRESS.md` để lấy bối cảnh, không coi sign-off, phase hoặc trạng thái trong đó là điều kiện chặn code.
 
-Nếu thiếu tài liệu nền, phát hiện mâu thuẫn hoặc chưa rõ yêu cầu, báo blocker và chờ quyết định; không tự suy diễn thành code.
+Nếu tài liệu thiếu chi tiết, tự chọn default đơn giản, nhất quán với code hiện có và ghi assumption ngắn trong báo cáo cuối. Chỉ dừng khi có nguy cơ mất dữ liệu, tác động production, lộ secret, quyền nguy hiểm hoặc thay đổi phạm vi lớn.
 
 ## 2. Tài liệu chuẩn
 
@@ -27,14 +28,7 @@ File nguồn trong `docs/source/` là bất biến: không sửa, đổi tên ho
 
 ## 3. Trạng thái dự án
 
-Task/milestone dùng đúng một trong các trạng thái:
-
-- `Todo`
-- `In progress`
-- `Blocked`
-- `Done`
-
-Chỉ ghi `Done` khi có evidence và test phù hợp. Cập nhật owner, worktree, phụ thuộc, kiểm thử gần nhất và ngày cập nhật trong `docs/PROGRESS.md`.
+`docs/PROGRESS.md` là báo cáo tiến độ tham khảo, không phải gate chặn implementation. Cập nhật khi task đã có thay đổi và evidence phù hợp; không dừng code chỉ vì phase hoặc milestone còn `Todo`, `In progress` hay `Blocked`.
 
 ## 4. Phạm vi MVP
 
@@ -61,34 +55,32 @@ Dashboard Subscription phải hiển thị `Chưa triển khai` hoặc empty sta
 - Không suy ra tồn batch từ `produced_qty_g`; quan hệ batch–variant–inventory phải được duyệt.
 - Freshness +30 là mốc thưởng thức ngon nhất, không phải hạn an toàn; không dùng nhãn “Còn tốt” đến ngày +45; sau +30 chỉ thông báo đã qua mốc thưởng thức ngon nhất.
 
-## 6. Gate P1
+## 6. CODE-FIRST
 
-Trước khi P1 contracts được duyệt, không tạo migration, schema triển khai, schema-dependent seed, business route/controller/service hoặc code nghiệp vụ. Không chốt bằng code các điểm còn mở về schema, quyền, API, view, PostgreSQL version, coupon redemption, batch/inventory, search hoặc guest lookup.
+Có thể triển khai trực tiếp MVP và các phần cần thiết để chạy bài tập trên lớp, gồm migration, seed, API, backend, frontend, route và test. Không dùng phase/gate P1/P2/P3, sign-off tài liệu, view contract hoặc trạng thái `PROGRESS.md` làm điều kiện chặn code.
 
-Nếu phát hiện công việc yêu cầu thay đổi schema, API, permission, MVP scope hoặc ownership, dừng phần phụ thuộc và xin duyệt trước.
+Không cần xin phép cho từng task hoặc file. Tự quyết các chi tiết kỹ thuật nhỏ theo default đơn giản, nhất quán với code hiện có và SPEC/PRD. Không mở rộng sang tính năng ngoài MVP nếu chưa được yêu cầu.
 
-## 7. Ownership
+Chỉ dừng hoặc hỏi lại khi thao tác có thể làm mất dữ liệu, kết nối production/Render, lộ hoặc ghi secret, thay đổi quyền nguy hiểm, phá worktree của người khác, hoặc mở rộng phạm vi lớn. Không dùng code để thay thế các quyết định về an toàn dữ liệu và production.
+
+## 7. Ownership và an toàn thay đổi
 
 **Frontend sở hữu:** templates, styles/CSS, JavaScript UI, assets/placeholders và UI rendering states.
 
 **Backend sở hữu:** routes, controllers, services, persistence/schema/migrations, validation và business logic.
 
-**Tech lead sở hữu/duyệt:** canonical docs và shared contracts; thay đổi ownership chéo, shared route/config/layout hoặc contract dùng chung.
-
-Không để hai worktree cùng sửa một shared file khi chưa có owner/approval rõ ràng. Không tạo branch/worktree, cài package, commit hoặc push nếu chưa được yêu cầu/duyệt.
+Giữ ownership rõ ràng và tránh hai worktree cùng sửa một shared file khi có thể. Có thể sửa các file liên quan trong cùng task khi cần để hoàn thiện chức năng; không cần approval riêng cho từng file. Không tạo branch/worktree, cài package, commit hoặc push nếu chưa được yêu cầu/cho phép.
 
 ## 8. Cách thực hiện task
 
-Trước khi ghi file hoặc thực hiện thay đổi, nêu:
+Trước khi ghi file hoặc thực hiện thay đổi, nêu ngắn trong tiến trình:
 
-1. File sẽ tạo/sửa.
-2. Nội dung dự kiến.
-3. Quyết định đã chốt có liên quan.
-4. Điểm còn mở.
-5. Lệnh/thao tác dự định.
-6. Rủi ro và kiểm thử dự kiến.
+1. File dự kiến tạo/sửa.
+2. Nội dung và assumption chính.
+3. Lệnh/thao tác dự định.
+4. Rủi ro và kiểm thử dự kiến.
 
-Chỉ thay đổi đúng các file đã được người dùng duyệt. Không tạo code/migration/seed khi yêu cầu chỉ là tài liệu.
+Có thể tiếp tục với default hợp lý; không dừng để hỏi sign-off tài liệu, phase, proposal hoặc approval cho từng file/task. Chỉ thay đổi đúng phạm vi user yêu cầu và các file phụ thuộc trực tiếp cần thiết để hoàn thành.
 
 ## 9. Bảo mật và dữ liệu
 
@@ -100,6 +92,6 @@ Chỉ thay đổi đúng các file đã được người dùng duyệt. Không 
 
 ## 10. Kiểm thử và báo cáo
 
-Dùng `docs/TEST_PLAN.md` để chọn test acceptance liên quan. Nếu chưa chạy được test, ghi `Not run`/`Blocked` và lý do; không báo pass hoặc chuyển task sang `Done` khi thiếu evidence.
+Dùng `docs/TEST_PLAN.md` để chọn test acceptance liên quan khi có thể. Nếu chưa chạy được test, ghi `Not run`/`Blocked` và lý do; không báo pass giả.
 
-Khi hoàn tất, báo file thay đổi, nội dung chính, test chạy/kết quả, test chưa chạy và residual blocker. Cập nhật tiến độ trong `docs/PROGRESS.md`; quyết định mới chỉ ghi vào `docs/DECISIONS.md` sau khi được duyệt.
+Khi hoàn tất, báo file thay đổi, nội dung chính, test chạy/kết quả, test chưa chạy, assumption và residual blocker. Cập nhật `docs/PROGRESS.md` khi phù hợp; không để trạng thái hoặc thiếu sign-off trong tài liệu chặn implementation.

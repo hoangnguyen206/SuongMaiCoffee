@@ -1,7 +1,14 @@
+DirectoryIndex index.html index.php
+
 RewriteEngine On
+
+RewriteRule ^checkout/checkout-mock\.js$ - [R=404,L]
 
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
 RewriteRule ^ index.php [L]
+
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html

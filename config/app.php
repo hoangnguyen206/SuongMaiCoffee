@@ -17,4 +17,7 @@ return [
     'auth' => [
         'rate_limit_key' => getenv('AUTH_RATE_LIMIT_KEY') ?: null,
     ],
+    'session' => [
+        'cookie_secure' => filter_var(getenv('SESSION_COOKIE_SECURE') ?: '0', FILTER_VALIDATE_BOOLEAN),
+    ],
 ];

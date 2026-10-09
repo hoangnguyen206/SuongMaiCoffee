@@ -3,9 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Catalog demo của Sương Mai Coffee Roasters.">
+  <meta name="description" content="Cửa hàng cà phê rang nhỏ của Sương Mai Coffee Roasters.">
   <title>Sương Mai — Cửa hàng</title>
   <link rel="stylesheet" href="catalog.css">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../shared/site-theme.css">
 </head>
 <body>
   <a class="skip-link" href="#catalog-main">Bỏ qua điều hướng, đến nội dung chính</a>
@@ -21,9 +24,9 @@
 
   <main id="catalog-main" class="container" tabindex="-1">
     <section class="catalog-heading" aria-labelledby="catalog-title">
-      <p class="eyebrow">Catalog · dữ liệu từ API</p>
+      <p class="eyebrow">CỬA HÀNG CÀ PHÊ</p>
       <h1 id="catalog-title">Những hạt cà phê cho nhịp chậm</h1>
-      <p class="intro">Dữ liệu dưới đây được lấy từ Catalog API. Nội dung và hình ảnh demo chưa phải tài sản thương hiệu chính thức.</p>
+      <p class="intro">Chọn hạt cà phê theo vùng trồng, cách pha và hương vị bạn yêu thích.</p>
     </section>
 
     <section class="catalog-toolbar" aria-label="Bộ lọc catalog">
@@ -65,10 +68,11 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <span>Sương Mai Coffee Roasters</span>
-      <span>PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.</span>
+      <span>Rang tại Đà Lạt · giao hàng tận nơi</span>
     </div>
   </footer>
   <script src="api-client.js"></script>
+  <script src="../cart/cart-api.js"></script>
   <script src="catalog.js"></script>
 </body>
 </html>

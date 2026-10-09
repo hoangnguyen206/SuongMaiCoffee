@@ -8,3 +8,10 @@
 **/storage
 **/*.log
 _apply_review.py
+.playwright-mcp
+.git
+.env
+.env.*
+tests
+docs
+public/checkout/checkout-mock.js

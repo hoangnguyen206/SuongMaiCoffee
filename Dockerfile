@@ -13,5 +13,9 @@ RUN sed -ri 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-avail
 
 WORKDIR /var/www/html
 COPY . /var/www/html
+COPY docker/entrypoint.sh /usr/local/bin/suongmai-entrypoint
+RUN chmod +x /usr/local/bin/suongmai-entrypoint
 
+ENV PORT=80
 EXPOSE 80
+ENTRYPOINT ["/usr/local/bin/suongmai-entrypoint"]

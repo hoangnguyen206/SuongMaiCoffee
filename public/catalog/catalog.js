@@ -1,5 +1,5 @@
 (() => {
-  const placeholderLabel = 'PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.';
+  const placeholderLabel = 'Hình ảnh sản phẩm cà phê';
   const grid = document.querySelector('#product-grid');
   const status = document.querySelector('#catalog-status');
   const categorySelect = document.querySelector('#category-filter');
@@ -44,14 +44,14 @@
   function renderCard(product) {
     const article = document.createElement('article');
     article.className = 'product-card';
-    const art = text('div', placeholderLabel, 'product-placeholder');
+    const art = text('div', '', 'product-placeholder');
     art.setAttribute('role', 'img');
     art.setAttribute('aria-label', placeholderLabel);
     article.append(art);
 
     const content = document.createElement('div');
     content.className = 'product-card-content';
-    content.append(text('p', product.origin?.region || 'Xuất xứ đang cập nhật', 'eyebrow'));
+    content.append(text('p', product.origin?.region || 'Nguồn gốc đang được bổ sung', 'eyebrow'));
     content.append(text('h2', product.name || 'Sản phẩm'));
     content.append(text('p', product.categories?.map(item => item.name).join(' · ') || ''));
 
@@ -114,14 +114,14 @@
       if (requestId !== activeRequest) return;
       const layout = document.createElement('div');
       layout.className = 'detail-layout';
-      const art = text('div', placeholderLabel, 'product-placeholder');
+      const art = text('div', '', 'product-placeholder');
       art.setAttribute('role', 'img');
       art.setAttribute('aria-label', placeholderLabel);
       layout.append(art);
 
       const copy = document.createElement('div');
       copy.className = 'detail-copy';
-      copy.append(text('p', product.origin?.region || 'Xuất xứ đang cập nhật', 'eyebrow'));
+      copy.append(text('p', product.origin?.region || 'Nguồn gốc đang được bổ sung', 'eyebrow'));
       const title = text('h2', product.name || 'Sản phẩm');
       title.className = 'detail-product-title';
       title.tabIndex = -1;
@@ -134,18 +134,95 @@
       addMeta(meta, 'Danh mục', categoryNames);
       addMeta(meta, 'Hương vị', tagNames);
       addMeta(meta, 'Vùng trồng', product.origin?.region);
-      addMeta(meta, 'Ảnh sản phẩm', product.images?.length ? 'Ảnh sẽ hiển thị khi có asset được duyệt.' : placeholderLabel);
+      addMeta(meta, 'Hình ảnh', product.images?.length ? 'Có sẵn' : 'Đang hoàn thiện');
       copy.append(meta);
 
       const profile = product.flavor_profile;
       if (profile) {
+        const profileLabels = { acidity: 'Độ chua', body: 'Độ đậm', sweetness: 'Độ ngọt', bitterness: 'Độ đắng', aroma: 'Hương thơm' };
         const profileText = ['acidity', 'body', 'sweetness', 'bitterness', 'aroma']
-          .map(key => `${key}: ${Number(profile[key])}/5`).join(' · ');
-        copy.append(text('p', `Hồ sơ hương vị minh họa — ${profileText}`));
+          .map(key => `${profileLabels[key]}: ${Number(profile[key])}/5`).join(' · ');
+        copy.append(text('p', `Gợi ý hương vị — ${profileText}`));
       }
 
-      const variantsHeading = text('h3', 'Quy cách');
+      const variantsHeading = text('h3', 'Chọn sản phẩm');
       copy.append(variantsHeading);
+      const variantControls = document.createElement('div');
+      variantControls.className = 'variant-controls';
+      const variantLabel = text('label', 'Quy cách');
+      const variantSelect = document.createElement('select');
+      variantSelect.setAttribute('aria-label', 'Chọn quy cách');
+      variantLabel.append(variantSelect);
+      const availableVariants = (product.variants || []).filter(variant => variant.available);
+      for (const variant of product.variants || []) {
+        const option = new Option(`${variant.label} · ${money(variant.price_vnd)}${variant.available ? '' : ' · Tạm hết hàng'}`, variant.id);
+        option.disabled = !variant.available;
+        variantSelect.add(option);
+      }
+      if (availableVariants.length > 0) variantSelect.value = availableVariants[0].id;
+      if (availableVariants.length === 0) variantSelect.disabled = true;
+
+      const grindLabel = text('label', 'Kiểu xay');
+      const grindSelect = document.createElement('select');
+      grindSelect.setAttribute('aria-label', 'Chọn kiểu xay');
+      grindLabel.append(grindSelect);
+      const grindOptions = await window.CartApi.grindOptions();
+      await window.CartApi.session();
+      for (const grind of grindOptions) grindSelect.add(new Option(grind.name, grind.id));
+      if (!grindOptions.length) grindSelect.disabled = true;
+
+      const quantityLabel = text('label', 'Số lượng');
+      const quantity = document.createElement('input');
+      quantity.type = 'number';
+      quantity.min = '1';
+      quantity.max = '20';
+      quantity.step = '1';
+      quantity.value = '1';
+      quantity.inputMode = 'numeric';
+      quantity.setAttribute('aria-label', 'Số lượng');
+      quantityLabel.append(quantity);
+
+      const addButton = text('button', 'Thêm vào giỏ', 'button');
+      addButton.type = 'button';
+      addButton.disabled = availableVariants.length === 0 || !grindOptions.length;
+      const addStatus = text('p', '', 'detail-add-status');
+      addStatus.setAttribute('role', 'status');
+      addStatus.setAttribute('aria-live', 'polite');
+      addButton.addEventListener('click', async () => {
+        const requestedQuantity = Number(quantity.value);
+        if (!Number.isInteger(requestedQuantity) || requestedQuantity < 1 || requestedQuantity > 20) {
+          addStatus.textContent = 'Số lượng phải là số nguyên từ 1 đến 20.';
+          addStatus.className = 'detail-add-status error';
+          quantity.focus();
+          return;
+        }
+        addButton.disabled = true;
+        addStatus.textContent = 'Đang thêm vào giỏ…';
+        addStatus.className = 'detail-add-status';
+        try {
+          await window.CartApi.session();
+          await window.CartApi.addLine({
+            variant_id: Number(variantSelect.value),
+            grind_option_id: Number(grindSelect.value),
+            quantity: requestedQuantity,
+          });
+          addStatus.textContent = 'Đã thêm vào giỏ.';
+          addStatus.className = 'detail-add-status success';
+        } catch (error) {
+          const fields = Object.values(error.fields || {}).flat();
+          addStatus.textContent = fields.length ? fields.join(' ') : (error.message || 'Không thể thêm vào giỏ.');
+          addStatus.className = 'detail-add-status error';
+        } finally {
+          addButton.disabled = false;
+        }
+      });
+      const cartLink = document.createElement('a');
+      cartLink.className = 'button button-quiet';
+      cartLink.href = '/cart/';
+      cartLink.textContent = 'Xem giỏ hàng';
+      variantControls.append(variantLabel, grindLabel, quantityLabel, addButton, cartLink, addStatus);
+      copy.append(variantControls);
+
       const variants = document.createElement('ul');
       variants.className = 'variant-list';
       for (const variant of product.variants || []) {
@@ -232,5 +309,8 @@
     if (!event.target.closest('.search-field')) suggestionsList.hidden = true;
   });
 
-  Promise.all([loadFilters(), loadProducts()]);
+  Promise.all([loadFilters(), loadProducts()]).then(() => {
+    const featuredSlug = new URLSearchParams(window.location.search).get('product');
+    if (featuredSlug) loadDetail(featuredSlug);
+  });
 })();

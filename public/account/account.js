@@ -51,6 +51,15 @@
     return Object.fromEntries(new FormData(form).entries());
   }
 
+  function mergeFailureMessage(error) {
+    const conflicts = error.details?.conflicts || [];
+    if (error.code === 'CART_MERGE_CONFLICT' && conflicts.length) {
+      const limits = conflicts.map(conflict => conflict.max_acceptable_quantity).join(', ');
+      return `Đăng nhập thành công. Một số sản phẩm cần điều chỉnh trước khi gộp; số lượng tối đa hiện có: ${limits}.`;
+    }
+    return 'Đăng nhập thành công nhưng chưa thể gộp giỏ hàng tạm thời.';
+  }
+
   function setAuthenticated(user) {
     authPanel.hidden = Boolean(user);
     profilePanel.hidden = !user;
@@ -82,7 +91,12 @@
     if (data?.user) {
       setAuthenticated(data.user);
       loginForm.reset();
-      showMessage(`Xin chào ${data.user.full_name}.`, 'success');
+      try {
+        await window.AccountApi.mergeCart();
+        showMessage(`Xin chào ${data.user.full_name}. giỏ hàng tạm thời đã được gộp.`, 'success');
+      } catch (mergeError) {
+        showMessage(mergeFailureMessage(mergeError), 'error');
+      }
     }
   });
 
@@ -92,7 +106,12 @@
     if (data?.user) {
       setAuthenticated(data.user);
       registerForm.reset();
-      showMessage('Tài khoản đã được tạo.', 'success');
+      try {
+        await window.AccountApi.mergeCart();
+        showMessage('Tài khoản đã được tạo và giỏ hàng tạm thời đã được gộp.', 'success');
+      } catch (mergeError) {
+        showMessage(mergeError.code === 'CART_MERGE_CONFLICT' ? 'Tài khoản đã được tạo. Một số sản phẩm trong giỏ hàng khách cần được điều chỉnh trước khi gộp.' : 'Tài khoản đã được tạo nhưng chưa thể gộp giỏ hàng tạm thời.', 'error');
+      }
     }
   });
 
