@@ -34,7 +34,11 @@
     showMessage('Đang xử lý…');
     try {
       const result = await operation();
-      if (successMessage) showMessage(successMessage, 'success');
+      if (successMessage) {
+        showMessage(successMessage, 'success');
+        status.focus();
+      }
+
       return result;
     } catch (error) {
       if (error.status === 401) showMessage(error.message, 'error');

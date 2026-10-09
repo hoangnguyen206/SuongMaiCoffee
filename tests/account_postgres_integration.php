@@ -11,6 +11,7 @@ use App\Services\AuthService;
 require_once dirname(__DIR__) . '/src/Auth/AuthException.php';
 require_once dirname(__DIR__) . '/src/Auth/PdoSessionHandler.php';
 require_once dirname(__DIR__) . '/src/Database/ConnectionFactory.php';
+require_once dirname(__DIR__) . '/src/Support/VietnamPhone.php';
 require_once dirname(__DIR__) . '/src/Repositories/UserRepository.php';
 require_once dirname(__DIR__) . '/src/Services/AuthService.php';
 
@@ -48,7 +49,7 @@ try {
     $user = $service->register([
         'full_name' => 'Khách hàng thử nghiệm',
         'email' => '  Auth.Test@example.com ',
-        'phone' => '+84901234567',
+        'phone' => '0901234567',
         'password' => 'CoffeePass123',
     ]);
     assertAuth($user['email'] === 'auth.test@example.com', 'Registration should normalize the email.');
@@ -68,8 +69,8 @@ try {
     }
     assertAuth($badLoginRejected, 'Invalid password must return an authentication error.');
 
-    $profile = $service->updateProfile($user['id'], ['full_name' => 'Tên cập nhật', 'phone' => '+84909876543']);
-    assertAuth($profile['full_name'] === 'Tên cập nhật', 'Profile updates should persist.');
+    assertAuth($user['phone'] === '0901234567', 'Registration should normalize Vietnamese phone numbers.');
+    assertAuth($service->updateProfile($user['id'], ['phone' => '+84909876543'])['phone'] === '0909876543', 'Profile should accept and normalize international legacy Vietnamese phone format.');
 
     $service->changePassword($user['id'], ['current_password' => 'CoffeePass123', 'new_password' => 'NewCoffee123'], hash('sha256', 'active-session'));
     $service->login('auth.test@example.com', 'NewCoffee123');

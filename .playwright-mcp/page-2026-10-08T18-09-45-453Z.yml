@@ -1,0 +1,78 @@
+- generic [active] [ref=e1]:
+  - link "Bỏ qua điều hướng, đến nội dung chính" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Sương Mai — trang chủ" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [aria-hidden] [ref=e6]: S
+        - generic [ref=e7]:
+          - strong [ref=e8]: Sương Mai
+          - generic [ref=e9]: COFFEE ROASTERS
+      - link "Quay lại giỏ hàng" [ref=e10] [cursor=pointer]:
+        - /url: /cart/
+  - main [ref=e11]:
+    - region [ref=e12]:
+      - paragraph [ref=e13]: Thanh toán an toàn
+      - heading "Hoàn tất đơn hàng" [level=1] [ref=e15]
+      - paragraph [ref=e16]: Thông tin giao hàng → vận chuyển & thanh toán → xác nhận. Giá và số lượng sẽ được xác nhận trước khi hoàn tất đơn hàng.
+    - navigation "Các bước checkout" [ref=e17]:
+      - list [ref=e18]:
+        - listitem [ref=e19]:
+          - generic [ref=e20]: "1"
+          - generic [ref=e21]: Giao hàng
+        - listitem [ref=e22]:
+          - generic [ref=e23]: "2"
+          - generic [ref=e24]: Vận chuyển & thanh toán
+        - listitem [ref=e25]:
+          - generic [ref=e26]: "3"
+          - generic [ref=e27]: Xác nhận
+    - status [ref=e28]: Giỏ hàng đang trống. Hãy thêm sản phẩm trước khi checkout.
+    - generic [ref=e29]:
+      - region [ref=e30]:
+        - generic [ref=e32]:
+          - paragraph [ref=e33]: BƯỚC 1 / 3
+          - heading "Thông tin giao hàng" [level=2] [ref=e34]
+        - generic [ref=e35]:
+          - group "Thông tin giao hàng" [ref=e36]:
+            - paragraph [ref=e38]: Các trường có dấu * là bắt buộc.
+            - generic [ref=e39]:
+              - generic [ref=e40]:
+                - generic [ref=e41]: Tên người nhận *
+                - textbox "Tên người nhận" [ref=e42]
+              - generic [ref=e43]:
+                - generic [ref=e44]: Số điện thoại *
+                - textbox "Số điện thoại" [ref=e45]
+              - generic [ref=e46]:
+                - generic [ref=e47]: Email nhận thông báo
+                - textbox "Email nhận thông báo" [ref=e48]
+              - generic [ref=e49]:
+                - generic [ref=e50]: Địa chỉ nhận hàng *
+                - textbox "Địa chỉ nhận hàng" [ref=e51]
+              - generic [ref=e52]:
+                - generic [ref=e53]: Địa chỉ bổ sung
+                - textbox "Địa chỉ bổ sung" [ref=e54]
+              - generic [ref=e55]:
+                - generic [ref=e56]: Tỉnh / thành phố *
+                - textbox "Tỉnh / thành phố" [ref=e57]
+              - generic [ref=e58]:
+                - generic [ref=e59]: Quận / huyện *
+                - textbox "Quận / huyện" [ref=e60]
+              - generic [ref=e61]:
+                - generic [ref=e62]: Phường / xã
+                - textbox "Phường / xã" [ref=e63]
+          - button "Tiếp tục" [disabled] [ref=e65]: Tiếp tục →
+          - status
+      - complementary [ref=e66]:
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - paragraph [ref=e69]: TÓM TẮT ĐƠN
+            - heading "Giỏ hàng" [level=2] [ref=e70]
+          - generic [ref=e71]: —
+        - paragraph [ref=e73]: Chưa có sản phẩm trong giỏ.
+        - paragraph [ref=e75]: Các khoản phí được hiển thị rõ trước khi bạn đặt hàng.
+  - contentinfo [ref=e76]:
+    - generic [ref=e77]:
+      - generic [ref=e78]: Sương Mai Coffee Roasters
+      - link "Về đầu trang ↑" [ref=e79] [cursor=pointer]:
+        - /url: "#main-content"

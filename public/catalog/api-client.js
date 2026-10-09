@@ -18,6 +18,7 @@
   window.CatalogApi = Object.freeze({
     categories: () => request('/categories'),
     origins: () => request('/origins'),
+    flavors: () => request('/flavors'),
     products: params => {
       const query = new URLSearchParams(params);
       return request(`/products?${query.toString()}`);

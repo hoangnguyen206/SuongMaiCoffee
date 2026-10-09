@@ -17,7 +17,7 @@
   <header class="site-header">
     <div class="page-container header-inner">
       <a class="brand" href="/" aria-label="Sương Mai — trang chủ"><span class="brand-mark" aria-hidden="true">S</span><span class="brand-copy"><strong>Sương Mai</strong><span>COFFEE ROASTERS</span></span></a>
-      <a class="button button-secondary" href="/cart/">Quay lại giỏ hàng</a>
+      <a class="button button-secondary" href="/cart/">Quay lại giỏ hàng</a><a class="account-shortcut" href="/account/" data-account-link>Tài khoản</a>
     </div>
   </header>
   <main id="main-content" class="page-container">
@@ -40,7 +40,7 @@
             <legend class="visually-hidden">Thông tin giao hàng</legend><p class="field-note">Các trường có dấu * là bắt buộc.</p>
             <div class="field-grid">
               <div class="field field-wide"><label for="recipient-name">Tên người nhận <span aria-hidden="true">*</span></label><input id="recipient-name" name="recipient_name" type="text" autocomplete="name" maxlength="120" required><small class="field-error" data-error-for="recipient-name"></small></div>
-              <div class="field"><label for="recipient-phone">Số điện thoại <span aria-hidden="true">*</span></label><input id="recipient-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="32" required><small class="field-error" data-error-for="recipient-phone"></small></div>
+              <div class="field"><label for="recipient-phone">Số điện thoại <span aria-hidden="true">*</span></label><input id="recipient-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="20" placeholder="0901234567" required><small class="field-error" data-error-for="recipient-phone"></small></div>
               <div class="field"><label for="recipient-email">Email nhận thông báo</label><input id="recipient-email" name="email" type="email" autocomplete="email" maxlength="254"><small class="field-error" data-error-for="recipient-email"></small></div>
               <div class="field field-wide"><label for="address-line">Địa chỉ nhận hàng <span aria-hidden="true">*</span></label><input id="address-line" name="address_line1" type="text" autocomplete="address-line1" maxlength="240" required><small class="field-error" data-error-for="address-line"></small></div>
               <div class="field field-wide"><label for="address-line2">Địa chỉ bổ sung</label><input id="address-line2" name="address_line2" type="text" autocomplete="address-line2" maxlength="240"><small class="field-error" data-error-for="address-line2"></small></div>
@@ -68,5 +68,5 @@
   </main>
   <footer class="site-footer"><div class="page-container footer-inner"><span>Sương Mai Coffee Roasters</span><a href="#main-content">Về đầu trang ↑</a></div></footer>
   <noscript><p class="noscript">Bật JavaScript để tiếp tục đặt hàng.</p></noscript>
-</body>
+<script src="../shared/site-account.js" defer></script>
 </html>

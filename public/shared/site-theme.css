@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap');
 
 :root {
   --ink: #262b20;
@@ -13,15 +13,15 @@
   --muted: #747568;
   --danger: #8d4435;
   --success: #4c7049;
-  --serif: 'Playfair Display', Georgia, serif;
-  --sans: 'DM Sans', 'Segoe UI', sans-serif;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Be Vietnam Pro', 'Segoe UI', sans-serif;
   --shell: 1240px;
   --shadow: 0 22px 60px rgba(37, 42, 31, .09);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 92px; }
-body { min-width: 320px; margin: 0; background: var(--cream); color: var(--ink); font: 15px/1.65 var(--sans); }
+body { min-width: 320px; margin: 0; background: var(--cream); color: var(--ink); font: 16px/1.7 var(--sans); }
 a { color: inherit; }
 button, input, select, textarea { font: inherit; }
 button { cursor: pointer; }
@@ -34,7 +34,9 @@ body > header { width: min(var(--shell), calc(100% - 64px)); min-height: 82px; m
 .brand, body > header > a { color: var(--forest); font-family: var(--serif); font-size: 1.65rem; font-weight: 600; letter-spacing: -.045em; text-decoration: none; }
 .brand span, body > header > a span { display: block; margin-top: 5px; color: var(--forest); font: 700 .52rem/1 var(--sans); letter-spacing: .23em; }
 nav { gap: 28px; }
-nav a { color: #50564a; font-size: .78rem; font-weight: 600; text-decoration: none; transition: color .18s ease; }
+nav a { color: #50564a; font-size: .9rem; font-weight: 600; text-decoration: none; transition: color .18s ease; }
+.nav-logout { min-height: 36px; padding: 6px 13px; border: 1px solid var(--line); background: transparent; color: var(--forest); font-size: .82rem; }
+.nav-logout:hover:not(:disabled) { background: var(--cream); color: var(--forest); }
 nav a:hover, nav a:focus-visible { color: var(--rust); }
 
 .skip-link, .skip { z-index: 100; border-radius: 4px; background: var(--forest); color: var(--paper); text-decoration: none; }
@@ -122,5 +124,15 @@ body > footer { margin-top: auto; padding: 22px max(16px, calc((100% - var(--she
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
-/* Keep headings consistent on pages with compact legacy stylesheets. */
-body h1, body h2, body h3, body h4 { font-family: var(--serif) !important; }
+/* Theme harmonization for legacy account/catalog/admin page styles. */
+:root { color-scheme: light; }
+body { font-family: var(--sans) !important; font-size: 16px; }
+body > header, .site-header { background-color: var(--paper); }
+body h1, body h2, body h3, body h4 { color: var(--forest); }
+body > header > a, .brand { color: var(--forest); }
+body > header > a span, .brand span { color: var(--leaf); font-family: var(--sans); }
+body input, body select, body textarea { font-family: var(--sans); }
+body button, body .button { background-color: var(--forest); color: var(--paper); }
+body .button-quiet, body .button-secondary, body .secondary { background: transparent; color: var(--forest); border-color: var(--forest); }
+body .status.success { color: var(--success); }
+body .status.error { color: var(--danger); }

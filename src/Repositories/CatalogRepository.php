@@ -30,12 +30,20 @@ final class CatalogRepository implements CatalogReadRepository
         )->fetchAll();
     }
 
+    public function flavorTags(): array
+    {
+        return $this->pdo->query(
+            'SELECT slug, name FROM flavor_tags WHERE is_active = TRUE ORDER BY name, id'
+        )->fetchAll();
+    }
+
     public function products(array $filters, int $page, int $perPage, string $sort): array
     {
         [$where, $parameters] = $this->productFilters($filters);
         $orderBy = match ($sort) {
             'price_asc' => 'minimum_price ASC NULLS LAST, p.name ASC, p.id ASC',
             'price_desc' => 'minimum_price DESC NULLS LAST, p.name ASC, p.id ASC',
+            'name_asc' => 'p.name ASC, p.id ASC',
             default => 'p.created_at DESC, p.id DESC',
         };
 

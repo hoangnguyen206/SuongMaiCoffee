@@ -1,0 +1,80 @@
+- generic [active] [ref=f4e1]:
+  - link "Bỏ qua điều hướng, đến nội dung chính" [ref=f4e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f4e3]:
+    - generic [ref=f4e4]:
+      - link "Sương Mai — trang chủ" [ref=f4e5] [cursor=pointer]:
+        - /url: /
+        - generic [aria-hidden] [ref=f4e6]: S
+        - generic [ref=f4e7]:
+          - strong [ref=f4e8]: Sương Mai
+          - generic [ref=f4e9]: COFFEE ROASTERS
+      - link "Quay lại giỏ hàng" [ref=f4e10] [cursor=pointer]:
+        - /url: /cart/
+  - main [ref=f4e11]:
+    - region [ref=f4e12]:
+      - paragraph [ref=f4e13]: Thanh toán an toàn
+      - heading "Hoàn tất đơn hàng" [level=1] [ref=f4e15]
+      - paragraph [ref=f4e16]: Thông tin giao hàng → vận chuyển & thanh toán → xác nhận. Giá và tồn kho được máy chủ kiểm tra khi tạo đơn.
+    - navigation "Các bước checkout" [ref=f4e17]:
+      - list [ref=f4e18]:
+        - listitem [ref=f4e19]:
+          - generic [ref=f4e20]: "1"
+          - generic [ref=f4e21]: Giao hàng
+        - listitem [ref=f4e22]:
+          - generic [ref=f4e23]: "2"
+          - generic [ref=f4e24]: Vận chuyển & thanh toán
+        - listitem [ref=f4e25]:
+          - generic [ref=f4e26]: "3"
+          - generic [ref=f4e27]: Xác nhận
+    - status [ref=f4e28]: Đang tải giỏ hàng…
+    - generic [ref=f4e29]:
+      - region [ref=f4e30]:
+        - generic [ref=f4e31]:
+          - generic [ref=f4e32]:
+            - paragraph [ref=f4e33]: BƯỚC 1 / 3
+            - heading "Thông tin giao hàng" [level=2] [ref=f4e34]
+          - generic [ref=f4e35]: API THẬT
+        - generic [ref=f4e36]:
+          - group "Thông tin giao hàng" [ref=f4e37]:
+            - paragraph [ref=f4e39]: Các trường có dấu * là bắt buộc.
+            - generic [ref=f4e40]:
+              - generic [ref=f4e41]:
+                - generic [ref=f4e42]: Tên người nhận *
+                - textbox "Tên người nhận" [ref=f4e43]
+              - generic [ref=f4e44]:
+                - generic [ref=f4e45]: Số điện thoại *
+                - textbox "Số điện thoại" [ref=f4e46]
+              - generic [ref=f4e47]:
+                - generic [ref=f4e48]: Email nhận thông báo
+                - textbox "Email nhận thông báo" [ref=f4e49]
+              - generic [ref=f4e50]:
+                - generic [ref=f4e51]: Địa chỉ nhận hàng *
+                - textbox "Địa chỉ nhận hàng" [ref=f4e52]
+              - generic [ref=f4e53]:
+                - generic [ref=f4e54]: Địa chỉ bổ sung
+                - textbox "Địa chỉ bổ sung" [ref=f4e55]
+              - generic [ref=f4e56]:
+                - generic [ref=f4e57]: Tỉnh / thành phố *
+                - textbox "Tỉnh / thành phố" [ref=f4e58]
+              - generic [ref=f4e59]:
+                - generic [ref=f4e60]: Quận / huyện *
+                - textbox "Quận / huyện" [ref=f4e61]
+              - generic [ref=f4e62]:
+                - generic [ref=f4e63]: Phường / xã
+                - textbox "Phường / xã" [ref=f4e64]
+          - button "Tiếp tục" [disabled] [ref=f4e66] [cursor=pointer]: Tiếp tục →
+          - status
+      - complementary [ref=f4e67]:
+        - generic [ref=f4e68]:
+          - generic [ref=f4e69]:
+            - paragraph [ref=f4e70]: TÓM TẮT ĐƠN
+            - heading "Giỏ hàng" [level=2] [ref=f4e71]
+          - generic [ref=f4e72]: —
+        - paragraph [ref=f4e74]: Phần giá, giảm giá, phí vận chuyển và tổng tiền do máy chủ tính.
+    - paragraph [ref=f4e75]: PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.
+  - contentinfo [ref=f4e76]:
+    - generic [ref=f4e77]:
+      - generic [ref=f4e78]: Sương Mai Coffee Roasters
+      - link "Về đầu trang ↑" [ref=f4e79] [cursor=pointer]:
+        - /url: "#main-content"

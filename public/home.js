@@ -14,17 +14,21 @@
       const availability = product.available ? '' : '<span class="product-unavailable">Tạm hết hàng</span>';
       const image = product.images?.[0]?.url;
       const assetSlug = String(product.slug || 'product').replace(/[^a-z0-9-]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'product';
-      const imageMarkup = image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" loading="lazy" width="600" height="600">` : `<span class="product-media-mark" aria-hidden="true">SM</span>`;
+      const imageMarkup = image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" loading="lazy" width="600" height="600" data-product-image>` : '<span class="product-media-mark" aria-hidden="true">SM</span>';
       return `<article class="product-card reveal is-visible"><a href="/catalog/?product=${encodeURIComponent(product.slug)}" aria-label="Xem ${escapeHtml(product.name)}"><div class="product-media" data-asset-slot="/assets/products/${assetSlug}.webp">${imageMarkup}</div></a><div class="product-card-copy"><p class="product-origin">${escapeHtml(origin)}</p><h3>${escapeHtml(product.name)}</h3><div class="product-meta">${tags || '<span class="product-tag">Cà phê rang xay</span>'}</div><div class="product-bottom"><span class="product-price">Từ ${money(product.minimum_price_vnd)}</span>${availability}<a class="product-link" href="/catalog/?product=${encodeURIComponent(product.slug)}">Xem chi tiết <span aria-hidden="true">↗</span></a></div></div></article>`;
     }).join('');
+    productGrid.querySelectorAll('[data-product-image]').forEach(image => image.addEventListener('error', () => { const fallback = document.createElement('span'); fallback.className = 'product-media-mark'; fallback.textContent = 'SM'; fallback.setAttribute('aria-hidden', 'true'); image.replaceWith(fallback); }, { once: true }));
   }
+
+  function setFeaturedState(message, kind = '') { productStatus.textContent = message; productStatus.classList.toggle('is-error', kind === 'error'); productStatus.classList.toggle('is-empty', kind === 'empty'); }
   async function loadFeatured() {
+    setFeaturedState('Đang tải cà phê nổi bật…');
     try {
       const result = await window.CatalogApi.products({ page: '1', per_page: '4', sort: 'newest' });
       const products = Array.isArray(result) ? result : result.data;
-      if (!Array.isArray(products) || products.length === 0) { productStatus.textContent = 'Hiện chưa có sản phẩm để giới thiệu. Hãy ghé lại sau.'; return; }
-      renderProducts(products); productStatus.textContent = '';
-    } catch (error) { productStatus.textContent = error.message || 'Không thể tải sản phẩm lúc này. Bạn vẫn có thể mở toàn bộ cửa hàng.'; productStatus.classList.add('is-error'); }
+      if (!Array.isArray(products) || products.length === 0) { productGrid.innerHTML = ''; setFeaturedState('Những mẻ rang mới đang được chuẩn bị. Hãy ghé cửa hàng để xem lựa chọn hiện có.', 'empty'); return; }
+      renderProducts(products); setFeaturedState('');
+    } catch (error) { productGrid.innerHTML = ''; setFeaturedState(error.message || 'Cà phê đang nghỉ một nhịp. Bạn vẫn có thể ghé cửa hàng để xem lựa chọn hiện có.', 'error'); }
   }
   function setMenu(open) { menuButton.setAttribute('aria-expanded', String(open)); menuButton.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu'); navigation.classList.toggle('is-open', open); document.body.classList.toggle('menu-open', open); }
   menuButton.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
@@ -48,5 +52,19 @@
     processPanel.setAttribute('aria-labelledby', tab.id); document.querySelector('#process-count').textContent = content.count; document.querySelector('#process-name').textContent = content.name; document.querySelector('#process-description').textContent = content.description; document.querySelector('.process-glyph').textContent = content.glyph; document.querySelector('.process-panel-art').setAttribute('data-asset-slot', content.asset); if (focus) tab.focus();
   }
   processTabs.forEach((tab, index) => { tab.addEventListener('click', () => activateProcessTab(tab)); tab.addEventListener('keydown', event => { const direction = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0; if (!direction) return; event.preventDefault(); activateProcessTab(processTabs[(index + direction + processTabs.length) % processTabs.length], true); }); });
+
+  const brewSteps = {
+    phin: { kicker: 'CHẬM VÀ ĐẬM', name: 'Phin Việt Nam', description: 'Một nhịp nhỏ, tròn vị và thân thuộc — hợp cho buổi sáng cần thêm vài phút thong thả.', glyph: '☕' },
+    pourover: { kicker: 'TRONG VÀ SÁNG', name: 'Pour over', description: 'Dòng nước chậm làm rõ hương hoa, trái cây và những lớp vị tinh tế của hạt.', glyph: '◌' },
+    french: { kicker: 'ÊM VÀ ĐẦY', name: 'French press', description: 'Ngâm đủ lâu để tách cà phê có thân vị tròn, ấm và dễ chia sẻ cùng nhau.', glyph: '♨' },
+  };
+  const brewTabs = [...document.querySelectorAll('.brew-option')];
+  const brewPanel = document.querySelector('#brew-panel');
+  function activateBrewTab(tab, focus = false) {
+    const content = brewSteps[tab.dataset.brew];
+    brewTabs.forEach(item => { const selected = item === tab; item.classList.toggle('is-active', selected); item.setAttribute('aria-selected', String(selected)); item.tabIndex = selected ? 0 : -1; });
+    brewPanel.setAttribute('aria-labelledby', tab.id); document.querySelector('#brew-kicker').textContent = content.kicker; document.querySelector('#brew-name').textContent = content.name; document.querySelector('#brew-description').textContent = content.description; document.querySelector('.brew-glyph').textContent = content.glyph; if (focus) tab.focus();
+  }
+  brewTabs.forEach((tab, index) => { tab.addEventListener('click', () => activateBrewTab(tab)); tab.addEventListener('keydown', event => { const direction = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0; if (!direction) return; event.preventDefault(); activateBrewTab(brewTabs[(index + direction + brewTabs.length) % brewTabs.length], true); }); });
   loadFeatured();
 })();

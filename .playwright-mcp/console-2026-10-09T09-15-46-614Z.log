@@ -1,0 +1,9 @@
+[     382ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8020/api/v1/products?page=1&per_page=4&sort=newest:0
+[     382ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8020/api/v1/session:0
+[  311451ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8020/api/v1/categories:0
+[  311452ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8020/api/v1/origins:0
+[  311454ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8020/api/v1/flavors:0
+[  311454ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8020/api/v1/session:0
+[  311459ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8020/api/v1/products?sort=newest&page=1&per_page=20:0
+[  320182ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8020/api/v1/products?page=1&per_page=4&sort=newest:0
+[  320182ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8020/api/v1/session:0

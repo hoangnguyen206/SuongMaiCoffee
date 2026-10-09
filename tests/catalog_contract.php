@@ -36,6 +36,11 @@ final class FakeCatalogRepository implements CatalogReadRepository
         return [['slug' => 'origin-demo', 'name' => 'Origin demo', 'region' => 'PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.']];
     }
 
+    public function flavorTags(): array
+    {
+        return [['slug' => 'flavor-demo', 'name' => 'Flavor demo']];
+    }
+
     public function products(array $filters, int $page, int $perPage, string $sort): array
     {
         return [

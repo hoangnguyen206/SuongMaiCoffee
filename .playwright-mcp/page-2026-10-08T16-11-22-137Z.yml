@@ -1,0 +1,105 @@
+- generic [ref=f9e1]:
+  - link "Bỏ qua điều hướng, đến nội dung chính" [ref=f9e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f9e3]:
+    - generic [ref=f9e4]:
+      - link "Sương Mai — trang chủ" [ref=f9e5] [cursor=pointer]:
+        - /url: /
+        - generic [aria-hidden] [ref=f9e6]: S
+        - generic [ref=f9e7]:
+          - strong [ref=f9e8]: Sương Mai
+          - generic [ref=f9e9]: COFFEE ROASTERS
+      - link "Quay lại giỏ hàng" [ref=f9e10] [cursor=pointer]:
+        - /url: /cart/
+  - main [ref=f9e11]:
+    - region [ref=f9e12]:
+      - paragraph [ref=f9e13]: Thanh toán an toàn
+      - heading "Hoàn tất đơn hàng" [level=1] [ref=f9e15]
+      - paragraph [ref=f9e16]: Thông tin giao hàng → vận chuyển & thanh toán → xác nhận. Giá và tồn kho được máy chủ kiểm tra khi tạo đơn.
+    - navigation "Các bước checkout" [ref=f9e17]:
+      - list [ref=f9e18]:
+        - listitem [ref=f9e19]:
+          - generic [ref=f9e20]: "1"
+          - generic [ref=f9e21]: Giao hàng
+        - listitem [ref=f9e22]:
+          - generic [ref=f9e23]: "2"
+          - generic [ref=f9e24]: Vận chuyển & thanh toán
+        - listitem [ref=f9e25]:
+          - generic [ref=f9e26]: "3"
+          - generic [ref=f9e27]: Xác nhận
+    - status [ref=f9e28]: Giỏ hàng đã được tải. Máy chủ sẽ xác thực lại giá và tồn kho khi bạn đặt hàng.
+    - generic [ref=f9e29]:
+      - region [ref=f9e80]:
+        - generic [ref=f9e31]:
+          - generic [ref=f9e32]:
+            - paragraph [ref=f9e33]: BƯỚC 2 / 3
+            - heading "Vận chuyển & thanh toán" [level=2] [ref=f9e81]
+          - generic [ref=f9e35]: API THẬT
+        - generic [ref=f9e36]:
+          - group "Vận chuyển & thanh toán" [ref=f9e82]:
+            - generic [ref=f9e83]: Vận chuyển và thanh toán
+            - paragraph [ref=f9e84]: Chọn phương thức phù hợp. Chưa có cổng thanh toán trực tuyến.
+            - generic [ref=f9e85]:
+              - generic [ref=f9e86]: Phương thức vận chuyển
+              - radiogroup "Phương thức vận chuyển" [ref=f9e87]:
+                - generic [ref=f9e88] [cursor=pointer]:
+                  - radio "Giao hàng tiêu chuẩn Phí được hiển thị trong tóm tắt đơn." [checked] [ref=f9e89]
+                  - generic [ref=f9e90]:
+                    - strong [ref=f9e91]: Giao hàng tiêu chuẩn
+                    - generic [ref=f9e92]: Phí được hiển thị trong tóm tắt đơn.
+                - generic [ref=f9e93] [cursor=pointer]:
+                  - radio "Nhận tại điểm bán Địa điểm nhận sẽ được nhân viên xác nhận." [ref=f9e94]
+                  - generic [ref=f9e95]:
+                    - strong [ref=f9e96]: Nhận tại điểm bán
+                    - generic [ref=f9e97]: Địa điểm nhận sẽ được nhân viên xác nhận.
+            - generic [ref=f9e98]:
+              - generic [ref=f9e99]: Phương thức thanh toán
+              - radiogroup "Phương thức thanh toán" [ref=f9e100]:
+                - generic [ref=f9e101] [cursor=pointer]:
+                  - radio "Thanh toán khi nhận hàng COD" [ref=f9e102]
+                  - generic [ref=f9e103]:
+                    - strong [ref=f9e104]: Thanh toán khi nhận hàng
+                    - generic [ref=f9e105]: COD
+                  - generic [aria-hidden] [ref=f9e106]: ₫
+                - generic [ref=f9e107] [cursor=pointer]:
+                  - radio "Chuyển khoản ngân hàng Thông tin chuyển khoản sẽ được xác nhận sau khi đặt." [checked] [active] [ref=f9e108]
+                  - generic [ref=f9e109]:
+                    - strong [ref=f9e110]: Chuyển khoản ngân hàng
+                    - generic [ref=f9e111]: Thông tin chuyển khoản sẽ được xác nhận sau khi đặt.
+                  - generic [aria-hidden] [ref=f9e112]: ↗
+          - generic [ref=f9e65]:
+            - button "Quay lại" [ref=f9e113] [cursor=pointer]
+            - button "Tiếp tục" [ref=f9e66] [cursor=pointer]: Tiếp tục →
+          - status
+      - complementary [ref=f9e67]:
+        - generic [ref=f9e68]:
+          - generic [ref=f9e69]:
+            - paragraph [ref=f9e70]: TÓM TẮT ĐƠN
+            - heading "Giỏ hàng" [level=2] [ref=f9e71]
+          - generic [ref=f9e72]: 2 sản phẩm
+        - article [ref=f9e115]:
+          - generic [aria-hidden] [ref=f9e116]: SM
+          - generic [ref=f9e117]:
+            - heading "Cà phê mẫu 01 — dữ liệu demo" [level=3] [ref=f9e118]
+            - paragraph [ref=f9e119]: 250g · Hạt nguyên · x2
+          - strong [ref=f9e120]: 370.000đ
+        - generic [ref=f9e73]:
+          - generic [ref=f9e121]:
+            - term [ref=f9e122]: Tạm tính
+            - definition [ref=f9e123]: 370.000đ
+          - generic [ref=f9e124]:
+            - term [ref=f9e125]: Giảm giá
+            - definition [ref=f9e126]: −37.000đ
+          - generic [ref=f9e127]:
+            - term [ref=f9e128]: Vận chuyển
+            - definition [ref=f9e129]: 30.000đ
+          - generic [ref=f9e130]:
+            - term [ref=f9e131]: Tổng cộng
+            - definition [ref=f9e132]: 363.000đ
+        - paragraph [ref=f9e74]: Phần giá, giảm giá, phí vận chuyển và tổng tiền do máy chủ tính.
+    - paragraph [ref=f9e75]: PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.
+  - contentinfo [ref=f9e76]:
+    - generic [ref=f9e77]:
+      - generic [ref=f9e78]: Sương Mai Coffee Roasters
+      - link "Về đầu trang ↑" [ref=f9e79] [cursor=pointer]:
+        - /url: "#main-content"

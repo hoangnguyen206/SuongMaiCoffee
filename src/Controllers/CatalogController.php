@@ -35,6 +35,14 @@ final class CatalogController
         }
     }
 
+    public function flavors(string $requestId): Response
+    {
+        try {
+            return JsonResponder::success($this->catalog->flavorTags(), []);
+        } catch (Throwable) {
+            return $this->unavailable($requestId);
+        }
+    }
     /** @param array<string, string> $parameters @param array<string, string> $query */
     public function products(string $requestId, array $parameters = [], array $query = []): Response
     {

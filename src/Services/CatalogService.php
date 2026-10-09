@@ -25,7 +25,11 @@ final class CatalogService
         return $this->catalog->origins();
     }
 
-    /** @param array<string, string> $query @return array{data: list<array<string, mixed>>, meta: array<string, int>} */
+    /** @return list<array<string, mixed>> */
+    public function flavorTags(): array
+    {
+        return $this->catalog->flavorTags();
+    }
     public function products(array $query): array
     {
         $allowed = ['page', 'per_page', 'sort', 'category_slug', 'origin_slug', 'min_price_vnd', 'max_price_vnd', 'in_stock', 'flavor_tag_slug'];
@@ -36,7 +40,7 @@ final class CatalogService
         $page = $this->integer($query, 'page', 1, 1, 1000000);
         $perPage = $this->integer($query, 'per_page', 20, 1, 100);
         $sort = $query['sort'] ?? 'newest';
-        if (!in_array($sort, ['newest', 'price_asc', 'price_desc'], true)) {
+        if (!in_array($sort, ['newest', 'price_asc', 'price_desc', 'name_asc'], true)) {
             throw new InvalidArgumentException('Invalid sort value.');
         }
 

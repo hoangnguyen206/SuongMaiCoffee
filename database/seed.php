@@ -15,7 +15,7 @@ require_once dirname(__DIR__) . '/src/Database/ConnectionFactory.php';
 $config = require dirname(__DIR__) . '/config/app.php';
 $pdo = (new ConnectionFactory($config['database']))->connect();
 
-foreach (['001_catalog_demo.sql', '002_commerce_demo.sql'] as $seedName) {
+foreach (['001_catalog_demo.sql', '002_commerce_demo.sql', '003_catalog_expansion.sql'] as $seedName) {
     $seedFile = __DIR__ . '/seeds/' . $seedName;
     $sql = file_get_contents($seedFile);
     if (!is_string($sql)) {

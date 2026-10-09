@@ -1,0 +1,34 @@
+- generic [active] [ref=f3e1]:
+  - link "Bỏ qua điều hướng, đến nội dung chính" [ref=f3e2] [cursor=pointer]:
+    - /url: "#cart-main"
+  - banner [ref=f3e3]:
+    - generic [ref=f3e4]:
+      - link "Sương Mai — trang chủ" [ref=f3e5] [cursor=pointer]:
+        - /url: /
+        - text: Sương Mai
+        - generic [ref=f3e6]: COFFEE ROASTERS
+      - navigation "Điều hướng chính" [ref=f3e7]:
+        - link "Cửa hàng" [ref=f3e8] [cursor=pointer]:
+          - /url: /catalog/
+        - link "Tài khoản" [ref=f3e9] [cursor=pointer]:
+          - /url: /account/
+        - link "Giỏ hàng" [ref=f3e10] [cursor=pointer]:
+          - /url: /cart/
+  - main [ref=f3e11]:
+    - region [ref=f3e12]:
+      - paragraph [ref=f3e13]: Đơn hàng của bạn
+      - heading "Giỏ hàng" [level=1] [ref=f3e14]
+      - paragraph [ref=f3e15]: Đang xác định chế độ giỏ hàng…
+    - region "Nội dung giỏ hàng" [ref=f3e16]:
+      - paragraph [ref=f3e17]: Đang tải giỏ hàng…
+    - paragraph [ref=f3e18]:
+      - text: Bạn có thể thêm sản phẩm từ
+      - link "Catalog" [ref=f3e19] [cursor=pointer]:
+        - /url: /catalog/
+      - text: . Checkout sẽ dùng giá và tồn kho từ Backend.
+    - group [ref=f3e20]:
+      - generic "Công cụ hỗ trợ" [ref=f3e21] [cursor=pointer]
+  - contentinfo [ref=f3e22]:
+    - generic [ref=f3e23]:
+      - generic [ref=f3e24]: Sương Mai Coffee Roasters
+      - generic [ref=f3e25]: PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.

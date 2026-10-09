@@ -1,0 +1,227 @@
+- generic [ref=f1e1]:
+  - link "Bỏ qua điều hướng" [ref=f1e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f1e3]:
+    - generic [ref=f1e4]:
+      - link "Sương Mai Coffee Roasters — trang chủ" [ref=f1e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f1e6]: Sương Mai
+        - generic [ref=f1e7]: COFFEE ROASTERS
+      - navigation "Điều hướng chính" [ref=f1e8]:
+        - link "Cà phê" [ref=f1e9] [cursor=pointer]:
+          - /url: "#featured"
+        - link "Câu chuyện" [ref=f1e10] [cursor=pointer]:
+          - /url: "#story"
+        - link "Cách pha" [ref=f1e11] [cursor=pointer]:
+          - /url: "#brew"
+        - link "Độ tươi" [ref=f1e12] [cursor=pointer]:
+          - /url: "#freshness"
+        - link "Cửa hàng" [ref=f1e13] [cursor=pointer]:
+          - /url: /catalog/
+        - link "Tài khoản" [ref=f1e14] [cursor=pointer]:
+          - /url: /account/
+        - link "Giỏ hàng" [ref=f1e15] [cursor=pointer]:
+          - /url: /cart/
+  - main [ref=f1e16]:
+    - region [ref=f1e17]:
+      - generic [ref=f1e18]:
+        - generic [ref=f1e19]:
+          - paragraph [ref=f1e20]: RANG MỖI NGÀY · ĐÀ LẠT
+          - heading [level=1] [ref=f1e22]:
+            - text: Hương cà phê từ
+            - emphasis [ref=f1e23]: sương sớm
+            - text: Đà Lạt
+          - paragraph [ref=f1e24]: Từ những hạt cà phê được tuyển chọn đến mẻ rang nhỏ thơm nồng — một khoảng lặng ấm áp trong ngày của bạn.
+          - generic [ref=f1e25]:
+            - link "Khám phá cà phê" [ref=f1e26] [cursor=pointer]:
+              - /url: "#featured"
+              - text: Khám phá cà phê
+              - generic [aria-hidden] [ref=f1e27]: ↗
+            - link "Tìm gu của bạn" [ref=f1e28] [cursor=pointer]:
+              - /url: /catalog/
+          - generic [ref=f1e29]:
+            - generic [aria-hidden] [ref=f1e30]: ✳
+            - generic [ref=f1e31]:
+              - text: Chậm một nhịp.
+              - strong [ref=f1e32]: Thưởng thức trọn hương.
+        - img "Phong cảnh Đà Lạt trong sương sớm." [ref=f1e33]:
+          - generic [aria-hidden] [ref=f1e37]: ✳
+          - generic [ref=f1e38]:
+            - generic [ref=f1e39]: SƯƠNG SỚM · ĐÀ LẠT
+            - generic [ref=f1e40]: ĐÀ LẠT · SƯƠNG SỚM
+          - generic [aria-hidden] [ref=f1e41]:
+            - text: SM
+            - generic [ref=f1e42]: ROASTEDWITH CARE
+      - link "KÉO XUỐNG" [ref=f1e44] [cursor=pointer]:
+        - /url: "#values"
+        - generic [aria-hidden] [ref=f1e45]: ↓
+        - text: KÉO XUỐNG
+    - region "Giá trị của Sương Mai" [ref=f1e46]:
+      - generic [ref=f1e47]:
+        - article [ref=f1e48]:
+          - generic [ref=f1e49]: "01"
+          - generic [ref=f1e50]:
+            - heading "Rang theo lô nhỏ" [level=2] [ref=f1e51]
+            - paragraph [ref=f1e52]: Chăm chút từng mẻ để hương vị luôn rõ nét.
+        - article [ref=f1e53]:
+          - generic [ref=f1e54]: "02"
+          - generic [ref=f1e55]:
+            - heading "Truy xuất nguồn gốc" [level=2] [ref=f1e56]
+            - paragraph [ref=f1e57]: Biết vùng trồng, ngày rang và câu chuyện hạt.
+        - article [ref=f1e58]:
+          - generic [ref=f1e59]: "03"
+          - generic [ref=f1e60]:
+            - heading "Đồng hành cùng nông hộ" [level=2] [ref=f1e61]
+            - paragraph [ref=f1e62]: Trân trọng người vun trồng nên mùa cà phê.
+        - article [ref=f1e63]:
+          - generic [ref=f1e64]: "04"
+          - generic [ref=f1e65]:
+            - heading "Giao hàng nhanh" [level=2] [ref=f1e66]
+            - paragraph [ref=f1e67]: Cà phê mới rang sớm có mặt bên bạn.
+    - region [ref=f1e68]:
+      - generic [ref=f1e69]:
+        - generic [ref=f1e70]:
+          - generic [ref=f1e71]:
+            - paragraph [ref=f1e72]: TỪ VƯỜN ĐẾN TÁCH
+            - heading "Những hạt đang được yêu mến" [level=2] [ref=f1e73]
+          - link "Xem tất cả sản phẩm" [ref=f1e74] [cursor=pointer]:
+            - /url: /catalog/
+            - text: Xem tất cả sản phẩm
+            - generic [aria-hidden] [ref=f1e75]: ↗
+        - paragraph [ref=f1e76]: Khám phá những lựa chọn được Sương Mai tuyển chọn. Giá và tình trạng hàng được cập nhật tại cửa hàng.
+        - status [ref=f1e77]: Không thể tải dữ liệu catalog.
+    - region [ref=f1e78]:
+      - generic [ref=f1e79]:
+        - img "Vùng trồng cà phê trên cao nguyên." [ref=f1e80]:
+          - generic [aria-hidden] [ref=f1e83]: S
+          - generic [ref=f1e84]:
+            - generic [ref=f1e85]: TỪ ĐẤT LÀNH
+            - generic [ref=f1e86]: CAO NGUYÊN ĐÀ LẠT
+        - generic [ref=f1e87]:
+          - paragraph [ref=f1e88]: MỘT HÀNH TRÌNH CÓ CHỦ Ý
+          - heading "Mỗi tách cà phê bắt đầu từ sự trân trọng" [level=2] [ref=f1e89]
+          - paragraph [ref=f1e90]: "Chúng tôi tin hương vị đẹp được tạo nên từ những lựa chọn tử tế: hiểu vùng đất, chọn hạt phù hợp, rang vừa đủ và dành thời gian thưởng thức."
+          - link "Tìm hiểu cà phê của chúng tôi" [ref=f1e91] [cursor=pointer]:
+            - /url: /catalog/
+            - text: Tìm hiểu cà phê của chúng tôi
+            - generic [aria-hidden] [ref=f1e92]: ↗
+      - generic [ref=f1e93]:
+        - generic [ref=f1e94]:
+          - paragraph [ref=f1e95]: BỐN CHẶNG ĐƯỜNG
+          - heading "Từ vùng trồng đến phút thưởng thức" [level=3] [ref=f1e96]
+        - tablist "Các bước làm nên tách cà phê" [ref=f1e97]:
+          - tab "01 Vùng trồng" [selected] [ref=f1e98] [cursor=pointer]:
+            - generic [ref=f1e99]: "01"
+            - text: Vùng trồng
+          - tab "02 Chọn hạt" [ref=f1e100] [cursor=pointer]:
+            - generic [ref=f1e101]: "02"
+            - text: Chọn hạt
+          - tab "03 Rang" [ref=f1e102] [cursor=pointer]:
+            - generic [ref=f1e103]: "03"
+            - text: Rang
+          - tab "04 Pha thưởng thức" [ref=f1e104] [cursor=pointer]:
+            - generic [ref=f1e105]: "04"
+            - text: Pha thưởng thức
+        - tabpanel "01 Vùng trồng" [ref=f1e106]:
+          - generic [ref=f1e108]: ⌁
+          - generic [ref=f1e109]:
+            - paragraph [ref=f1e110]: CHẶNG 01
+            - heading "Vùng trồng" [level=4] [ref=f1e111]
+            - paragraph [ref=f1e112]: Khí hậu cao nguyên và nhịp mùa tạo nên nét riêng cho mỗi vùng cà phê.
+    - region [ref=f1e113]:
+      - generic [ref=f1e114]:
+        - generic [ref=f1e115]:
+          - paragraph [ref=f1e116]: NGON NHẤT KHI ĐÚNG LÚC
+          - heading "Ngày rang kể một câu chuyện" [level=2] [ref=f1e117]
+          - paragraph [ref=f1e118]: Ngày rang giúp bạn hiểu hành trình của hạt cà phê và chọn thời điểm thưởng thức phù hợp. Sương Mai hiển thị mốc thưởng thức ngon nhất dựa trên ngày rang khi thông tin lô sẵn có.
+          - paragraph [ref=f1e119]:
+            - generic [aria-hidden] [ref=f1e120]: ✳
+            - text: Mốc thưởng thức ngon nhất không phải hạn an toàn thực phẩm. Sau mốc này, cà phê chỉ đơn giản đã qua thời điểm được khuyến nghị thưởng thức ngon nhất.
+          - link "Khám phá cà phê mới rang" [ref=f1e121] [cursor=pointer]:
+            - /url: /catalog/
+            - text: Khám phá cà phê mới rang
+            - generic [aria-hidden] [ref=f1e122]: ↗
+        - img "Rang và pha cà phê thủ công." [ref=f1e123]:
+          - generic [aria-hidden] [ref=f1e124]:
+            - generic [ref=f1e125]: ROASTDATE
+            - strong [ref=f1e127]: "+30"
+            - generic [ref=f1e128]: BEST ENJOYED
+          - generic [ref=f1e129]:
+            - generic [ref=f1e130]: RANG CÓ CHỦ Ý
+            - generic [ref=f1e131]: RANG CÓ CHỦ Ý
+    - region [ref=f1e132]:
+      - generic [ref=f1e133]:
+        - generic [ref=f1e134]:
+          - paragraph [ref=f1e135]: MỘT KHOẢNH KHẮC ĐỂ PHA
+          - heading "Cách pha nào hợp với buổi sáng của bạn?" [level=2] [ref=f1e136]
+          - paragraph [ref=f1e137]: Chọn một nhịp pha, rồi để hương vị dẫn đường. Bạn có thể xem thêm lựa chọn và cách xay trong cửa hàng.
+          - tablist "Chọn cách pha" [ref=f1e138]:
+            - tab "Phin" [ref=f1e139] [cursor=pointer]
+            - tab "Pour over" [active] [selected] [ref=f1e140] [cursor=pointer]
+            - tab "French press" [ref=f1e141] [cursor=pointer]
+        - tabpanel "Pour over" [ref=f1e195]:
+          - generic [aria-hidden] [ref=f1e143]:
+            - generic [ref=f1e144]: ⌁
+            - generic [ref=f1e145]: ◌
+          - generic [ref=f1e146]:
+            - paragraph [ref=f1e147]: TRONG VÀ SÁNG
+            - heading "Pour over" [level=3] [ref=f1e196]
+            - paragraph [ref=f1e149]: Dòng nước chậm làm rõ hương hoa, trái cây và những lớp vị tinh tế của hạt.
+            - link "Chọn hạt để pha" [ref=f1e150] [cursor=pointer]:
+              - /url: /catalog/
+              - text: Chọn hạt để pha
+              - generic [aria-hidden] [ref=f1e151]: ↗
+    - region [ref=f1e152]:
+      - generic [ref=f1e153]:
+        - generic [aria-hidden] [ref=f1e154]:
+          - generic [ref=f1e155]: SM
+          - generic [ref=f1e156]: CHÚ Ý ĐẾN NHỮNG ĐIỀU NHỎ
+        - generic [ref=f1e157]:
+          - paragraph [ref=f1e158]: ĐIỀU CHÚNG TÔI CHÚ Ý
+          - heading "Một mẻ rang tốt bắt đầu từ việc lắng nghe." [level=2] [ref=f1e159]
+          - paragraph [ref=f1e160]: Nghe hạt thay đổi trong lồng rang. Nhìn màu sắc chuyển mình. Ghi lại ngày rang và những gì cần nhớ để mỗi lần pha sau vẫn giữ được sự rõ ràng.
+          - paragraph [ref=f1e161]: Không cần vội vàng để làm nên một tách cà phê đáng nhớ — chỉ cần đủ chăm chút ở những bước nhỏ.
+    - region [ref=f1e162]:
+      - generic [ref=f1e163]:
+        - paragraph [ref=f1e164]: TÁCH TIẾP THEO CỦA BẠN
+        - heading "Tìm cà phê phù hợp với bạn" [level=2] [ref=f1e165]
+        - paragraph [ref=f1e166]: Khám phá hương vị, chọn cách xay và bắt đầu một buổi sáng thật riêng.
+        - generic [ref=f1e167]:
+          - link "Xem tất cả sản phẩm" [ref=f1e168] [cursor=pointer]:
+            - /url: /catalog/
+            - text: Xem tất cả sản phẩm
+            - generic [aria-hidden] [ref=f1e169]: ↗
+          - link "Liên hệ Sương Mai" [ref=f1e170] [cursor=pointer]:
+            - /url: "#contact"
+  - contentinfo [ref=f1e171]:
+    - generic [ref=f1e172]:
+      - generic [ref=f1e173]:
+        - link "Sương Mai Coffee Roasters — trang chủ" [ref=f1e174] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f1e175]: Sương Mai
+          - generic [ref=f1e176]: COFFEE ROASTERS
+        - paragraph [ref=f1e177]: Hương cà phê từ sương sớm Đà Lạt.
+      - generic [ref=f1e178]:
+        - heading "Khám phá" [level=2] [ref=f1e179]
+        - link "Cửa hàng" [ref=f1e180] [cursor=pointer]:
+          - /url: /catalog/
+        - link "Tài khoản" [ref=f1e181] [cursor=pointer]:
+          - /url: /account/
+        - link "Giỏ hàng" [ref=f1e182] [cursor=pointer]:
+          - /url: /cart/
+        - link "Tra cứu đơn hàng" [ref=f1e183] [cursor=pointer]:
+          - /url: /orders/lookup/
+      - generic [ref=f1e184]:
+        - heading "Liên hệ" [level=2] [ref=f1e185]
+        - paragraph [ref=f1e186]: "Xưởng rang: Đà Lạt, Lâm Đồng"
+      - generic [ref=f1e187]:
+        - heading "Ghé thăm" [level=2] [ref=f1e188]
+        - link "Chọn cà phê" [ref=f1e189] [cursor=pointer]:
+          - /url: /catalog/
+        - link "Tra cứu đơn hàng" [ref=f1e190] [cursor=pointer]:
+          - /url: /orders/lookup/
+        - link "Về đầu trang ↑" [ref=f1e191] [cursor=pointer]:
+          - /url: "#main"
+    - generic [ref=f1e192]:
+      - generic [ref=f1e193]: © Sương Mai Coffee Roasters
+      - generic [ref=f1e194]: RANG TẠI ĐÀ LẠT · GIAO HÀNG TẬN NƠI

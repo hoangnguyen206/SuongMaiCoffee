@@ -14,19 +14,20 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Bỏ qua điều hướng, đến nội dung chính</a>
-  <header><a href="/">Sương Mai <span>COFFEE ROASTERS</span></a><nav><a href="/catalog/">Cửa hàng</a><a href="/cart/">Giỏ hàng</a></nav></header>
+  <header><a href="/">Sương Mai <span>COFFEE ROASTERS</span></a><nav data-account-nav><a href="/catalog/">Cửa hàng</a><a href="/cart/">Giỏ hàng</a><a href="/account/" data-account-link>Tài khoản</a><a href="/admin/" data-admin-link hidden>Quản trị</a><button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button></nav></header>
   <main id="main" class="page">
     <p class="eyebrow">HỖ TRỢ ĐƠN HÀNG</p>
     <h1>Tra cứu đơn hàng</h1>
     <p>Nhập mã đơn hàng và số điện thoại đã dùng khi đặt. Lỗi tra cứu sẽ không phân biệt mã đơn và số điện thoại.</p>
     <form id="lookup-form" novalidate>
       <label for="order-code">Mã đơn hàng<input id="order-code" name="order_code" maxlength="32" autocomplete="off" required></label>
-      <label for="phone">Số điện thoại<input id="phone" name="phone" type="tel" inputmode="tel" maxlength="32" autocomplete="tel" required></label>
+      <label for="phone">Số điện thoại<input id="phone" name="phone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel-national" placeholder="0901234567" required></label>
       <button type="submit">Tra cứu</button>
     </form>
     <p id="status" role="status" aria-live="polite"></p>
     <section id="result" aria-live="polite" hidden></section>
   </main>
   <footer>Rang tại Đà Lạt · giao hàng tận nơi</footer>
+  <script src="/shared/site-account.js" defer></script>
 </body>
 </html>

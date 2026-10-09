@@ -1,0 +1,75 @@
+- generic [active] [ref=f3e1]:
+  - link "Bỏ qua điều hướng, đến nội dung chính" [ref=f3e2] [cursor=pointer]:
+    - /url: "#cart-main"
+  - banner [ref=f3e3]:
+    - generic [ref=f3e4]:
+      - link "Sương Mai — trang chủ" [ref=f3e5] [cursor=pointer]:
+        - /url: /
+        - text: Sương Mai
+        - generic [ref=f3e6]: COFFEE ROASTERS
+      - navigation "Điều hướng chính" [ref=f3e7]:
+        - link "Cửa hàng" [ref=f3e8] [cursor=pointer]:
+          - /url: /catalog/
+        - link "Tài khoản" [ref=f3e9] [cursor=pointer]:
+          - /url: /account/
+        - link "Giỏ hàng" [ref=f3e10] [cursor=pointer]:
+          - /url: /cart/
+  - main [ref=f3e11]:
+    - region [ref=f3e12]:
+      - paragraph [ref=f3e13]: Đơn hàng của bạn
+      - heading "Giỏ hàng" [level=1] [ref=f3e14]
+      - paragraph [ref=f3e15]: Giỏ hàng tài khoản — đã đăng nhập
+    - status [ref=f3e98]: Đã áp dụng mã giảm giá.
+    - region "Nội dung giỏ hàng" [ref=f3e16]:
+      - generic [ref=f3e99]:
+        - heading "Sản phẩm đã chọn" [level=2] [ref=f3e100]
+        - generic [ref=f3e101]: 2 sản phẩm
+      - article [ref=f3e103]:
+        - generic [ref=f3e104]:
+          - paragraph [ref=f3e105]: PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.
+          - heading "Cà phê mẫu 01 — dữ liệu demo" [level=3] [ref=f3e106]
+          - paragraph [ref=f3e107]: 250g · Hạt nguyên
+          - paragraph [ref=f3e108]: "Còn hàng: 10"
+        - generic [ref=f3e109]:
+          - generic [ref=f3e110]:
+            - text: Số lượng
+            - spinbutton "Số lượng Cà phê mẫu 01 — dữ liệu demo" [ref=f3e111]: "2"
+          - paragraph [ref=f3e112]:
+            - text: "Thành tiền:"
+            - strong [ref=f3e113]: 370.000đ
+          - button "Xóa" [ref=f3e114] [cursor=pointer]
+      - generic [ref=f3e115]:
+        - paragraph [ref=f3e116]:
+          - generic [ref=f3e117]: Tạm tính
+          - strong [ref=f3e118]: 370.000đ
+        - paragraph [ref=f3e119]:
+          - generic [ref=f3e120]: Giảm giá
+          - strong [ref=f3e121]: "-37.000đ"
+        - paragraph [ref=f3e122]:
+          - generic [ref=f3e123]: Vận chuyển
+          - strong [ref=f3e124]: 30.000đ
+        - paragraph [ref=f3e125]:
+          - generic [ref=f3e126]: Tổng cộng
+          - strong [ref=f3e127]: 363.000đ
+        - generic [ref=f3e128]:
+          - generic [ref=f3e129]: Mã giảm giá
+          - generic [ref=f3e130]:
+            - textbox "Mã giảm giá" [ref=f3e131]:
+              - /placeholder: WELCOME10
+              - text: WELCOME10
+            - button "Áp dụng" [ref=f3e132] [cursor=pointer]
+            - button "Gỡ mã" [ref=f3e133] [cursor=pointer]
+        - paragraph [ref=f3e134]: Giá và tổng tiền do Backend tính bằng VND integer.
+        - link "Tiến hành checkout" [ref=f3e135] [cursor=pointer]:
+          - /url: /checkout/
+    - paragraph [ref=f3e18]:
+      - text: Bạn có thể thêm sản phẩm từ
+      - link "Catalog" [ref=f3e19] [cursor=pointer]:
+        - /url: /catalog/
+      - text: . Checkout sẽ dùng giá và tồn kho từ Backend.
+    - group [ref=f3e20]:
+      - generic "Công cụ hỗ trợ" [ref=f3e21] [cursor=pointer]
+  - contentinfo [ref=f3e22]:
+    - generic [ref=f3e23]:
+      - generic [ref=f3e24]: Sương Mai Coffee Roasters
+      - generic [ref=f3e25]: PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.

@@ -1,0 +1,11 @@
+- generic [active] [ref=e1]:
+  - link "Bỏ qua điều hướng" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - main [ref=e3]:
+    - paragraph [ref=e4]: 500 · TẠM GIÁN ĐOẠN
+    - heading "Dịch vụ đang tạm thời gián đoạn" [level=1] [ref=e5]
+    - paragraph [ref=e6]: Vui lòng thử lại sau. Không hiển thị chi tiết lỗi máy chủ tại đây.
+    - link "Về trang chủ" [ref=e7] [cursor=pointer]:
+      - /url: /
+    - link "Mở cửa hàng" [ref=e8] [cursor=pointer]:
+      - /url: /catalog/

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/account/account.css">
   <script src="/account/account-api.js" defer></script>
   <script src="/account/account.js" defer></script>
+  <script src="/shared/site-account.js" defer></script>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../shared/site-theme.css">
@@ -17,7 +18,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="Sương Mai — trang chủ">Sương Mai <span>COFFEE ROASTERS</span></a>
-      <nav aria-label="Điều hướng chính"><a href="/catalog/">Cửa hàng</a><a href="/account/" aria-current="page">Tài khoản</a></nav>
+      <nav aria-label="Điều hướng chính" data-account-nav><a href="/catalog/">Cửa hàng</a><a href="/account/" data-account-link aria-current="page">Tài khoản</a><a href="/admin/" data-admin-link hidden>Quản trị</a><button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button></nav>
     </div>
   </header>
   <main id="account-main" class="container account-main">
@@ -26,7 +27,7 @@
       <h1 id="account-title">Chào mừng bạn trở lại</h1>
       <p>Đăng nhập hoặc tạo tài khoản để quản lý thông tin cá nhân.</p>
     </section>
-    <p id="account-status" class="status" role="status" aria-live="polite" hidden></p>
+    <p id="account-status" class="status" role="status" aria-live="polite" tabindex="-1" hidden></p>
     <section id="auth-panel" class="panel" aria-label="Đăng nhập hoặc đăng ký">
       <div class="tabs" role="group" aria-label="Chọn thao tác tài khoản">
         <button id="show-login" class="tab is-active" type="button" aria-pressed="true">Đăng nhập</button>
@@ -42,7 +43,7 @@
         <h2>Tạo tài khoản</h2>
         <label>Họ và tên<input name="full_name" autocomplete="name" maxlength="120" required></label>
         <label>Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
-        <label>Số điện thoại<input name="phone" type="tel" autocomplete="tel" maxlength="32" required></label>
+        <label>Số điện thoại<input name="phone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="20" placeholder="0901234567" required><span class="hint">Số điện thoại Việt Nam, ví dụ 0901234567.</span></label>
         <label>Mật khẩu<input name="password" type="password" autocomplete="new-password" minlength="8" required><span class="hint">Tối thiểu 8 ký tự, gồm chữ và số.</span></label>
         <button class="button" type="submit">Tạo tài khoản</button>
       </form>
@@ -55,7 +56,7 @@
       <form id="profile-form" novalidate>
         <label>Họ và tên<input name="full_name" autocomplete="name" maxlength="120" required></label>
         <label>Email<input name="email" type="email" autocomplete="email" readonly></label>
-        <label>Số điện thoại<input name="phone" type="tel" autocomplete="tel" maxlength="32" required></label>
+        <label>Số điện thoại<input name="phone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="20" placeholder="0901234567" required><span class="hint">Số điện thoại Việt Nam, ví dụ 0901234567.</span></label>
         <p id="profile-role" class="hint"></p>
         <button class="button" type="submit">Lưu thông tin</button>
       </form>

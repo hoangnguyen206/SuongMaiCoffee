@@ -1,0 +1,66 @@
+- generic [active] [ref=f1e1]:
+  - link "Bỏ qua điều hướng, đến nội dung chính" [ref=f1e2] [cursor=pointer]:
+    - /url: "#catalog-main"
+  - banner [ref=f1e3]:
+    - generic [ref=f1e4]:
+      - link "Sương Mai — trang chủ" [ref=f1e5] [cursor=pointer]:
+        - /url: /
+        - text: Sương Mai
+        - generic [ref=f1e6]: COFFEE ROASTERS
+      - navigation "Điều hướng chính" [ref=f1e7]:
+        - link "Trang chủ" [ref=f1e8] [cursor=pointer]:
+          - /url: /
+        - link "Cửa hàng" [ref=f1e9] [cursor=pointer]:
+          - /url: "#catalog-main"
+  - main [ref=f1e10]:
+    - region [ref=f1e11]:
+      - paragraph [ref=f1e12]: CỬA HÀNG CÀ PHÊ
+      - heading "Những hạt cà phê cho nhịp chậm" [level=1] [ref=f1e13]
+      - paragraph [ref=f1e14]: Chọn hạt cà phê theo vùng trồng, cách pha và hương vị bạn yêu thích.
+    - region "Bộ lọc catalog" [ref=f1e15]:
+      - generic [ref=f1e16]:
+        - generic [ref=f1e17]: Tìm sản phẩm
+        - searchbox "Tìm sản phẩm" [ref=f1e18]
+        - paragraph [ref=f1e19]: Nhập ít nhất 2 ký tự.
+      - generic [ref=f1e20]:
+        - text: Danh mục
+        - combobox "Danh mục" [ref=f1e21] [cursor=pointer]:
+          - option "Tất cả danh mục" [selected]
+          - option "Cà phê hạt"
+          - option "Cà phê xay sẵn"
+      - generic [ref=f1e22]:
+        - text: Vùng trồng
+        - combobox "Vùng trồng" [ref=f1e23] [cursor=pointer]:
+          - option "Tất cả vùng" [selected]
+          - option "Cao nguyên Đà Lạt"
+      - generic [ref=f1e24]:
+        - text: Sắp xếp
+        - combobox "Sắp xếp" [ref=f1e25] [cursor=pointer]:
+          - option "Mới nhất" [selected]
+          - option "Giá tăng dần"
+          - option "Giá giảm dần"
+    - region "Danh sách sản phẩm" [ref=f1e26]:
+      - article [ref=f1e27]:
+        - img "Hình ảnh sản phẩm cà phê" [ref=f1e28]
+        - generic [ref=f1e29]:
+          - paragraph [ref=f1e30]: Đà Lạt, Lâm Đồng
+          - heading "Sương Mai Hương Quả" [level=2] [ref=f1e31]
+          - paragraph [ref=f1e32]: Cà phê xay sẵn
+          - generic [ref=f1e33]:
+            - generic [ref=f1e34]: 195.000đ
+            - generic [ref=f1e35]: Còn hàng
+          - button "Xem chi tiết" [ref=f1e36] [cursor=pointer]
+      - article [ref=f1e37]:
+        - img "Hình ảnh sản phẩm cà phê" [ref=f1e38]
+        - generic [ref=f1e39]:
+          - paragraph [ref=f1e40]: Đà Lạt, Lâm Đồng
+          - heading "Sương Mai Đà Lạt" [level=2] [ref=f1e41]
+          - paragraph [ref=f1e42]: Cà phê hạt
+          - generic [ref=f1e43]:
+            - generic [ref=f1e44]: 185.000đ
+            - generic [ref=f1e45]: Còn hàng
+          - button "Xem chi tiết" [ref=f1e46] [cursor=pointer]
+  - contentinfo [ref=f1e47]:
+    - generic [ref=f1e48]:
+      - generic [ref=f1e49]: Sương Mai Coffee Roasters
+      - generic [ref=f1e50]: Rang tại Đà Lạt · giao hàng tận nơi

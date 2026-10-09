@@ -1,0 +1,82 @@
+- generic [active] [ref=f9e1]:
+  - link "Bỏ qua điều hướng, đến nội dung chính" [ref=f9e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f9e3]:
+    - generic [ref=f9e4]:
+      - link "Sương Mai — trang chủ" [ref=f9e5] [cursor=pointer]:
+        - /url: /
+        - generic [aria-hidden] [ref=f9e6]: S
+        - generic [ref=f9e7]:
+          - strong [ref=f9e8]: Sương Mai
+          - generic [ref=f9e9]: COFFEE ROASTERS
+      - link "Quay lại giỏ hàng" [ref=f9e10] [cursor=pointer]:
+        - /url: /cart/
+  - main [ref=f9e11]:
+    - region [ref=f9e12]:
+      - paragraph [ref=f9e13]: Thanh toán an toàn
+      - heading "Hoàn tất đơn hàng" [level=1] [ref=f9e15]
+      - paragraph [ref=f9e16]: Thông tin giao hàng → vận chuyển & thanh toán → xác nhận. Giá và tồn kho được máy chủ kiểm tra khi tạo đơn.
+    - navigation "Các bước checkout" [ref=f9e17]:
+      - list [ref=f9e18]:
+        - listitem [ref=f9e19]:
+          - generic [ref=f9e20]: "1"
+          - generic [ref=f9e21]: Giao hàng
+        - listitem [ref=f9e22]:
+          - generic [ref=f9e23]: "2"
+          - generic [ref=f9e24]: Vận chuyển & thanh toán
+        - listitem [ref=f9e25]:
+          - generic [ref=f9e26]: "3"
+          - generic [ref=f9e27]: Xác nhận
+    - status [ref=f9e28]: Đặt hàng thành công.
+    - generic [ref=f9e29]:
+      - region [ref=f9e159]:
+        - generic [ref=f9e160]:
+          - generic [aria-hidden] [ref=f9e161]: ✓
+          - generic [ref=f9e162]:
+            - paragraph [ref=f9e163]: ĐẶT HÀNG THÀNH CÔNG
+            - heading "Đơn hàng đã được tạo" [level=2] [ref=f9e164]
+            - paragraph [ref=f9e165]:
+              - text: "Mã đơn hàng:"
+              - strong [ref=f9e166]: SM261008161413EBA53A
+        - paragraph [ref=f9e167]: "Trạng thái: pending · Thanh toán: pending"
+        - paragraph [ref=f9e168]:
+          - text: "Tổng cộng:"
+          - strong [ref=f9e169]: 363.000đ
+        - paragraph [ref=f9e170]: Hãy lưu mã đơn để tra cứu tình trạng đơn hàng.
+        - paragraph [ref=f9e171]:
+          - link "Tra cứu đơn hàng" [ref=f9e172] [cursor=pointer]:
+            - /url: /orders/lookup/
+          - link "Tiếp tục mua sắm" [ref=f9e173] [cursor=pointer]:
+            - /url: /catalog/
+      - complementary [ref=f9e67]:
+        - generic [ref=f9e68]:
+          - generic [ref=f9e69]:
+            - paragraph [ref=f9e70]: TÓM TẮT ĐƠN
+            - heading "Giỏ hàng" [level=2] [ref=f9e71]
+          - generic [ref=f9e72]: 2 sản phẩm
+        - article [ref=f9e115]:
+          - generic [aria-hidden] [ref=f9e116]: SM
+          - generic [ref=f9e117]:
+            - heading "Cà phê mẫu 01 — dữ liệu demo" [level=3] [ref=f9e118]
+            - paragraph [ref=f9e119]: 250g · Hạt nguyên · x2
+          - strong [ref=f9e120]: 370.000đ
+        - generic [ref=f9e73]:
+          - generic [ref=f9e121]:
+            - term [ref=f9e122]: Tạm tính
+            - definition [ref=f9e123]: 370.000đ
+          - generic [ref=f9e124]:
+            - term [ref=f9e125]: Giảm giá
+            - definition [ref=f9e126]: −37.000đ
+          - generic [ref=f9e127]:
+            - term [ref=f9e128]: Vận chuyển
+            - definition [ref=f9e129]: 30.000đ
+          - generic [ref=f9e130]:
+            - term [ref=f9e131]: Tổng cộng
+            - definition [ref=f9e132]: 363.000đ
+        - paragraph [ref=f9e74]: Phần giá, giảm giá, phí vận chuyển và tổng tiền do máy chủ tính.
+    - paragraph [ref=f9e75]: PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.
+  - contentinfo [ref=f9e76]:
+    - generic [ref=f9e77]:
+      - generic [ref=f9e78]: Sương Mai Coffee Roasters
+      - link "Về đầu trang ↑" [ref=f9e79] [cursor=pointer]:
+        - /url: "#main-content"

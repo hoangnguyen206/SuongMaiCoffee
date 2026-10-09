@@ -1,0 +1,27 @@
+- generic [active] [ref=f7e1]:
+  - link "Bỏ qua điều hướng, đến nội dung chính" [ref=f7e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f7e3]:
+    - link "Sương Mai COFFEE ROASTERS" [ref=f7e4] [cursor=pointer]:
+      - /url: /
+      - text: Sương Mai
+      - generic [ref=f7e5]: COFFEE ROASTERS
+    - navigation [ref=f7e6]:
+      - link "Cửa hàng" [ref=f7e7] [cursor=pointer]:
+        - /url: /catalog/
+      - link "Giỏ hàng" [ref=f7e8] [cursor=pointer]:
+        - /url: /cart/
+  - main [ref=f7e9]:
+    - paragraph [ref=f7e10]: HỖ TRỢ ĐƠN HÀNG
+    - heading "Tra cứu đơn hàng" [level=1] [ref=f7e11]
+    - paragraph [ref=f7e12]: Nhập mã đơn hàng và số điện thoại đã dùng khi đặt. Lỗi tra cứu sẽ không phân biệt mã đơn và số điện thoại.
+    - generic [ref=f7e13]:
+      - generic [ref=f7e14]:
+        - text: Mã đơn hàng
+        - textbox "Mã đơn hàng" [ref=f7e15]
+      - generic [ref=f7e16]:
+        - text: Số điện thoại
+        - textbox "Số điện thoại" [ref=f7e17]
+      - button "Tra cứu" [ref=f7e18] [cursor=pointer]
+    - status [ref=f7e19]
+  - contentinfo [ref=f7e20]: PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.

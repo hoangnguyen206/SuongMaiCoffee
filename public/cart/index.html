@@ -17,7 +17,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="Sương Mai — trang chủ">Sương Mai <span>COFFEE ROASTERS</span></a>
-      <nav aria-label="Điều hướng chính"><a href="/catalog/">Cửa hàng</a><a href="/account/">Tài khoản</a><a href="/cart/" aria-current="page">Giỏ hàng</a></nav>
+      <nav aria-label="Điều hướng chính" data-account-nav><a href="/catalog/">Cửa hàng</a><a href="/account/" data-account-link>Tài khoản</a><a href="/admin/" data-admin-link hidden>Quản trị</a><button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button><a href="/cart/" aria-current="page">Giỏ hàng</a></nav>
     </div>
   </header>
   <main id="cart-main" class="container cart-main">
@@ -33,5 +33,5 @@
     <p class="hint">Bạn có thể thêm sản phẩm từ <a href="/catalog/">cửa hàng</a>, rồi quay lại đây để hoàn tất đơn hàng.</p>
   </main>
   <footer class="site-footer"><div class="container footer-inner"><span>Sương Mai Coffee Roasters</span><span class="placeholder">Rang tại Đà Lạt · giao hàng tận nơi</span></div></footer>
-</body>
+<script src="/shared/site-account.js" defer></script>
 </html>

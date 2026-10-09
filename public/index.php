@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Auth\PdoSessionHandler;
 use App\Controllers\AuthController;
+use App\Controllers\AdminController;
 use App\Controllers\CatalogController;
 use App\Controllers\CommerceController;
 use App\Controllers\HealthController;
@@ -12,21 +13,27 @@ use App\Http\JsonResponder;
 use App\Http\Response;
 use App\Http\Router;
 use App\Repositories\CatalogRepository;
+use App\Repositories\AdminRepository;
 use App\Repositories\CommerceRepository;
 use App\Repositories\UserRepository;
 use App\Services\AuthService;
+use App\Services\AdminService;
 use App\Services\CatalogService;
 use App\Services\CommerceService;
 
 require_once dirname(__DIR__) . '/src/Http/Response.php';
 require_once dirname(__DIR__) . '/src/Http/JsonResponder.php';
 require_once dirname(__DIR__) . '/src/Http/Router.php';
+require_once dirname(__DIR__) . '/src/Support/VietnamPhone.php';
 require_once dirname(__DIR__) . '/src/Database/ConnectionFactory.php';
 require_once dirname(__DIR__) . '/src/Auth/AuthException.php';
 require_once dirname(__DIR__) . '/src/Auth/PdoSessionHandler.php';
 require_once dirname(__DIR__) . '/src/Repositories/UserRepository.php';
 require_once dirname(__DIR__) . '/src/Services/AuthService.php';
 require_once dirname(__DIR__) . '/src/Controllers/AuthController.php';
+require_once dirname(__DIR__) . '/src/Repositories/AdminRepository.php';
+require_once dirname(__DIR__) . '/src/Services/AdminService.php';
+require_once dirname(__DIR__) . '/src/Controllers/AdminController.php';
 require_once dirname(__DIR__) . '/src/Controllers/HealthController.php';
 require_once dirname(__DIR__) . '/src/Repositories/CatalogReadRepository.php';
 require_once dirname(__DIR__) . '/src/Repositories/CatalogRepository.php';
@@ -255,6 +262,75 @@ try {
             return $commerceResponse($id, static fn (CommerceController $controller, string $requestId): Response => $controller->adjustInventory($requestId, $body, $currentUserId));
         });
 
+        $router->get('/api/v1/admin/dashboard', static function (string $id) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            return $controller->handle($id, static fn (AdminService $service): array => $service->dashboard());
+        });
+        $router->get('/api/v1/admin/products', static function (string $id, array $parameters, array $query) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            return $controller->handle($id, static fn (AdminService $service): array => $service->products($query['q'] ?? null));
+        });
+        $router->get('/api/v1/admin/product-options', static function (string $id) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            return $controller->handle($id, static fn (AdminService $service): array => $service->productOptions());
+        });
+        $router->post('/api/v1/admin/products', static function (string $id, array $parameters, array $query, array $body) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            return $controller->handle($id, static fn (AdminService $service): array => $service->saveProduct($body));
+        });
+        $router->patch('/api/v1/admin/products/{id}', static function (string $id, array $parameters, array $query, array $body) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            $entityId = filter_var($parameters['id'] ?? null, FILTER_VALIDATE_INT);
+            if (!is_int($entityId) || $entityId < 1) return JsonResponder::error('VALIDATION_FAILED', 'Mã sản phẩm không hợp lệ.', 422, $id);
+            return $controller->handle($id, static fn (AdminService $service): array => $service->saveProduct($body, $entityId));
+        });
+        $router->post('/api/v1/admin/products/{id}/active', static function (string $id, array $parameters, array $query, array $body) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            $entityId = filter_var($parameters['id'] ?? null, FILTER_VALIDATE_INT);
+            if (!is_int($entityId) || $entityId < 1 || !is_bool($body['is_active'] ?? null)) return JsonResponder::error('VALIDATION_FAILED', 'Thông tin hiển thị sản phẩm không hợp lệ.', 422, $id);
+            return $controller->handle($id, static fn (AdminService $service): array => $service->setProductActive($entityId, $body['is_active']));
+        });
+        $router->get('/api/v1/admin/coupons', static function (string $id) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            return $controller->handle($id, static fn (AdminService $service): array => $service->coupons());
+        });
+        $router->post('/api/v1/admin/coupons', static function (string $id, array $parameters, array $query, array $body) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            return $controller->handle($id, static fn (AdminService $service): array => $service->saveCoupon($body));
+        });
+        $router->patch('/api/v1/admin/coupons/{id}', static function (string $id, array $parameters, array $query, array $body) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            $entityId = filter_var($parameters['id'] ?? null, FILTER_VALIDATE_INT);
+            if (!is_int($entityId) || $entityId < 1) return JsonResponder::error('VALIDATION_FAILED', 'Mã ưu đãi không hợp lệ.', 422, $id);
+            return $controller->handle($id, static fn (AdminService $service): array => $service->saveCoupon($body, $entityId));
+        });
+        $router->post('/api/v1/admin/coupons/{id}/active', static function (string $id, array $parameters, array $query, array $body) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            $entityId = filter_var($parameters['id'] ?? null, FILTER_VALIDATE_INT);
+            if (!is_int($entityId) || $entityId < 1 || !is_bool($body['is_active'] ?? null)) return JsonResponder::error('VALIDATION_FAILED', 'Thông tin trạng thái ưu đãi không hợp lệ.', 422, $id);
+            return $controller->handle($id, static fn (AdminService $service): array => $service->setCouponActive($entityId, $body['is_active']));
+        });
+        $router->get('/api/v1/admin/content', static function (string $id) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            return $controller->handle($id, static fn (AdminService $service): array => $service->content());
+        });
+        $router->put('/api/v1/admin/content', static function (string $id, array $parameters, array $query, array $body) use ($connectionFactory, $currentUserId, $adminAllowed): Response {
+            if (!$adminAllowed($currentUserId)) return JsonResponder::error($currentUserId === null ? 'UNAUTHENTICATED' : 'FORBIDDEN', 'Bạn không có quyền thực hiện thao tác này.', $currentUserId === null ? 401 : 403, $id);
+            if ($currentUserId === null) return JsonResponder::error('UNAUTHENTICATED', 'Vui lòng đăng nhập để tiếp tục.', 401, $id);
+            $controller = new AdminController(new AdminService(new AdminRepository($connectionFactory->connect())));
+            return $controller->handle($id, static fn (AdminService $service): array => $service->saveContent($body, $currentUserId));
+        });
         $catalogResponse = static function (string $id, callable $operation) use ($connectionFactory): Response {
             try {
                 $controller = new CatalogController(new CatalogService(new CatalogRepository($connectionFactory->connect())));
@@ -268,6 +344,9 @@ try {
         });
         $router->get('/api/v1/origins', static function (string $id, array $parameters, array $query) use ($catalogResponse): Response {
             return $catalogResponse($id, static fn (CatalogController $controller, string $requestId): Response => $controller->origins($requestId, $parameters, $query));
+        });
+        $router->get('/api/v1/flavors', static function (string $id) use ($catalogResponse): Response {
+            return $catalogResponse($id, static fn (CatalogController $controller, string $requestId): Response => $controller->flavors($requestId));
         });
         $router->get('/api/v1/products', static function (string $id, array $parameters, array $query) use ($catalogResponse): Response {
             return $catalogResponse($id, static fn (CatalogController $controller, string $requestId): Response => $controller->products($requestId, $parameters, $query));

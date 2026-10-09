@@ -1,0 +1,44 @@
+- generic [active] [ref=f2e1]:
+  - link "Bỏ qua điều hướng, đến nội dung chính" [ref=f2e2] [cursor=pointer]:
+    - /url: "#account-main"
+  - banner [ref=f2e3]:
+    - generic [ref=f2e4]:
+      - link "Sương Mai — trang chủ" [ref=f2e5] [cursor=pointer]:
+        - /url: /
+        - text: Sương Mai
+        - generic [ref=f2e6]: COFFEE ROASTERS
+      - navigation "Điều hướng chính" [ref=f2e7]:
+        - link "Cửa hàng" [ref=f2e8] [cursor=pointer]:
+          - /url: /catalog/
+        - link "Tài khoản" [ref=f2e9] [cursor=pointer]:
+          - /url: /account/
+  - main [ref=f2e10]:
+    - region [ref=f2e11]:
+      - paragraph [ref=f2e12]: Tài khoản khách hàng
+      - heading "Tạo tài khoản Sương Mai" [level=1] [ref=f2e13]
+      - paragraph [ref=f2e14]: Đăng nhập hoặc tạo tài khoản để quản lý thông tin cá nhân.
+    - status [ref=f2e35]: Nhập số điện thoại theo định dạng quốc tế hợp lệ.
+    - region "Đăng nhập hoặc đăng ký" [ref=f2e15]:
+      - group "Chọn thao tác tài khoản" [ref=f2e16]:
+        - button "Đăng nhập" [ref=f2e17] [cursor=pointer]
+        - button "Tạo tài khoản" [pressed] [ref=f2e18] [cursor=pointer]
+      - generic [ref=f2e19]:
+        - heading "Tạo tài khoản" [level=2] [ref=f2e20]
+        - generic [ref=f2e21]:
+          - text: Họ và tên
+          - textbox "Họ và tên" [ref=f2e22]: E2E Demo Customer
+        - generic [ref=f2e23]:
+          - text: Email
+          - textbox "Email" [ref=f2e24]: e2e.demo.20261008@demo.local
+        - generic [ref=f2e25]:
+          - text: Số điện thoại
+          - textbox "Số điện thoại" [invalid] [ref=f2e26]: "0900000008"
+        - generic [ref=f2e27]:
+          - text: Mật khẩu
+          - textbox "Mật khẩu Tối thiểu 8 ký tự, gồm chữ và số." [ref=f2e28]: DemoPass123
+          - generic [ref=f2e29]: Tối thiểu 8 ký tự, gồm chữ và số.
+        - button "Tạo tài khoản" [ref=f2e30] [cursor=pointer]
+  - contentinfo [ref=f2e31]:
+    - generic [ref=f2e32]:
+      - generic [ref=f2e33]: Sương Mai Coffee Roasters
+      - generic [ref=f2e34]: PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.

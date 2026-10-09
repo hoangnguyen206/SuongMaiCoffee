@@ -1,0 +1,29 @@
+- generic [active] [ref=f8e1]:
+  - link "Bỏ qua điều hướng" [ref=f8e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f8e3]:
+    - link "Sương Mai QUẢN TRỊ" [ref=f8e4] [cursor=pointer]:
+      - /url: /
+      - text: Sương Mai
+      - generic [ref=f8e5]: QUẢN TRỊ
+    - navigation [ref=f8e6]:
+      - link "Cửa hàng" [ref=f8e7] [cursor=pointer]:
+        - /url: /catalog/
+      - link "Tài khoản" [ref=f8e8] [cursor=pointer]:
+        - /url: /account/
+  - main [ref=f8e9]:
+    - paragraph [ref=f8e10]: KHU VỰC QUẢN TRỊ
+    - heading "Đơn hàng & tồn kho" [level=1] [ref=f8e11]
+    - generic [ref=f8e12]:
+      - heading "Đăng nhập quản trị" [level=2] [ref=f8e13]
+      - paragraph [ref=f8e14]: Chỉ tài khoản admin được phép truy cập. Quyền luôn được kiểm tra lại ở máy chủ.
+      - generic [ref=f8e15]:
+        - generic [ref=f8e16]:
+          - text: Email
+          - textbox "Email" [ref=f8e17]
+        - generic [ref=f8e18]:
+          - text: Mật khẩu
+          - textbox "Mật khẩu" [ref=f8e19]
+        - button "Đăng nhập" [ref=f8e20] [cursor=pointer]
+    - status [ref=f8e21]
+  - contentinfo [ref=f8e22]: PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.

@@ -1,0 +1,98 @@
+- generic [ref=f9e1]:
+  - link "Bỏ qua điều hướng, đến nội dung chính" [ref=f9e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f9e3]:
+    - generic [ref=f9e4]:
+      - link "Sương Mai — trang chủ" [ref=f9e5] [cursor=pointer]:
+        - /url: /
+        - generic [aria-hidden] [ref=f9e6]: S
+        - generic [ref=f9e7]:
+          - strong [ref=f9e8]: Sương Mai
+          - generic [ref=f9e9]: COFFEE ROASTERS
+      - link "Quay lại giỏ hàng" [ref=f9e10] [cursor=pointer]:
+        - /url: /cart/
+  - main [ref=f9e11]:
+    - region [ref=f9e12]:
+      - paragraph [ref=f9e13]: Thanh toán an toàn
+      - heading "Hoàn tất đơn hàng" [level=1] [ref=f9e15]
+      - paragraph [ref=f9e16]: Thông tin giao hàng → vận chuyển & thanh toán → xác nhận. Giá và tồn kho được máy chủ kiểm tra khi tạo đơn.
+    - navigation "Các bước checkout" [ref=f9e17]:
+      - list [ref=f9e18]:
+        - listitem [ref=f9e19]:
+          - generic [ref=f9e20]: "1"
+          - generic [ref=f9e21]: Giao hàng
+        - listitem [ref=f9e22]:
+          - generic [ref=f9e23]: "2"
+          - generic [ref=f9e24]: Vận chuyển & thanh toán
+        - listitem [ref=f9e25]:
+          - generic [ref=f9e26]: "3"
+          - generic [ref=f9e27]: Xác nhận
+    - status [ref=f9e28]: Giỏ hàng đã được tải. Máy chủ sẽ xác thực lại giá và tồn kho khi bạn đặt hàng.
+    - generic [ref=f9e29]:
+      - region [ref=f9e133]:
+        - generic [ref=f9e31]:
+          - generic [ref=f9e32]:
+            - paragraph [ref=f9e33]: BƯỚC 3 / 3
+            - heading "Xác nhận đơn hàng" [active] [level=2] [ref=f9e134]
+          - generic [ref=f9e35]: API THẬT
+        - generic [ref=f9e36]:
+          - group "Xác nhận đơn hàng" [ref=f9e135]:
+            - generic [ref=f9e136]: Xác nhận
+            - generic [ref=f9e137]:
+              - generic [aria-hidden] [ref=f9e138]: ✓
+              - generic [ref=f9e139]:
+                - paragraph [ref=f9e140]: BƯỚC 3 / 3
+                - heading "Kiểm tra trước khi đặt" [level=3] [ref=f9e141]
+                - paragraph [ref=f9e142]: Đơn hàng và tồn kho chỉ được xác nhận sau khi gửi tới máy chủ.
+            - generic [ref=f9e143]:
+              - generic [ref=f9e144]:
+                - term [ref=f9e145]: Người nhận
+                - definition [ref=f9e146]: E2E Demo Customer
+              - generic [ref=f9e147]:
+                - term [ref=f9e148]: Địa chỉ
+                - definition [ref=f9e149]: 123 Đường Demo, Phường Demo, Phường Demo, Đà Lạt
+              - generic [ref=f9e150]:
+                - term [ref=f9e151]: Vận chuyển
+                - definition [ref=f9e152]: Giao hàng tiêu chuẩn
+              - generic [ref=f9e153]:
+                - term [ref=f9e154]: Thanh toán
+                - definition [ref=f9e155]: Chuyển khoản ngân hàng
+            - paragraph [ref=f9e156]:
+              - generic [aria-hidden] [ref=f9e157]: ⌁
+              - text: Thông tin chỉ được gửi để xử lý đơn hàng; không lưu biểu mẫu trong trình duyệt.
+          - generic [ref=f9e65]:
+            - button "Quay lại" [ref=f9e113] [cursor=pointer]
+            - button "Đặt hàng" [ref=f9e158] [cursor=pointer]: Đặt hàng ✓
+          - status
+      - complementary [ref=f9e67]:
+        - generic [ref=f9e68]:
+          - generic [ref=f9e69]:
+            - paragraph [ref=f9e70]: TÓM TẮT ĐƠN
+            - heading "Giỏ hàng" [level=2] [ref=f9e71]
+          - generic [ref=f9e72]: 2 sản phẩm
+        - article [ref=f9e115]:
+          - generic [aria-hidden] [ref=f9e116]: SM
+          - generic [ref=f9e117]:
+            - heading "Cà phê mẫu 01 — dữ liệu demo" [level=3] [ref=f9e118]
+            - paragraph [ref=f9e119]: 250g · Hạt nguyên · x2
+          - strong [ref=f9e120]: 370.000đ
+        - generic [ref=f9e73]:
+          - generic [ref=f9e121]:
+            - term [ref=f9e122]: Tạm tính
+            - definition [ref=f9e123]: 370.000đ
+          - generic [ref=f9e124]:
+            - term [ref=f9e125]: Giảm giá
+            - definition [ref=f9e126]: −37.000đ
+          - generic [ref=f9e127]:
+            - term [ref=f9e128]: Vận chuyển
+            - definition [ref=f9e129]: 30.000đ
+          - generic [ref=f9e130]:
+            - term [ref=f9e131]: Tổng cộng
+            - definition [ref=f9e132]: 363.000đ
+        - paragraph [ref=f9e74]: Phần giá, giảm giá, phí vận chuyển và tổng tiền do máy chủ tính.
+    - paragraph [ref=f9e75]: PLACEHOLDER — CHƯA PHẢI ASSET CHÍNH THỨC.
+  - contentinfo [ref=f9e76]:
+    - generic [ref=f9e77]:
+      - generic [ref=f9e78]: Sương Mai Coffee Roasters
+      - link "Về đầu trang ↑" [ref=f9e79] [cursor=pointer]:
+        - /url: "#main-content"

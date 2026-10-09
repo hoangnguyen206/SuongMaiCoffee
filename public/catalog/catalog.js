@@ -5,6 +5,9 @@
   const categorySelect = document.querySelector('#category-filter');
   const originSelect = document.querySelector('#origin-filter');
   const sortSelect = document.querySelector('#sort-filter');
+  const flavorSelect = document.querySelector('#flavor-filter');
+  const stockSelect = document.querySelector('#stock-filter');
+  const presets = [...document.querySelectorAll('[data-preset]')];
   const searchInput = document.querySelector('#search-input');
   const suggestionsList = document.querySelector('#suggestions');
   const detailPanel = document.querySelector('#product-detail');
@@ -78,6 +81,13 @@
     const params = { sort: sortSelect.value, page: '1', per_page: '20' };
     if (categorySelect.value) params.category_slug = categorySelect.value;
     if (originSelect.value) params.origin_slug = originSelect.value;
+    if (flavorSelect?.value) params.flavor_tag_slug = flavorSelect.value;
+    if (stockSelect?.value) params.in_stock = stockSelect.value;
+    const url = new URL(window.location.href);
+    for (const key of ['category_slug', 'origin_slug', 'flavor_tag_slug', 'in_stock', 'sort']) {
+      if (params[key]) url.searchParams.set(key, params[key]); else url.searchParams.delete(key);
+    }
+    window.history.replaceState({}, '', url);
 
     try {
       const result = await window.CatalogApi.products(params);
@@ -254,17 +264,25 @@
 
   async function loadFilters() {
     try {
-      const [categories, origins] = await Promise.all([
+      const [categories, origins, flavors] = await Promise.all([
         window.CatalogApi.categories(),
         window.CatalogApi.origins(),
+        window.CatalogApi.flavors(),
       ]);
       appendOptions(categorySelect, categories, 'Tất cả danh mục');
       appendOptions(originSelect, origins, 'Tất cả vùng');
+      if (flavorSelect) appendOptions(flavorSelect, flavors, 'Tất cả hương vị');
     } catch (error) {
       setStatus(error.message || 'Không thể tải bộ lọc.', 'error');
     }
   }
 
+  function applyQueryFilters() {
+    const query = new URLSearchParams(window.location.search);
+    for (const [key, select] of [['category_slug', categorySelect], ['origin_slug', originSelect], ['flavor_tag_slug', flavorSelect], ['in_stock', stockSelect], ['sort', sortSelect]]) {
+      if (select && query.has(key)) select.value = query.get(key);
+    }
+  }
   function renderSuggestions(items) {
     suggestionsList.replaceChildren();
     for (const item of items) {
@@ -284,7 +302,27 @@
 
   categorySelect.addEventListener('change', loadProducts);
   originSelect.addEventListener('change', loadProducts);
+  flavorSelect?.addEventListener('change', loadProducts);
+  stockSelect?.addEventListener('change', loadProducts);
   sortSelect.addEventListener('change', loadProducts);
+  presets.forEach(preset => preset.addEventListener('click', () => {
+    presets.forEach(item => item.classList.toggle('is-active', item === preset));
+    const key = preset.dataset.preset;
+    if (key === 'all') {
+      categorySelect.value = '';
+      originSelect.value = '';
+      if (flavorSelect) flavorSelect.value = '';
+    } else if (key === 'coffee') {
+      categorySelect.value = [...categorySelect.options].find(option => /hạt|xay/i.test(option.textContent || ''))?.value || '';
+    } else if (key === 'origin') {
+      originSelect.value = originSelect.options[1]?.value || '';
+    } else if (key === 'nutty') {
+      flavorSelect.value = [...flavorSelect.options].find(option => /chocolate|hạt|caramel/i.test(option.textContent || ''))?.value || '';
+    } else if (key === 'floral') {
+      flavorSelect.value = [...flavorSelect.options].find(option => /hoa|quả|cam|trái/i.test(option.textContent || ''))?.value || '';
+    }
+    loadProducts();
+  }));
   detailClose.addEventListener('click', () => {
     activeRequest++;
     detailPanel.hidden = true;
@@ -309,7 +347,9 @@
     if (!event.target.closest('.search-field')) suggestionsList.hidden = true;
   });
 
-  Promise.all([loadFilters(), loadProducts()]).then(() => {
+  Promise.all([loadFilters()]).then(() => {
+    applyQueryFilters();
+    loadProducts();
     const featuredSlug = new URLSearchParams(window.location.search).get('product');
     if (featuredSlug) loadDetail(featuredSlug);
   });

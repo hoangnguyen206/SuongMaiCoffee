@@ -425,8 +425,10 @@ final class CommerceRepository
     /** @return array<string, mixed>|null */
     public function guestOrder(string $code, string $phone): ?array
     {
-        $statement = $this->pdo->prepare('SELECT id FROM orders WHERE order_code = :code AND phone = :phone');
-        $statement->execute(['code' => $code, 'phone' => $phone]);
+        $statement = $this->pdo->prepare('SELECT id FROM orders WHERE order_code = :code AND (phone = :phone OR phone = :legacy_phone OR phone = :legacy_phone_no_zero)');
+        $legacyPhone = str_starts_with($phone, '0') ? '+84' . substr($phone, 1) : $phone;
+        $legacyPhoneNoZero = str_starts_with($phone, '0') ? '84' . substr($phone, 1) : $phone;
+        $statement->execute(['code' => $code, 'phone' => $phone, 'legacy_phone' => $legacyPhone, 'legacy_phone_no_zero' => $legacyPhoneNoZero]);
         $id = $statement->fetchColumn();
         return $id === false ? null : $this->orderData((int) $id, true);
     }

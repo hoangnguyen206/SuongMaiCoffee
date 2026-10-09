@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Auth\AuthException;
 use App\Repositories\UserRepository;
+use App\Support\VietnamPhone;
 use PDOException;
 
 final class AuthService
@@ -174,15 +175,11 @@ final class AuthService
 
     private function validatePhone(mixed $value): string
     {
-        if (!is_string($value)) {
-            $this->invalidField('phone', 'Nhập số điện thoại hợp lệ.');
+        try {
+            return VietnamPhone::normalize($value);
+        } catch (\InvalidArgumentException) {
+            $this->invalidField('phone', 'Nhập số điện thoại Việt Nam gồm 10 chữ số, ví dụ 0901234567.');
         }
-        $phone = trim($value);
-        if (preg_match('/^\+[1-9][0-9]{7,14}$/D', $phone) !== 1) {
-            $this->invalidField('phone', 'Nhập số điện thoại theo định dạng quốc tế hợp lệ.');
-        }
-
-        return $phone;
     }
 
     /** @param array<string, mixed> $input */

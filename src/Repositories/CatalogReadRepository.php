@@ -12,6 +12,9 @@ interface CatalogReadRepository
     /** @return list<array<string, mixed>> */
     public function origins(): array;
 
+    /** @return list<array<string, mixed>> */
+    public function flavorTags(): array;
+
     /**
      * @param array{category_slug?: string, origin_slug?: string, min_price_vnd?: int, max_price_vnd?: int, in_stock?: bool} $filters
      * @return array{items: list<array<string, mixed>>, total_items: int}

@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Commerce\CommerceException;
 use App\Repositories\CommerceRepository;
+use App\Support\VietnamPhone;
 
 final class CommerceService
 {
@@ -56,7 +57,11 @@ final class CommerceService
             if ($value !== null && (!is_string($value) || mb_strlen(trim($value), 'UTF-8') > $max)) throw new CommerceException('Thông tin giao hàng chưa hợp lệ.', 'VALIDATION_FAILED', 422, [$key => ['Giá trị không hợp lệ.']]);
             $clean[$key] = is_string($value) ? trim($value) : null;
         }
-        if (preg_match('/^\+?[0-9][0-9 -]{7,19}$/D', $clean['phone']) !== 1) throw new CommerceException('Số điện thoại không hợp lệ.', 'VALIDATION_FAILED', 422, ['phone' => ['Số điện thoại không hợp lệ.']]);
+        try {
+            $clean['phone'] = VietnamPhone::normalize($clean['phone']);
+        } catch (\InvalidArgumentException) {
+            throw new CommerceException('Số điện thoại không hợp lệ.', 'VALIDATION_FAILED', 422, ['phone' => ['Nhập số điện thoại Việt Nam gồm 10 chữ số, ví dụ 0901234567.']]);
+        }
         if ($clean['email'] !== null && $clean['email'] !== '' && filter_var($clean['email'], FILTER_VALIDATE_EMAIL) === false) throw new CommerceException('Email không hợp lệ.', 'VALIDATION_FAILED', 422, ['email' => ['Email không hợp lệ.']]);
         $clean['shipping_method'] = $input['shipping_method'] ?? 'standard';
         $clean['payment_method'] = $input['payment_method'] ?? 'cod';
@@ -74,7 +79,12 @@ final class CommerceService
     }
     public function guestLookup(string $code, string $phone): array
     {
-        $order = $this->commerce->guestOrder(trim($code), trim($phone));
+        try {
+            $normalizedPhone = VietnamPhone::normalize($phone);
+        } catch (\InvalidArgumentException) {
+            throw new CommerceException('Số điện thoại không hợp lệ.', 'VALIDATION_FAILED', 422, ['phone' => ['Nhập số điện thoại Việt Nam gồm 10 chữ số, ví dụ 0901234567.']]);
+        }
+        $order = $this->commerce->guestOrder(trim($code), $normalizedPhone);
         if ($order === null) throw new CommerceException('Không tìm thấy đơn hàng phù hợp.', 'NOT_FOUND', 404);
         return $order;
     }
