@@ -28,6 +28,15 @@
       if (session.user.role === 'admin' && adminLink) adminLink.hidden = false;
       if (logoutButton) logoutButton.hidden = false;
     }
+    const notice = sessionStorage.getItem('accountNotice');
+    if (notice) {
+      sessionStorage.removeItem('accountNotice');
+      const banner = document.createElement('p');
+      banner.className = 'account-nav-notice';
+      banner.setAttribute('role', 'status');
+      banner.textContent = notice;
+      nav.after(banner);
+    }
   }).catch(() => {});
 
   logoutButton?.addEventListener('click', async () => {

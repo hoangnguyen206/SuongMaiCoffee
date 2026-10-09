@@ -7,6 +7,7 @@
   const sortSelect = document.querySelector('#sort-filter');
   const flavorSelect = document.querySelector('#flavor-filter');
   const stockSelect = document.querySelector('#stock-filter');
+  const clearFiltersButton = document.querySelector('#clear-filters');
   const presets = [...document.querySelectorAll('[data-preset]')];
   const searchInput = document.querySelector('#search-input');
   const suggestionsList = document.querySelector('#suggestions');
@@ -305,6 +306,16 @@
   flavorSelect?.addEventListener('change', loadProducts);
   stockSelect?.addEventListener('change', loadProducts);
   sortSelect.addEventListener('change', loadProducts);
+  clearFiltersButton?.addEventListener('click', () => {
+    searchInput.value = '';
+    categorySelect.value = '';
+    originSelect.value = '';
+    if (flavorSelect) flavorSelect.value = '';
+    if (stockSelect) stockSelect.value = '';
+    sortSelect.value = 'newest';
+    presets.forEach(item => item.classList.toggle('is-active', item.dataset.preset === 'all'));
+    loadProducts();
+  });
   presets.forEach(preset => preset.addEventListener('click', () => {
     presets.forEach(item => item.classList.toggle('is-active', item === preset));
     const key = preset.dataset.preset;

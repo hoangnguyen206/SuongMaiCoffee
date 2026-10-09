@@ -19,6 +19,7 @@
       <nav aria-label="Điều hướng chính" data-account-nav>
         <a href="/">Trang chủ</a>
         <a href="#catalog-main" aria-current="page">Cửa hàng</a>
+        <a href="/cart/" class="nav-cart">Giỏ hàng</a>
         <a href="/account/" data-account-link>Tài khoản</a>
         <a href="/admin/" data-admin-link hidden>Quản trị</a>
         <button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button>
@@ -48,29 +49,39 @@
         <p id="search-hint" class="field-hint">Nhập ít nhất 2 ký tự.</p>
         <ul id="suggestions" class="suggestions" aria-label="Gợi ý tìm kiếm" hidden></ul>
       </div>
-      <label>Danh mục
-        <select id="category-filter">
-          <option value="">Tất cả danh mục</option>
-        </select>
-      </label>
-      <label>Vùng trồng
-        <select id="origin-filter">
-          <option value="">Tất cả vùng</option>
-        </select>
-      </label>
-      <label>Hương vị
-        <select id="flavor-filter">
-          <option value="">Tất cả hương vị</option>
-        </select>
-      </label>
-      <label>Sắp xếp
-        <select id="sort-filter">
-          <option value="newest">Mới nhất</option>
-          <option value="price_asc">Giá tăng dần</option>
-          <option value="price_desc">Giá giảm dần</option>
-          <option value="name_asc">Tên A–Z</option>
-        </select>
-      </label>
+      <div class="catalog-filter-grid">
+        <label>Danh mục
+          <select id="category-filter">
+            <option value="">Tất cả danh mục</option>
+          </select>
+        </label>
+        <label>Vùng trồng
+          <select id="origin-filter">
+            <option value="">Tất cả vùng</option>
+          </select>
+        </label>
+        <label>Hương vị
+          <select id="flavor-filter">
+            <option value="">Tất cả hương vị</option>
+          </select>
+        </label>
+        <label>Tình trạng
+          <select id="stock-filter">
+            <option value="">Tất cả sản phẩm</option>
+            <option value="true">Còn hàng</option>
+            <option value="false">Tạm hết hàng</option>
+          </select>
+        </label>
+        <label>Sắp xếp
+          <select id="sort-filter">
+            <option value="newest">Mới nhất</option>
+            <option value="price_asc">Giá tăng dần</option>
+            <option value="price_desc">Giá giảm dần</option>
+            <option value="name_asc">Tên A–Z</option>
+          </select>
+        </label>
+        <button id="clear-filters" class="button button-quiet filter-reset" type="button">Xóa bộ lọc</button>
+      </div>
     </section>
 
     <div id="catalog-status" class="status" role="status" aria-live="polite" hidden></div>

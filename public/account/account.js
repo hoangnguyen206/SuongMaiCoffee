@@ -97,10 +97,10 @@
       loginForm.reset();
       try {
         await window.AccountApi.mergeCart();
-        showMessage(`Xin chào ${data.user.full_name}. giỏ hàng tạm thời đã được gộp.`, 'success');
       } catch (mergeError) {
-        showMessage(mergeFailureMessage(mergeError), 'error');
+        sessionStorage.setItem('accountNotice', mergeFailureMessage(mergeError));
       }
+      window.location.assign('/catalog/');
     }
   });
 
@@ -112,10 +112,10 @@
       registerForm.reset();
       try {
         await window.AccountApi.mergeCart();
-        showMessage('Tài khoản đã được tạo và giỏ hàng tạm thời đã được gộp.', 'success');
       } catch (mergeError) {
-        showMessage(mergeError.code === 'CART_MERGE_CONFLICT' ? 'Tài khoản đã được tạo. Một số sản phẩm trong giỏ hàng khách cần được điều chỉnh trước khi gộp.' : 'Tài khoản đã được tạo nhưng chưa thể gộp giỏ hàng tạm thời.', 'error');
+        sessionStorage.setItem('accountNotice', mergeError.code === 'CART_MERGE_CONFLICT' ? 'Tài khoản đã được tạo. Một số sản phẩm trong giỏ hàng khách cần được điều chỉnh trước khi gộp.' : 'Tài khoản đã được tạo nhưng chưa thể gộp giỏ hàng tạm thời.');
       }
+      window.location.assign('/catalog/');
     }
   });
 
