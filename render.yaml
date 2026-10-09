@@ -4,13 +4,14 @@ services:
     runtime: docker
     plan: free
     dockerfilePath: ./Dockerfile
-    preDeployCommand: php database/migrate.php && SEED_DEMO_DATA=true php database/seed.php && if [ -n "$ADMIN_EMAIL" ] && [ -n "$ADMIN_NAME" ] && [ -n "$ADMIN_PHONE" ] && [ -n "$ADMIN_PASSWORD" ]; then php database/provision_admin.php; fi
     healthCheckPath: /api/v1/health
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_URL
         sync: false
+      - key: SEED_DEMO_DATA
+        value: "true"
       - key: AUTH_RATE_LIMIT_KEY
         generateValue: true
       - key: SESSION_COOKIE_SECURE

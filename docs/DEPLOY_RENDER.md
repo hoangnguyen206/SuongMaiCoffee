@@ -35,16 +35,16 @@ Khi dùng `DATABASE_URL`, không cần đặt `DB_HOST`, `DB_PORT`, `DB_NAME`, `
 
 ## 5. Migration, dữ liệu demo và tài khoản admin
 
-Blueprint chạy migration và seed catalog demo trước mỗi deploy khi `SEED_DEMO_DATA=true`. Đây là dữ liệu placeholder để kiểm tra catalog/giỏ hàng, không phải dữ liệu thương mại chính thức.
+Blueprint đặt `SEED_DEMO_DATA=true`. Khi Web Service khởi động, entrypoint sẽ chạy migration, seed catalog placeholder và provision admin nếu đủ bốn biến `ADMIN_*`. Cơ chế này không phụ thuộc Pre-Deploy Command của gói Render.
 
-Thiết lập các biến Secret trên Render để tạo tài khoản admin test:
+Thiết lập các biến Secret trên Web Service:
 
-- `ADMIN_EMAIL` — email đăng nhập, ví dụ `admin@suongmai.example`
+- `ADMIN_EMAIL` — email đăng nhập
 - `ADMIN_NAME` — tên hiển thị
-- `ADMIN_PHONE` — số điện thoại hợp lệ
-- `ADMIN_PASSWORD` — mật khẩu tự đặt, ít nhất 8 ký tự gồm chữ và số
+- `ADMIN_PHONE` — số điện thoại
+- `ADMIN_PASSWORD` — mật khẩu tối thiểu 8 ký tự gồm chữ và số
 
-Khi đủ bốn biến, pre-deploy sẽ chạy `database/provision_admin.php` và cập nhật tài khoản admin theo các giá trị đó. Không ghi mật khẩu vào repository hoặc chat công khai.
+Sau khi lưu Environment, chọn **Manual Deploy → Deploy latest commit**. Theo dõi Logs để thấy migration, seed và dòng `Admin account provisioned.` Không ghi mật khẩu vào repository hoặc log.
 
 ## 6. Kiểm tra sau deploy
 
