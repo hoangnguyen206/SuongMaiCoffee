@@ -61,7 +61,9 @@ final class CatalogRepository implements CatalogReadRepository
             'o.slug AS origin_slug, o.name AS origin_name, o.region AS origin_region, ' .
             '(SELECT MIN(v.price_vnd) FROM product_variants v WHERE v.product_id = p.id AND v.is_active = TRUE) AS minimum_price, ' .
             'COALESCE((SELECT BOOL_OR(l.quantity_on_hand > 0) FROM inventory_lots l ' .
-            'JOIN product_variants v ON v.id = l.variant_id AND v.product_id = p.id AND v.is_active = TRUE), FALSE) AS available ' .
+            'JOIN product_variants v ON v.id = l.variant_id AND v.product_id = p.id AND v.is_active = TRUE), FALSE) AS available, ' .
+            'COALESCE((SELECT SUM(l.quantity_on_hand) FROM inventory_lots l ' .
+            'JOIN product_variants v ON v.id = l.variant_id AND v.product_id = p.id AND v.is_active = TRUE), 0) AS stock_quantity ' .
             'FROM products p JOIN origins o ON o.id = p.origin_id AND o.is_active = TRUE ' .
             'WHERE p.is_active = TRUE' . $where .
             ' ORDER BY ' . $orderBy . ' LIMIT :limit OFFSET :offset'
@@ -84,6 +86,7 @@ final class CatalogRepository implements CatalogReadRepository
             $item['minimum_price_vnd'] = $item['minimum_price'] === null ? null : (int) $item['minimum_price'];
             unset($item['minimum_price']);
             $item['available'] = $this->databaseBoolean($item['available']);
+            $item['stock_quantity'] = (int) $item['stock_quantity'];
             $item['categories'] = $this->productCategories($id);
             $item['flavor_tags'] = $this->productFlavorTags($id);
             $item['flavor_profile'] = $this->flavorProfile($id);
@@ -279,6 +282,7 @@ final class CatalogRepository implements CatalogReadRepository
     {
         $statement = $this->pdo->prepare(
             'SELECT v.id, v.label, v.weight_g, v.price_vnd, ' .
+            'COALESCE((SELECT SUM(l.quantity_on_hand) FROM inventory_lots l WHERE l.variant_id = v.id), 0) AS stock_quantity, ' .
             'COALESCE((SELECT SUM(l.quantity_on_hand) > 0 FROM inventory_lots l WHERE l.variant_id = v.id), FALSE) AS available ' .
             'FROM product_variants v WHERE v.product_id = :product_id AND v.is_active = TRUE ORDER BY v.weight_g, v.id'
         );
@@ -290,6 +294,7 @@ final class CatalogRepository implements CatalogReadRepository
             $variant['weight_g'] = (int) $variant['weight_g'];
             $variant['price_vnd'] = (int) $variant['price_vnd'];
             $variant['available'] = $this->databaseBoolean($variant['available']);
+            $variant['stock_quantity'] = (int) $variant['stock_quantity'];
         }
         unset($variant);
 

@@ -77,6 +77,7 @@
     const available = Boolean(product.available);
     footer.append(text('span', available ? 'Còn hàng' : 'Tạm hết hàng', `availability${available ? '' : ' unavailable'}`));
     content.append(footer);
+    if (Number.isSafeInteger(Number(product.stock_quantity))) content.append(text('span', available ? `Còn ${Number(product.stock_quantity)} sản phẩm` : 'Đang cập nhật hàng mới', 'stock-count'));
 
     const detailButton = text('button', 'Xem chi tiết', 'button');
     detailButton.type = 'button';
@@ -184,7 +185,7 @@
       variantLabel.append(variantSelect);
       const availableVariants = (product.variants || []).filter(variant => variant.available);
       for (const variant of product.variants || []) {
-        const option = new Option(`${variant.label} · ${money(variant.price_vnd)}${variant.available ? '' : ' · Tạm hết hàng'}`, variant.id);
+        const option = new Option(`${variant.label} · ${money(variant.price_vnd)}${variant.available ? ` · Còn ${variant.stock_quantity}` : ' · Tạm hết hàng'}`, variant.id);
         option.disabled = !variant.available;
         variantSelect.add(option);
       }
@@ -256,7 +257,7 @@
       variants.className = 'variant-list';
       for (const variant of product.variants || []) {
         const row = document.createElement('li');
-        row.append(text('span', `${variant.label} · ${variant.available ? 'Còn hàng' : 'Tạm hết hàng'}`));
+        row.append(text('span', `${variant.label} · ${variant.available ? `Còn ${variant.stock_quantity} sản phẩm` : 'Tạm hết hàng'}`));
         row.append(text('strong', money(variant.price_vnd)));
         variants.append(row);
       }
