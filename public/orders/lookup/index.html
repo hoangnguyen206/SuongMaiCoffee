@@ -3,31 +3,155 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Tra cứu tình trạng đơn hàng Sương Mai.">
+  <meta name="description" content="Tra cứu tình trạng đơn hàng Sương Mai — xem đơn đang ở đâu và khi nào tới.">
   <title>Tra cứu đơn hàng — Sương Mai</title>
-  <link rel="stylesheet" href="lookup.css">
-  <script src="../../cart/cart-api.js" defer></script>
-  <script src="lookup.js" defer></script>
+  <link rel="canonical" href="/orders/lookup/">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tra cứu đơn hàng — Sương Mai">
+  <meta property="og:description" content="Nhập mã đơn và số điện thoại để xem đơn của bạn đang ở đâu.">
+  <meta property="og:image" content="/assets/og-cover.webp">
+  <meta name="theme-color" content="#2E3A2C">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../../shared/site-theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/site-theme.css">
+  <link rel="stylesheet" href="/orders/lookup/lookup.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "/" },
+      { "@type": "ListItem", "position": 2, "name": "Tra cứu đơn hàng", "item": "/orders/lookup/" }
+    ]
+  }
+  </script>
+  <script src="/cart/cart-api.js" defer></script>
+  <script src="/shared/sm-ui.js" defer></script>
+  <script src="/shared/sm-motion.js" defer></script>
+  <script src="/shared/site-account.js" defer></script>
+  <script src="/orders/lookup/lookup.js" defer></script>
+  <noscript><style>.sm-preloader { display: none !important; }</style></noscript>
 </head>
 <body>
+  <div class="sm-grain" aria-hidden="true"></div>
+  <div class="sm-preloader" aria-hidden="true">
+    <div class="sm-preloader-brand">Sương Mai</div>
+    <p class="sm-preloader-sub">Đang rót sương sớm…</p>
+    <div class="sm-preloader-bar"><i></i></div>
+  </div>
   <a class="skip-link" href="#main">Bỏ qua điều hướng, đến nội dung chính</a>
-  <header><a href="/">Sương Mai <span>COFFEE ROASTERS</span></a><nav data-account-nav><a href="/catalog/">Cửa hàng</a><a href="/orders/lookup/" aria-current="page">Tra cứu đơn hàng</a><a href="/cart/">Giỏ hàng</a><a href="/account/" data-account-link>Tài khoản</a><a href="/admin/" data-admin-link hidden>Quản trị</a><button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button></nav></header>
-  <main id="main" class="page">
-    <p class="eyebrow">HỖ TRỢ ĐƠN HÀNG</p>
-    <h1>Tra cứu đơn hàng</h1>
-    <p>Nhập mã đơn hàng và số điện thoại đã dùng khi đặt. Lỗi tra cứu sẽ không phân biệt mã đơn và số điện thoại.</p>
-    <form id="lookup-form" novalidate>
-      <label for="order-code">Mã đơn hàng<input id="order-code" name="order_code" maxlength="32" autocomplete="off" required></label>
-      <label for="phone">Số điện thoại<input id="phone" name="phone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel-national" placeholder="0901234567" required></label>
-      <button type="submit">Tra cứu</button>
-    </form>
-    <p id="status" role="status" aria-live="polite"></p>
-    <section id="result" aria-live="polite" hidden></section>
+  <header class="site-header" id="site-header">
+    <div class="header-inner shell">
+      <a class="wordmark wordmark-with-logo" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><img class="wordmark-logo" src="/assets/ui/logo.svg" alt="" width="49" height="40"><span class="wordmark-stack"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Mở menu"><span></span><span></span><span></span></button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Điều hướng chính" data-account-nav><a href="/#featured">Cà phê</a><a href="/#story">Câu chuyện</a><a href="/#brew">Cách pha</a><a href="/#freshness">Độ tươi</a><a href="/catalog/">Cửa hàng</a><a href="/orders/lookup/" aria-current="page">Tra cứu đơn hàng</a><a href="/account/" data-account-link>Tài khoản</a><a href="/admin/" data-admin-link hidden>Quản trị</a><button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button><a class="nav-cart" href="/cart/">Giỏ hàng</a></nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="lookup-hero" aria-labelledby="lookup-title">
+      <div class="shell lookup-hero-inner reveal">
+        <nav class="lookup-crumb" aria-label="Đường dẫn"><a href="/">Trang chủ</a><span aria-hidden="true">/</span><span aria-current="page">Tra cứu đơn hàng</span></nav>
+        <p class="lookup-eyebrow">HỖ TRỢ ĐƠN HÀNG</p>
+        <h1 id="lookup-title">Đơn của bạn đang ở đâu?</h1>
+        <p class="lookup-lead">Nhập mã đơn hàng và số điện thoại đã dùng khi đặt — Sương Mai sẽ cho bạn biết đơn đang ở chặng nào.</p>
+      </div>
+    </section>
+    <div class="shell lookup-grid">
+      <div class="lookup-main reveal">
+        <section class="lookup-card" id="lookup-form-card" aria-labelledby="lookup-form-title">
+          <h2 id="lookup-form-title" class="lookup-card-title">Tra cứu đơn hàng</h2>
+          <form id="lookup-form" novalidate>
+            <div class="float-field">
+              <input id="order-code" name="order_code" maxlength="32" autocomplete="off" placeholder=" " required aria-describedby="order-code-hint lookup-error">
+              <label for="order-code">Mã đơn hàng</label>
+              <p class="field-hint" id="order-code-hint">Ví dụ: SM260101120000ABCDEF — mã trong SMS/email xác nhận.</p>
+            </div>
+            <div class="float-field">
+              <input id="phone" name="phone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel-national" placeholder=" " required aria-describedby="lookup-error">
+              <label for="phone">Số điện thoại đặt hàng</label>
+            </div>
+            <p class="field-hint">Lỗi tra cứu sẽ không phân biệt mã đơn và số điện thoại.</p>
+            <p id="lookup-error" class="form-error" role="alert" hidden></p>
+            <button class="lookup-submit" type="submit" id="lookup-submit">
+              <span class="lookup-submit-label">Tra cứu →</span>
+            </button>
+          </form>
+          <p id="status" class="lookup-status" role="status" aria-live="polite"></p>
+          <p class="lookup-help">Không nhớ mã? Kiểm tra SMS/email xác nhận. <a href="#contact">Liên hệ hỗ trợ</a></p>
+        </section>
+        <section id="result" class="lookup-card lookup-result" aria-live="polite" hidden tabindex="-1"></section>
+      </div>
+      <aside class="lookup-side reveal" aria-label="Hành trình đơn và hỗ trợ">
+        <section class="lookup-card journey" aria-labelledby="journey-title">
+          <h2 id="journey-title" class="lookup-card-title">Hành trình đơn Sương Mai</h2>
+          <ol class="journey-steps">
+            <li>
+              <span class="journey-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5.5"/></svg></span>
+              <div><p class="journey-name">Xác nhận đơn</p><p class="journey-desc">Sương Mai tiếp nhận và kiểm tra đơn của bạn.</p></div>
+            </li>
+            <li>
+              <span class="journey-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5s5.5 4.6 5.5 9.3a5.5 5.5 0 0 1-11 0c0-2 1-3.9 2.3-5.4.3 1.4 1 2.4 2 3-.3-2.3.2-4.9 1.2-6.9z"/></svg></span>
+              <div><p class="journey-name">Rang &amp; đóng gói</p><p class="journey-desc">Rang mẻ mới, xay theo yêu cầu rồi đóng gói.</p></div>
+            </li>
+            <li>
+              <span class="journey-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2.5 6.5h11v9h-11zM13.5 10h4l3 3.5v2h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span>
+              <div><p class="journey-name">Đang giao</p><p class="journey-desc">Đơn rời xưởng Đà Lạt và đến tay bạn.</p></div>
+            </li>
+            <li>
+              <span class="journey-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 11.5L12 4l8 7.5M6 10.5V20h12v-9.5"/><path d="M9.5 15.5l2 2 3.5-4"/></svg></span>
+              <div><p class="journey-name">Đã giao</p><p class="journey-desc">Mời bạn pha tách đầu tiên khi nhận hàng.</p></div>
+            </li>
+          </ol>
+          <figure class="journey-visual">
+            <img src="/assets/story/process-roast.webp" alt="Mẻ cà phê đang rang tại xưởng Sương Mai Đà Lạt" width="800" height="600" loading="lazy" onerror="this.closest('.journey-visual').classList.add('is-fallback');this.remove();">
+            <figcaption>Mẻ rang mới cho đơn của bạn.</figcaption>
+          </figure>
+        </section>
+        <section class="lookup-card faq" aria-labelledby="faq-title">
+          <h2 id="faq-title" class="lookup-card-title">Câu hỏi thường gặp</h2>
+          <details class="faq-item">
+            <summary>Bao lâu thì nhận được hàng?</summary>
+            <!-- TODO(backend): so 30.000d/500.000d copy tu CommerceRepository.php (BR-03); dong bo lai khi backend doi pricing. -->
+            <p>Phí vận chuyển toàn quốc là 30.000đ; đơn từ 500.000đ được miễn phí giao hàng. Thời gian giao cụ thể phụ thuộc tuyến — bạn xem ngày dự kiến ngay trên kết quả tra cứu khi có.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Muốn đổi địa chỉ nhận hàng thì sao?</summary>
+            <p>Liên hệ Sương Mai sớm nhất có thể. Đơn đang chờ xác nhận hoặc mới xác nhận thường còn đổi được; đơn đã rang, đóng gói hoặc đang giao thì khó thay đổi.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Có thể hủy đơn không?</summary>
+            <p>Bạn có thể hủy khi đơn còn ở trạng thái chờ xác nhận hoặc đã xác nhận. Đơn đã rang hoặc đang giao không thể hủy — hãy liên hệ để được hỗ trợ.</p>
+          </details>
+        </section>
+        <section class="lookup-card support" aria-labelledby="support-title">
+          <h2 id="support-title" class="lookup-card-title">Cần giúp thêm?</h2>
+          <p class="support-desc">Xưởng rang: Đà Lạt, Lâm Đồng. Liên hệ Sương Mai để được hỗ trợ về đơn hàng.</p>
+          <a class="lookup-support-link" href="/catalog/">Mua thêm cà phê →</a>
+          <!-- TODO(backend): hotline/Zalo hỗ trợ chưa có số chính thức — bổ sung href tel:/Zalo khi duyệt. -->
+        </section>
+      </aside>
+    </div>
   </main>
-  <footer>Rang tại Đà Lạt · giao hàng tận nơi</footer>
-  <script src="/shared/site-account.js" defer></script>
+  <footer class="site-footer" id="contact">
+    <div class="shell footer-main">
+      <div class="footer-brand">
+        <a class="wordmark wordmark-light" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></a>
+        <p>Hương cà phê từ sương sớm Đà Lạt.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Sương Mai trên Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5z"/></svg></a>
+          <a href="#" aria-label="Sương Mai trên Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm0-1.7a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm6.2-.3a1.1 1.1 0 1 1-2.3 0 1.1 1.1 0 0 1 2.3 0zM12 4.5c-2.5 0-2.9 0-3.9.1-1 .1-1.7.2-2.3.5-.6.2-1 .5-1.5 1-.4.4-.7.9-1 1.5-.2.6-.4 1.3-.5 2.3-.1 1-.1 1.4-.1 3.9s0 2.9.1 3.9c.1 1 .2 1.7.5 2.3.2.6.5 1 1 1.5.4.4.9.7 1.5 1 .6.2 1.3.4 2.3.5 1 .1 1.4.1 3.9.1s2.9 0 3.9-.1c1-.1 1.7-.2 2.3-.5.6-.2 1-.5 1.5-1 .4-.4.7-.9 1-1.5.2-.6.4-1.3.5-2.3.1-1 .1-1.4.1-3.9s0-2.9-.1-3.9c-.1-1-.2-1.7-.5-2.3a3.7 3.7 0 0 0-1-1.5 3.7 3.7 0 0 0-1.5-1c-.6-.2-1.3-.4-2.3-.5-1-.1-1.4-.1-3.9-.1z"/></svg></a>
+          <a href="#" aria-label="Sương Mai trên TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 4.5c.4 2 1.8 3.4 3.9 3.6v2.7c-1.5 0-2.8-.5-3.9-1.3v6.6c0 3.4-2.6 5.9-5.9 5.9-3.2 0-5.7-2.5-5.7-5.7 0-3.3 2.7-5.9 6.1-5.7v2.8c-1.8-.2-3.3 1.1-3.3 2.9 0 1.6 1.3 2.9 2.9 2.9 1.7 0 3-1.3 3-3.1V4.5h2.9z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-column"><h2>Khám phá</h2><a href="/catalog/">Cửa hàng</a><a href="/account/">Tài khoản</a><a href="/cart/">Giỏ hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a></div>
+      <div class="footer-column"><h2>Liên hệ</h2><p>Xưởng rang: Đà Lạt, Lâm Đồng</p></div>
+      <div class="footer-column"><h2>Ghé thăm</h2><a href="/catalog/">Chọn cà phê</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="#main">Về đầu trang ↑</a></div>
+    </div>
+    <div class="shell footer-bottom"><span>© Sương Mai Coffee Roasters</span><span>RANG TẠI ĐÀ LẠT · GIAO HÀNG TẬN NƠI</span></div>
+  </footer>
 </body>
 </html>

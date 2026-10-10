@@ -3,34 +3,421 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Quản lý đơn hàng và tồn kho Sương Mai.">
-  <title>Quản trị đơn hàng — Sương Mai</title>
-  <link rel="stylesheet" href="admin.css">
-  <script src="../cart/cart-api.js" defer></script>
-  <script src="../account/account-api.js" defer></script>
-  <script src="../shared/site-account.js" defer></script>
-  <script src="admin-api.js" defer></script>
-  <script src="admin.js" defer></script>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Bảng điều khiển quản trị Sương Mai Coffee Roasters.">
+  <title>Quản trị — Sương Mai Coffee Roasters</title>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../shared/site-theme.css">
+  <link rel="stylesheet" href="/shared/site-theme.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+  <script src="/cart/cart-api.js" defer></script>
+  <script src="/account/account-api.js" defer></script>
+  <script src="/shared/sm-ui.js" defer></script>
+  <script src="/shared/site-account.js" defer></script>
+  <script src="/admin/admin-api.js" defer></script>
+  <script src="/admin/admin.js" defer></script>
+  <!-- CẤM sm-motion.js / GSAP ở admin: dashboard cần nhẹ, chỉ CSS transition .2s. -->
+  <!-- TODO(backend): thêm Disallow /admin/ vào robots.txt phía server (ngoài phạm vi 4 file frontend). -->
+  <!-- TODO(backend): tab Khách hàng cần API users-list — chưa build. -->
 </head>
-<body>
-  <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
-  <header><a href="/">Sương Mai <span>QUẢN TRỊ</span></a><nav data-account-nav><a href="/catalog/">Cửa hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="/account/" data-account-link>Tài khoản</a><a href="/admin/" data-admin-link>Quản trị</a><button class="nav-logout" type="button" data-logout>Đăng xuất</button></nav></header>
-  <main id="main" class="page">
-    <p class="eyebrow">KHU VỰC QUẢN TRỊ</p><h1>Đơn hàng &amp; tồn kho</h1>
-    <section id="login-panel" class="panel"><h2>Đăng nhập quản trị</h2><p>Chỉ tài khoản admin được phép truy cập. Quyền luôn được kiểm tra lại ở máy chủ.</p><form id="login-form"><label>Email<input name="email" type="email" autocomplete="username" required></label><label>Mật khẩu<input name="password" type="password" autocomplete="current-password" required></label><button type="submit">Đăng nhập</button></form></section>
-    <p id="status" role="status" aria-live="polite"></p>
-    <section id="dashboard" hidden>
-      <div class="admin-tabs" role="tablist" aria-label="Khu vực quản trị"><button class="admin-tab is-active" type="button" data-admin-tab="overview">Tổng quan</button><button class="admin-tab" type="button" data-admin-tab="products">Sản phẩm</button><button class="admin-tab" type="button" data-admin-tab="coupons">Mã giảm giá</button><button class="admin-tab" type="button" data-admin-tab="content">Giới thiệu</button><button class="admin-tab" type="button" data-admin-tab="orders">Đơn hàng &amp; tồn kho</button></div>
-      <section class="admin-section" data-admin-panel="overview"><h2>Tổng quan cửa hàng</h2><div id="kpis" class="kpi-grid"></div></section>
-      <section class="admin-section" data-admin-panel="products" hidden><div class="section-heading"><h2>Sản phẩm</h2><button id="new-product" type="button">Thêm sản phẩm</button></div><form id="product-form" class="admin-form" hidden><input type="hidden" name="id"><label>Tên sản phẩm<input name="name" required maxlength="200"></label><label>Slug<input name="slug" required pattern="[a-z0-9]+(?:-[a-z0-9]+)*"></label><label>Vùng trồng<select name="origin_id" id="product-origin" required></select></label><label class="field-wide">Mô tả<textarea name="description" maxlength="1000" required></textarea></label><div class="profile-fields"><label>Acidity<input name="acidity" type="number" min="1" max="5" value="3"></label><label>Body<input name="body" type="number" min="1" max="5" value="3"></label><label>Sweetness<input name="sweetness" type="number" min="1" max="5" value="3"></label><label>Bitterness<input name="bitterness" type="number" min="1" max="5" value="3"></label><label>Aroma<input name="aroma" type="number" min="1" max="5" value="3"></label></div><button type="submit">Lưu sản phẩm</button><button id="cancel-product" class="secondary" type="button">Hủy</button></form><div id="products"></div></section>
-      <section class="admin-section" data-admin-panel="coupons" hidden><div class="section-heading"><h2>Mã giảm giá</h2><button id="new-coupon" type="button">Thêm mã</button></div><form id="coupon-form" class="admin-form" hidden><input type="hidden" name="id"><label>Mã<input name="code" required maxlength="80"></label><label>Loại<select name="coupon_type"><option value="percent">Phần trăm</option><option value="fixed">Số tiền</option></select></label><label>% giảm<input name="percent_value" type="number" min="1" max="100"></label><label>Giảm VND<input name="fixed_value_vnd" type="number" min="0"></label><label>Tối thiểu VND<input name="minimum_subtotal_vnd" type="number" min="0" value="0"></label><button type="submit">Lưu mã</button><button id="cancel-coupon" class="secondary" type="button">Hủy</button></form><div id="coupons"></div></section>
-      <section class="admin-section" data-admin-panel="content" hidden><h2>Giới thiệu &amp; liên hệ</h2><form id="content-form" class="admin-form"><label>Giới thiệu ngắn<textarea name="home_intro" maxlength="1000"></textarea></label><label>Liên hệ<textarea name="home_contact" maxlength="1000"></textarea></label><label>Thông báo<textarea name="home_notice" maxlength="1000"></textarea></label><button type="submit">Lưu nội dung</button></form></section>
-      <section class="admin-section" data-admin-panel="orders"><div class="toolbar"><label for="status-filter">Lọc trạng thái</label><select id="status-filter"><option value="">Tất cả</option><option value="pending">Chờ xác nhận</option><option value="confirmed">Đã xác nhận</option><option value="roasting">Đang rang</option><option value="shipping">Đang giao</option><option value="completed">Hoàn tất</option><option value="cancelled">Đã hủy</option></select></div><div class="admin-grid"><section><h2>Đơn hàng</h2><div id="orders"></div></section><section><h2>Chi tiết đơn</h2><div id="order-detail"><p>Chọn một đơn hàng.</p></div></section></div><section class="inventory-panel"><h2>Tồn kho</h2><div id="inventory"></div></section></section>
-    </section>
-  </main>
-  <footer>Rang tại Đà Lạt · giao hàng tận nơi</footer>
+<body class="admin">
+  <a class="skip-link" href="#admin-main">Bỏ qua điều hướng</a>
+
+  <!-- Cổng đăng nhập: chỉ hiện khi chưa có session admin. -->
+  <div class="admin-login" id="login-view" hidden>
+    <div class="card admin-login-card">
+      <span class="admin-monogram admin-monogram-lg" aria-hidden="true">SM</span>
+      <p class="eyebrow">Khu vực quản trị</p>
+      <h1>Đăng nhập quản trị</h1>
+      <p class="admin-muted">Chỉ tài khoản admin được phép truy cập. Quyền luôn được kiểm tra lại ở máy chủ.</p>
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="login-email">Email</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="login-password">Mật khẩu</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <p class="field-error" id="login-error" role="alert" hidden></p>
+        <button class="button button-block" type="submit" id="login-submit">Đăng nhập</button>
+      </form>
+      <p class="admin-login-back"><a class="text-link" href="/">← Về cửa hàng</a></p>
+    </div>
+  </div>
+
+  <!-- Console: sidebar + topbar + content. Không header/footer site. -->
+  <div class="admin-shell" id="admin-shell" hidden>
+    <div class="admin-scrim" id="admin-scrim" hidden></div>
+    <aside class="admin-sidebar" id="admin-sidebar" aria-label="Điều hướng quản trị">
+      <div class="admin-brand">
+        <span class="admin-monogram" aria-hidden="true">SM</span>
+        <span class="admin-brand-text"><strong>Sương Mai</strong><small>Quản trị</small></span>
+      </div>
+      <nav class="admin-nav" aria-label="Khu vực quản trị">
+        <button type="button" class="admin-nav-item is-active" data-admin-tab="overview" aria-current="page">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v4h-7zM13 11h7v9h-7zM4 14h7v6H4z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span>Tổng quan</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-admin-tab="orders">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2-1.4L14 21l-2-1.4L10 21l-2-1.4L6 21zM9 8h6M9 12h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span>Đơn hàng</span>
+          <em class="admin-nav-count" id="nav-orders-count" hidden></em>
+        </button>
+        <button type="button" class="admin-nav-item" data-admin-tab="products">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7zM9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span>Sản phẩm</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-admin-tab="inventory">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-5 9 5v11h-6v-6H9v6H3z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span>Tồn kho</span>
+          <em class="admin-nav-count is-alert" id="nav-stock-count" hidden></em>
+        </button>
+        <button type="button" class="admin-nav-item" data-admin-tab="coupons">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4zM13 7v2m0 3v2m0 3v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span>Mã giảm giá</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-admin-tab="content">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4zM8 9h8M8 12h5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span>Nội dung giới thiệu</span>
+        </button>
+      </nav>
+      <div class="admin-side-foot">
+        <a class="admin-home-link" href="/">← Về cửa hàng</a>
+        <div class="admin-user">
+          <span class="admin-avatar" id="side-avatar" aria-hidden="true">…</span>
+          <span class="admin-user-name" id="side-user">…</span>
+        </div>
+        <div class="admin-side-actions">
+          <button type="button" class="admin-collapse" id="collapse-btn" aria-expanded="true" aria-label="Thu gọn thanh bên">«</button>
+          <button type="button" class="admin-logout" id="logout-btn">Đăng xuất</button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="admin-body">
+      <div class="admin-topbar">
+        <button type="button" class="admin-menu-btn" id="menu-btn" aria-label="Mở điều hướng" aria-expanded="false" aria-controls="admin-sidebar">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="admin-title-wrap">
+          <h1 id="topbar-title">Tổng quan</h1>
+          <p id="topbar-date"></p>
+        </div>
+        <div class="admin-topbar-search" id="topbar-search-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm7 11l4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <input id="topbar-search" type="search" placeholder="Tìm trong trang này…" aria-label="Tìm trong trang hiện tại" autocomplete="off">
+        </div>
+        <span class="admin-avatar" id="top-avatar" aria-hidden="true">…</span>
+      </div>
+
+      <main class="admin-main" id="admin-main" tabindex="-1">
+        <p id="status" class="admin-status" role="status" aria-live="polite"></p>
+
+        <!-- TỔNG QUAN -->
+        <section class="admin-section" data-admin-panel="overview" aria-label="Tổng quan">
+          <p class="admin-greeting" id="greeting"></p>
+          <div class="admin-exceptions" id="exception-banner" hidden></div>
+          <div class="kpi-grid" id="kpis" role="list" aria-label="Chỉ số cửa hàng"></div>
+          <div class="admin-actions-row">
+            <button type="button" class="button button-sm" id="quick-new-coupon">+ Tạo mã giảm giá</button>
+            <button type="button" class="button button-outline button-sm" id="quick-new-product">+ Thêm sản phẩm</button>
+          </div>
+          <!-- TODO(backend): KHÔNG có nút "Tạo đơn tay" / "Nhập kho" — API chưa có. -->
+          <div class="admin-preview-grid">
+            <section class="card admin-preview" aria-label="Đơn mới nhất">
+              <header><h2>Đơn mới nhất</h2><button type="button" class="text-link" data-goto="orders">Xem tất cả →</button></header>
+              <div id="recent-orders"></div>
+            </section>
+            <section class="card admin-preview" aria-label="Tồn thấp nhất">
+              <header><h2>Tồn thấp nhất</h2><button type="button" class="text-link" data-goto="inventory">Xem tất cả →</button></header>
+              <div id="low-stock"></div>
+              <!-- TODO(backend): danh sách "sắp hết" đúng ngưỡng cần API inventory trả low_stock_threshold; hiện xếp theo tồn thực tế. -->
+            </section>
+          </div>
+        </section>
+
+        <!-- ĐƠN HÀNG -->
+        <section class="admin-section" data-admin-panel="orders" aria-label="Đơn hàng" hidden>
+          <div class="admin-toolbar card">
+            <div class="toolbar-row">
+              <div class="field toolbar-search">
+                <label for="orders-search">Tìm đơn</label>
+                <input id="orders-search" type="search" placeholder="Mã đơn, tên khách, SĐT…" autocomplete="off">
+              </div>
+              <fieldset class="status-pills">
+                <legend>Trạng thái</legend>
+                <label><input type="checkbox" name="ostatus" value="pending">Chờ xác nhận</label>
+                <label><input type="checkbox" name="ostatus" value="confirmed">Đã xác nhận</label>
+                <label><input type="checkbox" name="ostatus" value="roasting">Đang rang</label>
+                <label><input type="checkbox" name="ostatus" value="shipping">Đang giao</label>
+                <label><input type="checkbox" name="ostatus" value="completed">Đã giao</label>
+                <label><input type="checkbox" name="ostatus" value="cancelled">Đã hủy</label>
+              </fieldset>
+            </div>
+            <div class="toolbar-row toolbar-row-secondary">
+              <div class="field"><label for="orders-from">Từ ngày</label><input id="orders-from" type="date"></div>
+              <div class="field"><label for="orders-to">Đến ngày</label><input id="orders-to" type="date"></div>
+              <div class="field">
+                <label for="orders-sort">Sắp xếp</label>
+                <select id="orders-sort">
+                  <option value="newest">Mới nhất</option>
+                  <option value="oldest">Cũ nhất</option>
+                  <option value="total_desc">Giá trị cao nhất</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="orders-per">Hiển thị</label>
+                <select id="orders-per">
+                  <option value="10">10 / trang</option>
+                  <option value="25">25 / trang</option>
+                  <option value="50">50 / trang</option>
+                </select>
+              </div>
+              <button type="button" class="button button-quiet button-sm" id="orders-reset">Xóa lọc</button>
+            </div>
+          </div>
+          <!-- TODO(backend): KHÔNG có bulk cập nhật / Export CSV — API chỉ hỗ trợ đổi trạng thái từng đơn. -->
+          <p class="admin-count" id="orders-count" role="status"></p>
+          <div class="admin-table-wrap card">
+            <table class="admin-table" id="orders-table">
+              <thead>
+                <tr><th scope="col">Mã đơn</th><th scope="col">Khách hàng</th><th scope="col">Ngày đặt</th><th scope="col" class="num">Tổng tiền</th><th scope="col">Trạng thái</th><th scope="col"><span class="visually-hidden">Thao tác</span></th></tr>
+              </thead>
+              <tbody id="orders-tbody"></tbody>
+            </table>
+          </div>
+          <!-- TODO(backend): cột Món (số món + ảnh) cần API admin orders list trả item_count + thumbnail — hiện ẩn. -->
+          <div class="admin-pager" id="orders-pager"></div>
+        </section>
+
+        <!-- SẢN PHẨM -->
+        <section class="admin-section" data-admin-panel="products" aria-label="Sản phẩm" hidden>
+          <div class="admin-toolbar card">
+            <div class="toolbar-row">
+              <div class="field toolbar-search">
+                <label for="products-search">Tìm sản phẩm</label>
+                <input id="products-search" type="search" placeholder="Tên hoặc slug…" autocomplete="off">
+              </div>
+              <button type="button" class="button button-sm toolbar-cta" id="new-product">+ Thêm sản phẩm</button>
+            </div>
+          </div>
+          <p class="admin-count" id="products-count" role="status"></p>
+          <div class="admin-table-wrap card">
+            <table class="admin-table" id="products-table">
+              <thead>
+                <tr><th scope="col">Sản phẩm</th><th scope="col">Vùng trồng</th><th scope="col" class="num">Giá từ</th><th scope="col" class="num">Tồn tổng</th><th scope="col">Trạng thái</th><th scope="col"><span class="visually-hidden">Thao tác</span></th></tr>
+              </thead>
+              <tbody id="products-tbody"></tbody>
+            </table>
+          </div>
+          <!-- TODO(backend): thumb + SKU + 5 chỉ số vị chưa có trong API products list; form sửa không prefill được điểm vị. -->
+          <!-- SPEC BR-16: sản phẩm có đơn chỉ được ẨN — cấm xóa cứng, không nút Xóa. -->
+          <div class="admin-pager" id="products-pager"></div>
+        </section>
+
+        <!-- TỒN KHO -->
+        <section class="admin-section" data-admin-panel="inventory" aria-label="Tồn kho" hidden>
+          <div class="admin-toolbar card">
+            <div class="toolbar-row">
+              <div class="field toolbar-search">
+                <label for="inventory-search">Tìm SKU</label>
+                <input id="inventory-search" type="search" placeholder="Tên sản phẩm, variant…" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="inventory-filter">Lọc</label>
+                <select id="inventory-filter">
+                  <option value="">Tất cả</option>
+                  <option value="out">Hết hàng</option>
+                  <option value="unbatched">Chưa gán lô</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="inventory-sort">Sắp xếp</label>
+                <select id="inventory-sort">
+                  <option value="qty_asc">Tồn tăng dần</option>
+                  <option value="qty_desc">Tồn giảm dần</option>
+                  <option value="name">Tên A–Z</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- TODO(backend): KHÔNG có nhập kho hàng loạt / paste Excel — API adjust chỉ nhận từng lô. -->
+          <!-- TODO(backend): lọc "Sắp hết" + cột ngưỡng cảnh báo cần API trả low_stock_threshold — hiện ẩn. -->
+          <p class="admin-count" id="inventory-count" role="status"></p>
+          <div class="admin-table-wrap card">
+            <table class="admin-table" id="inventory-table">
+              <thead>
+                <tr><th scope="col">Sản phẩm</th><th scope="col">Mã lô</th><th scope="col" class="num">Tồn kho</th><th scope="col"><span class="visually-hidden">Thao tác</span></th></tr>
+              </thead>
+              <tbody id="inventory-tbody"></tbody>
+            </table>
+          </div>
+          <!-- TODO(backend): cột Cập nhật + lịch sử nhập/xuất mỗi SKU + nút gán lô cần API mới — hiện ẩn. -->
+          <div class="admin-pager" id="inventory-pager"></div>
+        </section>
+
+        <!-- MÃ GIẢM GIÁ -->
+        <section class="admin-section" data-admin-panel="coupons" aria-label="Mã giảm giá" hidden>
+          <div class="admin-toolbar card">
+            <div class="toolbar-row">
+              <div class="field toolbar-search">
+                <label for="coupons-search">Tìm mã</label>
+                <input id="coupons-search" type="search" placeholder="Mã giảm giá…" autocomplete="off">
+              </div>
+              <button type="button" class="button button-sm toolbar-cta" id="new-coupon">+ Tạo mã</button>
+            </div>
+          </div>
+          <p class="admin-count" id="coupons-count" role="status"></p>
+          <div class="admin-table-wrap card">
+            <table class="admin-table" id="coupons-table">
+              <thead>
+                <tr><th scope="col">Mã</th><th scope="col">Loại</th><th scope="col" class="num">Giá trị</th><th scope="col" class="num">Đơn tối thiểu</th><th scope="col">Hiệu lực</th><th scope="col">Trạng thái</th><th scope="col"><span class="visually-hidden">Thao tác</span></th></tr>
+              </thead>
+              <tbody id="coupons-tbody"></tbody>
+            </table>
+          </div>
+          <!-- TODO(backend): cột Đã dùng/Giới hạn + HSD nhập tay cần API mới; form chỉ gồm field API saveCoupon hỗ trợ (mã/loại/giá trị/đơn tối thiểu). -->
+        </section>
+
+        <!-- NỘI DUNG GIỚI THIỆU -->
+        <section class="admin-section" data-admin-panel="content" aria-label="Nội dung giới thiệu" hidden>
+          <!-- TODO: xác nhận với chủ shop tab "Nội dung giới thiệu" dùng cho nội dung marketing nào. -->
+          <form id="content-form" class="card admin-form-card" novalidate>
+            <h2>Nội dung giới thiệu</h2>
+            <div class="field">
+              <label for="content-intro">Giới thiệu ngắn</label>
+              <textarea id="content-intro" name="home_intro" maxlength="1000" rows="4"></textarea>
+            </div>
+            <div class="field">
+              <label for="content-contact">Liên hệ</label>
+              <textarea id="content-contact" name="home_contact" maxlength="1000" rows="4"></textarea>
+            </div>
+            <div class="field">
+              <label for="content-notice">Thông báo</label>
+              <textarea id="content-notice" name="home_notice" maxlength="1000" rows="4"></textarea>
+            </div>
+            <p class="field-error" id="content-error" role="alert" hidden></p>
+            <div class="admin-form-actions">
+              <button class="button button-sm" type="submit" id="content-submit">Lưu nội dung</button>
+            </div>
+          </form>
+        </section>
+      </main>
+
+      <footer class="admin-foot">
+        <span>Sương Mai Console</span><span aria-hidden="true">·</span><span>Rang tại Đà Lạt</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Drawer chi tiết đơn (dùng chung SM.openDrawer). -->
+  <div class="sm-drawer-backdrop" data-drawer-backdrop="order-drawer"></div>
+  <aside class="sm-drawer admin-drawer" id="order-drawer" role="dialog" aria-modal="true" aria-label="Chi tiết đơn hàng">
+    <div class="sm-drawer-head">
+      <h2 id="drawer-title">Chi tiết đơn</h2>
+      <button type="button" class="sm-drawer-close" data-sm-close aria-label="Đóng chi tiết đơn">✕</button>
+    </div>
+    <div class="sm-drawer-body" id="order-detail">
+      <p class="admin-muted">Chọn một đơn hàng.</p>
+    </div>
+  </aside>
+
+  <!-- Modal sản phẩm: field BÁM ĐÚNG API saveProduct (tên/slug/vùng/mô tả/5 chỉ số vị). -->
+  <dialog class="admin-dialog" id="product-dialog" aria-labelledby="product-dialog-title">
+    <div class="admin-dialog-head">
+      <h2 id="product-dialog-title">Thêm sản phẩm</h2>
+      <button type="button" class="sm-drawer-close" data-close-dialog aria-label="Đóng">✕</button>
+    </div>
+    <form id="product-form" novalidate>
+      <input type="hidden" name="id">
+      <div class="field">
+        <label for="product-name">Tên sản phẩm</label>
+        <input id="product-name" name="name" required maxlength="200" autocomplete="off">
+        <p class="field-error" data-error-for="name"></p>
+      </div>
+      <div class="admin-dialog-grid">
+        <div class="field">
+          <label for="product-slug">Slug</label>
+          <input id="product-slug" name="slug" required pattern="[a-z0-9]+(?:-[a-z0-9]+)*" autocomplete="off" placeholder="vi-du-slug">
+          <p class="field-error" data-error-for="slug"></p>
+        </div>
+        <div class="field">
+          <label for="product-origin">Vùng trồng</label>
+          <select id="product-origin" name="origin_id" required></select>
+          <p class="field-error" data-error-for="origin_id"></p>
+        </div>
+      </div>
+      <div class="field">
+        <label for="product-description">Mô tả</label>
+        <textarea id="product-description" name="description" maxlength="1000" required rows="3"></textarea>
+        <p class="field-error" data-error-for="description"></p>
+      </div>
+      <fieldset class="profile-fields">
+        <legend>Hồ sơ vị (1–5)</legend>
+        <div class="field"><label for="profile-acidity">Chua</label><input id="profile-acidity" name="acidity" type="number" min="1" max="5" value="3"></div>
+        <div class="field"><label for="profile-body">Đậm</label><input id="profile-body" name="body" type="number" min="1" max="5" value="3"></div>
+        <div class="field"><label for="profile-sweetness">Ngọt</label><input id="profile-sweetness" name="sweetness" type="number" min="1" max="5" value="3"></div>
+        <div class="field"><label for="profile-bitterness">Đắng</label><input id="profile-bitterness" name="bitterness" type="number" min="1" max="5" value="3"></div>
+        <div class="field"><label for="profile-aroma">Hương</label><input id="profile-aroma" name="aroma" type="number" min="1" max="5" value="3"></div>
+      </fieldset>
+      <!-- TODO(backend): KHÔNG upload ảnh / giá theo size / roast level / lưu nháp-xuất bản — API chưa có. -->
+      <p class="field-error" id="product-error" role="alert" hidden></p>
+      <div class="admin-form-actions">
+        <button type="button" class="button button-outline button-sm" data-close-dialog>Hủy</button>
+        <button class="button button-sm" type="submit" id="product-submit">Lưu sản phẩm</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Modal mã giảm giá: field BÁM ĐÚNG API saveCoupon. -->
+  <dialog class="admin-dialog" id="coupon-dialog" aria-labelledby="coupon-dialog-title">
+    <div class="admin-dialog-head">
+      <h2 id="coupon-dialog-title">Tạo mã giảm giá</h2>
+      <button type="button" class="sm-drawer-close" data-close-dialog aria-label="Đóng">✕</button>
+    </div>
+    <form id="coupon-form" novalidate>
+      <input type="hidden" name="id">
+      <div class="admin-dialog-grid">
+        <div class="field">
+          <label for="coupon-code">Mã</label>
+          <input id="coupon-code" name="code" required maxlength="80" autocomplete="off" placeholder="VIDU10">
+          <p class="field-error" data-error-for="code"></p>
+        </div>
+        <div class="field">
+          <label for="coupon-type">Loại</label>
+          <select id="coupon-type" name="coupon_type">
+            <option value="percent">Phần trăm</option>
+            <option value="fixed">Số tiền</option>
+          </select>
+        </div>
+      </div>
+      <div class="admin-dialog-grid">
+        <div class="field" id="coupon-percent-wrap">
+          <label for="coupon-percent">% giảm (1–100)</label>
+          <input id="coupon-percent" name="percent_value" type="number" min="1" max="100" inputmode="numeric">
+          <p class="field-error" data-error-for="percent_value"></p>
+        </div>
+        <div class="field" id="coupon-fixed-wrap" hidden>
+          <label for="coupon-fixed">Giảm (VND)</label>
+          <input id="coupon-fixed" name="fixed_value_vnd" type="number" min="0" step="1000" inputmode="numeric">
+          <p class="field-error" data-error-for="fixed_value_vnd"></p>
+        </div>
+        <div class="field">
+          <label for="coupon-minimum">Đơn tối thiểu (VND)</label>
+          <input id="coupon-minimum" name="minimum_subtotal_vnd" type="number" min="0" step="1000" value="0" inputmode="numeric">
+          <p class="field-error" data-error-for="minimum_subtotal_vnd"></p>
+        </div>
+      </div>
+      <p class="field-error" id="coupon-error" role="alert" hidden></p>
+      <div class="admin-form-actions">
+        <button type="button" class="button button-outline button-sm" data-close-dialog>Hủy</button>
+        <button class="button button-sm" type="submit" id="coupon-submit">Lưu mã</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Vùng in đơn hàng (chỉ hiện khi in). -->
+  <div id="print-sheet" aria-hidden="true"></div>
 </body>
 </html>

@@ -27,15 +27,8 @@ button, input, select { font: inherit; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
 .skip-link { position: fixed; z-index: 20; top: 10px; left: 12px; transform: translateY(-160%); border-radius: 6px; padding: 10px 15px; background: var(--espresso); color: var(--paper); font-weight: 700; text-decoration: none; }
 .skip-link:focus { transform: translateY(0); }
-.site-header { border-bottom: 1px solid var(--mist); background: var(--paper); }
-.header-inner { display: flex; min-height: 76px; align-items: center; justify-content: space-between; gap: 16px; }
-.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-.brand-mark { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid var(--caramel); border-radius: 50%; color: var(--roast); font-family: var(--font-display); font-size: 22px; font-style: italic; }
-.brand-copy { display: grid; line-height: 1.25; }
-.brand-copy strong { font-family: var(--font-display); font-size: 19px; }
-.brand-copy span { color: var(--muted); font-size: 8px; font-weight: 700; letter-spacing: .17em; }
-.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--caramel); }
-.checkout-heading { max-width: 690px; padding: 48px 0 26px; }
+/* Header/footer thong nhat tu /shared/site-theme.css (contract foundation). */
+.checkout-heading { max-width: 690px; padding: 40px 0 26px; }
 .eyebrow, .panel-kicker { margin: 0; color: var(--moss); font-size: 10px; font-weight: 800; letter-spacing: .14em; }
 .eyebrow { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }
 .eyebrow span { width: 20px; height: 1px; background: var(--caramel); }
@@ -125,9 +118,6 @@ h1 { margin-bottom: 7px; font-family: var(--font-display); font-size: clamp(36px
 .summary-totals .total-row { border-top: 1px solid var(--mist); padding-top: 12px; color: var(--espresso); font-size: 12px; font-weight: 800; }
 .summary-totals .total-row dd { color: var(--roast); font-size: 11px; }
 .summary-disclaimer { margin: 0 20px 18px; border-left: 2px solid var(--caramel); padding-left: 9px; color: var(--muted); font-size: 9px; line-height: 1.6; }
-.site-footer { border-top: 1px solid var(--mist); background: var(--crema); }
-.footer-inner { display: flex; min-height: 62px; align-items: center; justify-content: space-between; gap: 14px; color: var(--muted); font-size: 9px; }
-.footer-inner a { color: var(--roast); font-weight: 700; text-decoration: none; white-space: nowrap; }
 .noscript { margin: 18px; border: 1px solid var(--caramel); padding: 12px; }
 
 @media (max-width: 760px) {
@@ -143,10 +133,6 @@ h1 { margin-bottom: 7px; font-family: var(--font-display); font-size: clamp(36px
 }
 @media (max-width: 480px) {
   .page-container { width: calc(100% - 32px); }
-  .header-inner { min-height: 68px; }
-  .brand-mark { width: 34px; height: 34px; font-size: 20px; }
-  .brand-copy strong { font-size: 17px; }
-  .brand-copy span { font-size: 7px; }
   .checkout-heading { padding: 32px 0 21px; }
   h1 { font-size: 39px; }
   .intro { font-size: 11px; }
@@ -175,7 +161,6 @@ h1 { margin-bottom: 7px; font-family: var(--font-display); font-size: clamp(36px
   .review-list > div { grid-template-columns: minmax(78px, .65fr) minmax(0, 1.35fr); gap: 8px; }
   .form-actions { margin-top: 17px; }
   .button { padding-inline: 15px; }
-  .footer-inner { min-height: 58px; font-size: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -190,4 +175,4 @@ h1 { margin-bottom: 7px; font-family: var(--font-display); font-size: clamp(36px
 .checkout-panel > p { color: var(--muted); }
 .checkout-panel .confirmation-intro { margin-top: 10px; }
 .checkout-panel > p a { display: inline-flex; margin: 4px 6px 4px 0; align-items: center; text-decoration: none; }
-@media (max-width: 480px) { .header-inner { flex-wrap: wrap; padding-block: 10px; } #checkout-status { font-size: 10px; } }
+@media (max-width: 480px) { #checkout-status { font-size: 10px; } }

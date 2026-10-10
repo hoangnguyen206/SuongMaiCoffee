@@ -5,22 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Hoàn tất đơn hàng Sương Mai Coffee Roasters.">
   <title>Thanh toán — Sương Mai</title>
-  <link rel="stylesheet" href="checkout.css">
-  <script src="../cart/cart-api.js" defer></script>
-  <script src="checkout.js" defer></script>
+  <link rel="canonical" href="/checkout/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:title" content="Thanh toán — Sương Mai">
+  <meta property="og:description" content="Hoàn tất đơn hàng Sương Mai Coffee Roasters.">
+  <meta property="og:image" content="/assets/og-cover.webp">
+  <meta name="theme-color" content="#f4efe5">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../shared/site-theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/site-theme.css">
+  <link rel="stylesheet" href="/checkout/checkout.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "/" },
+      { "@type": "ListItem", "position": 2, "name": "Giỏ hàng", "item": "/cart/" },
+      { "@type": "ListItem", "position": 3, "name": "Thanh toán", "item": "/checkout/" }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Bỏ qua điều hướng, đến nội dung chính</a>
-  <header class="site-header">
-    <div class="page-container header-inner">
-      <a class="brand" href="/" aria-label="Sương Mai — trang chủ"><span class="brand-mark" aria-hidden="true">S</span><span class="brand-copy"><strong>Sương Mai</strong><span>COFFEE ROASTERS</span></span></a>
-      <a class="button button-secondary" href="/cart/">Quay lại giỏ hàng</a><a class="account-shortcut" href="/account/" data-account-link>Tài khoản</a><a class="account-shortcut" href="/orders/lookup/">Tra cứu đơn hàng</a>
+  <a class="skip-link" href="#main">Bỏ qua điều hướng, đến nội dung chính</a>
+  <noscript><style>.sm-preloader { display: none !important; }</style></noscript>
+  <div class="sm-grain" aria-hidden="true"></div>
+  <div class="sm-preloader" aria-hidden="true"><div class="sm-preloader-brand">Sương Mai</div><p class="sm-preloader-sub">Đang rót sương sớm…</p><div class="sm-preloader-bar"><i></i></div></div>
+  <header class="site-header" id="site-header">
+    <div class="header-inner shell">
+      <a class="wordmark wordmark-with-logo" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><img class="wordmark-logo" src="/assets/ui/logo.svg" alt="" width="49" height="40"><span class="wordmark-stack"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Mở menu"><span></span><span></span><span></span></button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Điều hướng chính" data-account-nav><a href="/#featured">Cà phê</a><a href="/#story">Câu chuyện</a><a href="/#brew">Cách pha</a><a href="/#freshness">Độ tươi</a><a href="/catalog/">Cửa hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="/account/" data-account-link>Tài khoản</a><a href="/admin/" data-admin-link hidden>Quản trị</a><button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button><a class="nav-cart" href="/cart/">Giỏ hàng</a></nav>
     </div>
   </header>
-  <main id="main-content" class="page-container">
+  <main id="main" class="page-container">
     <section class="checkout-heading" aria-labelledby="checkout-title">
       <p class="eyebrow"><span aria-hidden="true"></span> Thanh toán an toàn</p>
       <h1 id="checkout-title">Hoàn tất đơn hàng</h1>
@@ -66,7 +89,28 @@
       <aside class="order-summary" aria-labelledby="summary-title" aria-busy="true"><div class="summary-header"><div><p class="panel-kicker">TÓM TẮT ĐƠN</p><h2 id="summary-title">Giỏ hàng</h2></div><span class="item-count">—</span></div><div class="summary-items" id="summary-items"></div><dl class="summary-totals" id="summary-totals"></dl><p class="summary-disclaimer">Các khoản phí được hiển thị rõ trước khi bạn đặt hàng.</p></aside>
     </div>
   </main>
-  <footer class="site-footer"><div class="page-container footer-inner"><span>Sương Mai Coffee Roasters</span><a href="#main-content">Về đầu trang ↑</a></div></footer>
+  <footer class="site-footer" id="contact">
+    <div class="shell footer-main">
+      <div class="footer-brand">
+        <a class="wordmark wordmark-light" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></a>
+        <p>Hương cà phê từ sương sớm Đà Lạt.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Sương Mai trên Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5z"/></svg></a>
+          <a href="#" aria-label="Sương Mai trên Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm0-1.7a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm6.2-.3a1.1 1.1 0 1 1-2.3 0 1.1 1.1 0 0 1 2.3 0zM12 4.5c-2.5 0-2.9 0-3.9.1-1 .1-1.7.2-2.3.5-.6.2-1 .5-1.5 1-.4.4-.7.9-1 1.5-.2.6-.4 1.3-.5 2.3-.1 1-.1 1.4-.1 3.9s0 2.9.1 3.9c.1 1 .2 1.7.5 2.3.2.6.5 1 1 1.5.4.4.9.7 1.5 1 .6.2 1.3.4 2.3.5 1 .1 1.4.1 3.9.1s2.9 0 3.9-.1c1-.1 1.7-.2 2.3-.5.6-.2 1-.5 1.5-1 .4-.4.7-.9 1-1.5.2-.6.4-1.3.5-2.3.1-1 .1-1.4.1-3.9s0-2.9-.1-3.9c-.1-1-.2-1.7-.5-2.3a3.7 3.7 0 0 0-1-1.5 3.7 3.7 0 0 0-1.5-1c-.6-.2-1.3-.4-2.3-.5-1-.1-1.4-.1-3.9-.1z"/></svg></a>
+          <a href="#" aria-label="Sương Mai trên TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 4.5c.4 2 1.8 3.4 3.9 3.6v2.7c-1.5 0-2.8-.5-3.9-1.3v6.6c0 3.4-2.6 5.9-5.9 5.9-3.2 0-5.7-2.5-5.7-5.7 0-3.3 2.7-5.9 6.1-5.7v2.8c-1.8-.2-3.3 1.1-3.3 2.9 0 1.6 1.3 2.9 2.9 2.9 1.7 0 3-1.3 3-3.1V4.5h2.9z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-column"><h2>Khám phá</h2><a href="/catalog/">Cửa hàng</a><a href="/account/">Tài khoản</a><a href="/cart/">Giỏ hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a></div>
+      <div class="footer-column"><h2>Liên hệ</h2><p>Xưởng rang: Đà Lạt, Lâm Đồng</p></div>
+      <div class="footer-column"><h2>Ghé thăm</h2><a href="/catalog/">Chọn cà phê</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="#main">Về đầu trang ↑</a></div>
+    </div>
+    <div class="shell footer-bottom"><span>© Sương Mai Coffee Roasters</span><span>RANG TẠI ĐÀ LẠT · GIAO HÀNG TẬN NƠI</span></div>
+  </footer>
   <noscript><p class="noscript">Bật JavaScript để tiếp tục đặt hàng.</p></noscript>
-<script src="../shared/site-account.js" defer></script>
+  <script src="/cart/cart-api.js" defer></script>
+  <script src="/shared/sm-ui.js" defer></script>
+  <script src="/shared/sm-motion.js" defer></script>
+  <script src="/shared/site-account.js" defer></script>
+  <script src="/checkout/checkout.js" defer></script>
+</body>
 </html>

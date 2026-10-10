@@ -3,107 +3,253 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Cửa hàng cà phê rang nhỏ của Sương Mai Coffee Roasters.">
-  <title>Sương Mai — Cửa hàng</title>
-  <link rel="stylesheet" href="catalog.css">
-  <link rel="stylesheet" href="../shared/site-theme.css">
-  <link rel="stylesheet" href="../shared/placeholder-media.css">
+  <meta name="theme-color" content="#f4efe5">
+  <meta name="description" content="Cửa hàng Sương Mai Coffee Roasters — chọn hạt cà phê theo vùng trồng, cách pha và hương vị bạn yêu thích. Rang mỗi ngày tại Đà Lạt.">
+  <title>Cửa hàng — Sương Mai Coffee Roasters</title>
+  <link rel="canonical" href="/catalog/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:title" content="Cửa hàng — Sương Mai Coffee Roasters">
+  <meta property="og:description" content="Những hạt cà phê cho nhịp chậm. Rang mỗi ngày tại Đà Lạt.">
+  <meta property="og:image" content="/assets/og-cover.webp">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/site-theme.css">
+  <link rel="stylesheet" href="/catalog/catalog.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "/" },
+      { "@type": "ListItem", "position": 2, "name": "Cửa hàng", "item": "/catalog/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json" id="catalog-itemlist-jsonld">
+  { "@context": "https://schema.org", "@type": "ItemList", "itemListElement": [] }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#catalog-main">Bỏ qua điều hướng, đến nội dung chính</a>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="/" aria-label="Sương Mai — trang chủ">Sương Mai <span>COFFEE ROASTERS</span></a>
-      <nav aria-label="Điều hướng chính" data-account-nav>
-        <a href="/">Trang chủ</a>
-        <a href="#catalog-main" aria-current="page">Cửa hàng</a>
-        <a href="/cart/" class="nav-cart">Giỏ hàng</a>
-        <a href="/orders/lookup/">Tra cứu đơn hàng</a>
-        <a href="/account/" data-account-link>Tài khoản</a>
-        <a href="/admin/" data-admin-link hidden>Quản trị</a>
-        <button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button>
-      </nav>
+  <noscript><style>.sm-preloader { display: none !important; }</style></noscript>
+  <div class="sm-grain" aria-hidden="true"></div>
+  <div class="sm-preloader" aria-hidden="true"><div class="sm-preloader-brand">Sương Mai</div><p class="sm-preloader-sub">Đang rót sương sớm…</p><div class="sm-preloader-bar"><i></i></div></div>
+
+  <header class="site-header" id="site-header">
+    <div class="header-inner shell">
+      <a class="wordmark wordmark-with-logo" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><img class="wordmark-logo" src="/assets/ui/logo.svg" alt="" width="49" height="40"><span class="wordmark-stack"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Mở menu"><span></span><span></span><span></span></button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Điều hướng chính" data-account-nav><a href="/#featured">Cà phê</a><a href="/#story">Câu chuyện</a><a href="/#brew">Cách pha</a><a href="/#freshness">Độ tươi</a><a href="/catalog/" aria-current="page">Cửa hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="/account/" data-account-link>Tài khoản</a><a href="/admin/" data-admin-link hidden>Quản trị</a><button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button><a class="nav-cart" href="/cart/">Giỏ hàng</a></nav>
     </div>
   </header>
 
-  <main id="catalog-main" class="container" tabindex="-1">
-    <section class="catalog-heading" aria-labelledby="catalog-title">
-      <p class="eyebrow">CỬA HÀNG CÀ PHÊ</p>
-      <h1 id="catalog-title">Những hạt cà phê cho nhịp chậm</h1>
-      <p class="intro">Chọn hạt cà phê theo vùng trồng, cách pha và hương vị bạn yêu thích.</p>
+  <main id="catalog-main" tabindex="-1">
+    <!-- TODO(asset): hero catalog đang dùng ảnh tĩnh hero-dalat-1200.webp; khi có /assets/hero/hero-dalat-1920.mp4 (V1) + bản mobile (V1m) thì thêm <video> nền, giữ ảnh này làm poster. -->
+    <section class="shop-hero" aria-labelledby="catalog-title">
+      <div class="shop-hero-media" aria-hidden="true">
+        <img src="/assets/hero/hero-dalat-1200.webp"
+             srcset="/assets/hero/hero-dalat-768.webp 768w, /assets/hero/hero-dalat-1200.webp 1200w, /assets/hero/hero-dalat-1920.webp 1920w"
+             sizes="100vw" alt="" width="1200" height="630" fetchpriority="high" loading="eager" onerror="this.remove()">
+      </div>
+      <div class="shell shop-hero-inner">
+        <nav aria-label="Breadcrumb"><ol class="breadcrumb breadcrumb-light">
+          <li><a href="/">Trang chủ</a></li>
+          <li><span aria-current="page">Cửa hàng</span></li>
+        </ol></nav>
+        <p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> Cửa hàng cà phê</p>
+        <h1 id="catalog-title">Cà phê cho nhịp chậm</h1>
+        <p class="shop-hero-sub">Chọn hạt theo vùng trồng, cách pha và hương vị bạn yêu thích.</p>
+        <p class="shop-hero-count" id="shop-count" role="status" aria-live="polite">Đang đếm mẻ rang…</p>
+      </div>
     </section>
 
-    <section class="catalog-toolbar" aria-label="Bộ lọc catalog">
-      <div class="catalog-presets" role="tablist" aria-label="Khám phá nhanh">
-        <button class="preset is-active" type="button" data-preset="all">Tất cả</button>
-        <button class="preset" type="button" data-preset="coffee">Hạt &amp; xay</button>
-        <button class="preset" type="button" data-preset="origin">Vùng trồng</button>
-        <button class="preset" type="button" data-preset="nutty">Chocolate &amp; hạt</button>
-        <button class="preset" type="button" data-preset="floral">Hoa &amp; trái cây</button>
-      </div>
-
-      <div class="search-field">
-        <label for="search-input">Tìm sản phẩm</label>
-        <input id="search-input" type="search" autocomplete="off" placeholder="Tên, vùng hoặc hương vị" aria-describedby="search-hint">
-        <p id="search-hint" class="field-hint">Nhập ít nhất 2 ký tự.</p>
-        <ul id="suggestions" class="suggestions" aria-label="Gợi ý tìm kiếm" hidden></ul>
-      </div>
-      <div class="catalog-filter-grid">
-        <label>Danh mục
-          <select id="category-filter">
-            <option value="">Tất cả danh mục</option>
-          </select>
-        </label>
-        <label>Vùng trồng
-          <select id="origin-filter">
-            <option value="">Tất cả vùng</option>
-          </select>
-        </label>
-        <label>Hương vị
-          <select id="flavor-filter">
-            <option value="">Tất cả hương vị</option>
-          </select>
-        </label>
-        <label>Tình trạng
-          <select id="stock-filter">
-            <option value="">Tất cả sản phẩm</option>
-            <option value="true">Còn hàng</option>
-            <option value="false">Tạm hết hàng</option>
-          </select>
-        </label>
-        <label>Sắp xếp
+    <div class="shop-toolbar" role="search">
+      <div class="shell shop-toolbar-inner">
+        <div class="search-field">
+          <label class="visually-hidden" for="search-input">Tìm sản phẩm</label>
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M10.5 3a7.5 7.5 0 1 0 4.6 13.4l4.1 4.1 1.4-1.4-4.1-4.1A7.5 7.5 0 0 0 10.5 3zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z" fill="currentColor"/></svg>
+          </span>
+          <input id="search-input" type="search" autocomplete="off" placeholder="Tên, vùng, hương vị…" aria-describedby="search-hint">
+          <p id="search-hint" class="visually-hidden">Nhập ít nhất 2 ký tự.</p>
+          <ul id="suggestions" class="suggestions" aria-label="Gợi ý tìm kiếm" hidden></ul>
+        </div>
+        <button id="filter-toggle" class="button button-outline filter-toggle" type="button" aria-expanded="false" aria-controls="filter-panel">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 6h16v2H4zm4 5h12v2H8zm4 5h4v2h-4z" fill="currentColor"/></svg>
+          Bộ lọc <span id="filter-count" class="filter-count" hidden>0</span>
+        </button>
+        <div class="catalog-presets" role="tablist" aria-label="Khám phá nhanh">
+          <button class="preset is-active" type="button" role="tab" aria-selected="true" data-preset="all">Tất cả</button>
+          <button class="preset" type="button" role="tab" aria-selected="false" data-preset="coffee">Hạt &amp; xay</button>
+          <button class="preset" type="button" role="tab" aria-selected="false" data-preset="origin">Vùng trồng</button>
+          <button class="preset" type="button" role="tab" aria-selected="false" data-preset="nutty">Chocolate &amp; hạt</button>
+          <button class="preset" type="button" role="tab" aria-selected="false" data-preset="floral">Hoa &amp; trái cây</button>
+        </div>
+        <div class="toolbar-right">
+          <label class="visually-hidden" for="sort-filter">Sắp xếp</label>
           <select id="sort-filter">
             <option value="newest">Mới nhất</option>
             <option value="price_asc">Giá tăng dần</option>
             <option value="price_desc">Giá giảm dần</option>
             <option value="name_asc">Tên A–Z</option>
           </select>
-        </label>
-        <button id="clear-filters" class="button button-quiet filter-reset" type="button">Xóa bộ lọc</button>
+          <div class="grid-toggle" role="group" aria-label="Số cột hiển thị">
+            <button type="button" data-cols="3" aria-pressed="true" aria-label="Hiển thị 3 cột">
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M1 1h4v14H1zm5 0h4v14H6zm5 0h4v14h-4z" fill="currentColor"/></svg>
+            </button>
+            <button type="button" data-cols="4" aria-pressed="false" aria-label="Hiển thị 4 cột">
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M1 1h2.6v14H1zm3.4 0h2.6v14H4.4zm3.4 0H10.4v14H7.8zm3.4 0H15v14h-3.8z" fill="currentColor"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="shell">
+        <div id="filter-panel" class="filter-panel" hidden>
+          <!-- TODO(backend): API chưa trả số lượng theo từng option (VD "Kenya (2)") nên panel chưa hiện đếm; khi API có field count thì render vào .filter-option-count. -->
+          <div class="filter-groups">
+            <fieldset class="filter-group" data-filter-group="category">
+              <legend>Danh mục</legend>
+              <div class="filter-options" data-filter-options="category"><p class="filter-loading">Đang tải…</p></div>
+            </fieldset>
+            <fieldset class="filter-group" data-filter-group="origin">
+              <legend>Vùng trồng</legend>
+              <div class="filter-options" data-filter-options="origin"><p class="filter-loading">Đang tải…</p></div>
+            </fieldset>
+            <fieldset class="filter-group" data-filter-group="flavor">
+              <legend>Hương vị</legend>
+              <div class="filter-options" data-filter-options="flavor"><p class="filter-loading">Đang tải…</p></div>
+            </fieldset>
+            <fieldset class="filter-group" data-filter-group="stock">
+              <legend>Tình trạng</legend>
+              <div class="filter-options">
+                <label class="filter-option"><input type="radio" name="stock-option" value=""> <span>Tất cả sản phẩm</span></label>
+                <label class="filter-option"><input type="radio" name="stock-option" value="true"> <span>Còn hàng</span></label>
+                <label class="filter-option"><input type="radio" name="stock-option" value="false"> <span>Tạm hết hàng</span></label>
+              </div>
+            </fieldset>
+          </div>
+          <div class="filter-actions">
+            <button id="filter-apply" class="button" type="button">Áp dụng</button>
+            <button id="filter-clear" class="button button-outline" type="button">Xóa tất cả</button>
+          </div>
+        </div>
+        <div class="active-filters" id="active-filters" aria-live="polite"></div>
+        <p class="result-line"><span id="result-count">Tìm thấy 0 sản phẩm</span>
+          <button id="clear-filters" class="text-button" type="button">Xóa bộ lọc</button>
+        </p>
+      </div>
+    </div>
+
+    <div class="shell">
+      <noscript><p class="status">Cửa hàng cần JavaScript để tải sản phẩm. Bạn vui lòng bật JavaScript rồi tải lại trang nhé.</p></noscript>
+      <div id="catalog-status" class="status" role="status" aria-live="polite" hidden></div>
+      <section id="product-grid" class="product-grid" aria-live="polite" aria-label="Danh sách sản phẩm"></section>
+      <nav id="pagination" class="pagination" aria-label="Phân trang sản phẩm" hidden></nav>
+
+      <section id="product-detail" class="detail-panel" aria-labelledby="detail-panel-title" hidden>
+        <button id="detail-close" class="button button-outline" type="button">← Quay lại danh sách</button>
+        <h2 id="detail-panel-title" class="visually-hidden" tabindex="-1">Chi tiết sản phẩm</h2>
+        <div id="detail-content"></div>
+      </section>
+    </div>
+
+    <section class="brew-cross" aria-labelledby="brew-cross-title">
+      <div class="shell">
+        <div class="section-heading">
+          <div><p class="eyebrow">Hoàn thiện góc pha của bạn</p><h2 id="brew-cross-title">Pha thế nào cho đúng gu?</h2></div>
+          <a class="text-link" href="/#brew">Xem cách pha <span aria-hidden="true">↗</span></a>
+        </div>
+        <!-- TODO(asset): khi có /assets/products/phin-inox.webp, /assets/products/pour-over-set.webp, /assets/products/can-dien.webp, /assets/products/tui-vai.webp (X1–X4) và API phụ kiện thì thay 3 card brew dưới đây bằng card dụng cụ quick-add. -->
+        <div class="brew-cross-grid">
+          <a class="brew-cross-card" href="/#brew">
+            <span class="brew-cross-media"><img src="/assets/brew/phin.webp" alt="Pha cà phê bằng phin" width="800" height="600" loading="lazy" onerror="this.remove()"></span>
+            <span class="brew-cross-name">Phin Việt Nam</span>
+            <span class="brew-cross-desc">Chậm và đậm, cho buổi sáng thong thả.</span>
+          </a>
+          <a class="brew-cross-card" href="/#brew">
+            <span class="brew-cross-media"><img src="/assets/brew/pour-over.webp" alt="Pha cà phê pour over" width="800" height="600" loading="lazy" onerror="this.remove()"></span>
+            <span class="brew-cross-name">Pour over</span>
+            <span class="brew-cross-desc">Trong trẻo, rõ từng nốt hương.</span>
+          </a>
+          <a class="brew-cross-card" href="/#brew">
+            <span class="brew-cross-media"><img src="/assets/brew/french-press.webp" alt="Pha cà phê bằng french press" width="800" height="600" loading="lazy" onerror="this.remove()"></span>
+            <span class="brew-cross-name">French press</span>
+            <span class="brew-cross-desc">Tròn đầy, hợp cuối tuần lười biếng.</span>
+          </a>
+        </div>
       </div>
     </section>
 
-    <div id="catalog-status" class="status" role="status" aria-live="polite" hidden></div>
-    <section id="product-grid" class="product-grid" aria-live="polite" aria-label="Danh sách sản phẩm"></section>
-
-    <section id="product-detail" class="detail-panel" aria-labelledby="detail-panel-title" hidden>
-      <button id="detail-close" class="button button-quiet" type="button">← Quay lại danh sách</button>
-      <h2 id="detail-panel-title" class="visually-hidden" tabindex="-1">Chi tiết sản phẩm</h2>
-      <div id="detail-content"></div>
+    <section class="trust-strip" aria-label="Cam kết của Sương Mai">
+      <div class="shell trust-grid">
+        <div class="trust-item">
+          <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M16 9v7l5 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div><strong>Rang trong 48h trước khi giao</strong><span>Hạt luôn mới từ mẻ rang Đà Lạt.</span></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><path d="M6 16a10 10 0 0 1 17-7M26 16a10 10 0 0 1-17 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M23 5v5h-5M9 27v-5h5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Đổi trả 7 ngày</strong><span>Không hợp gu, đổi không hỏi nhiều.</span></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><path d="M4 20V10l12-5 12 5v10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10.5" cy="22.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="21.5" cy="22.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <div><strong>Giao toàn quốc</strong><span>Tận nơi, đóng gói cẩn thận.</span></div>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <span>Sương Mai Coffee Roasters</span>
-      <span>Rang tại Đà Lạt · giao hàng tận nơi</span>
+  <footer class="site-footer" id="contact">
+    <div class="shell footer-main">
+      <div class="footer-brand">
+        <a class="wordmark wordmark-light" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></a>
+        <p>Hương cà phê từ sương sớm Đà Lạt.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Sương Mai trên Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5z"/></svg></a>
+          <a href="#" aria-label="Sương Mai trên Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm0-1.7a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm6.2-.3a1.1 1.1 0 1 1-2.3 0 1.1 1.1 0 0 1 2.3 0zM12 4.5c-2.5 0-2.9 0-3.9.1-1 .1-1.7.2-2.3.5-.6.2-1 .5-1.5 1-.4.4-.7.9-1 1.5-.2.6-.4 1.3-.5 2.3-.1 1-.1 1.4-.1 3.9s0 2.9.1 3.9c.1 1 .2 1.7.5 2.3.2.6.5 1 1 1.5.4.4.9.7 1.5 1 .6.2 1.3.4 2.3.5 1 .1 1.4.1 3.9.1s2.9 0 3.9-.1c1-.1 1.7-.2 2.3-.5.6-.2 1-.5 1.5-1 .4-.4.7-.9 1-1.5.2-.6.4-1.3.5-2.3.1-1 .1-1.4.1-3.9s0-2.9-.1-3.9c-.1-1-.2-1.7-.5-2.3a3.7 3.7 0 0 0-1-1.5 3.7 3.7 0 0 0-1.5-1c-.6-.2-1.3-.4-2.3-.5-1-.1-1.4-.1-3.9-.1z"/></svg></a>
+          <a href="#" aria-label="Sương Mai trên TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 4.5c.4 2 1.8 3.4 3.9 3.6v2.7c-1.5 0-2.8-.5-3.9-1.3v6.6c0 3.4-2.6 5.9-5.9 5.9-3.2 0-5.7-2.5-5.7-5.7 0-3.3 2.7-5.9 6.1-5.7v2.8c-1.8-.2-3.3 1.1-3.3 2.9 0 1.6 1.3 2.9 2.9 2.9 1.7 0 3-1.3 3-3.1V4.5h2.9z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-column"><h2>Khám phá</h2><a href="/catalog/">Cửa hàng</a><a href="/account/">Tài khoản</a><a href="/cart/">Giỏ hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a></div>
+      <div class="footer-column"><h2>Liên hệ</h2><p>Xưởng rang: Đà Lạt, Lâm Đồng</p></div>
+      <div class="footer-column"><h2>Ghé thăm</h2><a href="/catalog/">Chọn cà phê</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="#catalog-main">Về đầu trang ↑</a></div>
     </div>
+    <div class="shell footer-bottom"><span>© Sương Mai Coffee Roasters</span><span>RANG TẠI ĐÀ LẠT · GIAO HÀNG TẬN NƠI</span></div>
   </footer>
-  <script src="api-client.js"></script>
-  <script src="../cart/cart-api.js"></script>
-  <script src="catalog.js"></script>
-  <script src="../shared/site-account.js"></script>
+
+  <div class="sm-drawer-backdrop" data-drawer-backdrop="mini-cart"></div>
+  <aside class="sm-drawer" id="mini-cart" role="dialog" aria-modal="true" aria-label="Giỏ hàng của bạn">
+    <div class="sm-drawer-head">
+      <h2 id="mini-cart-title">Giỏ hàng</h2>
+      <button class="sm-drawer-close" type="button" data-sm-close aria-label="Đóng giỏ hàng">✕</button>
+    </div>
+    <div class="sm-drawer-body">
+      <!-- TODO(backend): API pricing chưa trả ngưỡng miễn phí giao hàng nên thanh bên dưới chỉ hiện câu chung; khi API có field free-shipping threshold thì render progress bar theo ngưỡng thật. -->
+      <p class="mini-ship-note" id="mini-ship-note">Giao hàng toàn quốc · phí tính ở bước thanh toán.</p>
+      <div id="mini-cart-lines" class="mini-lines" aria-live="polite"></div>
+      <div id="mini-upsell" class="mini-upsell" hidden>
+        <h3>Hay đi kèm</h3>
+        <div id="mini-upsell-list" class="mini-upsell-list"></div>
+      </div>
+    </div>
+    <div class="sm-drawer-foot">
+      <p class="mini-subtotal"><span>Tạm tính</span> <strong id="mini-subtotal">0đ</strong></p>
+      <p class="mini-hint">Phí ship &amp; thuế tính ở bước thanh toán.</p>
+      <div class="mini-actions">
+        <a class="button button-outline" href="/cart/">Xem giỏ hàng</a>
+        <a class="button" href="/checkout/">Thanh toán →</a>
+      </div>
+    </div>
+  </aside>
+
+  <script src="/catalog/api-client.js" defer></script>
+  <script src="/cart/cart-api.js" defer></script>
+  <script src="/shared/sm-ui.js" defer></script>
+  <script src="/shared/sm-motion.js" defer></script>
+  <script src="/shared/site-account.js" defer></script>
+  <script src="/catalog/catalog.js" defer></script>
 </body>
 </html>

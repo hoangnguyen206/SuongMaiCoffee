@@ -7,8 +7,29 @@
   <title>500 — Dịch vụ tạm thời gián đoạn</title>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <style>:root{color:#2b1b14;background:#f5ede0;font-family:"Segoe UI",sans-serif}body{min-width:320px;margin:0}.page{width:min(720px,calc(100% - 32px));margin:0 auto;padding:18vh 0}p{color:#614c41;line-height:1.6}.code{color:#b3412f;font-size:.8rem;font-weight:700;letter-spacing:.15em}a{display:inline-block;margin:8px 8px 0 0;border-radius:999px;padding:10px 16px;background:#4a2e22;color:#fffdf8;text-decoration:none}a:focus-visible{outline:3px solid #c17f3e;outline-offset:3px}.skip{position:absolute;top:-60px;left:12px}.skip:focus{top:12px}</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/shared/site-theme.css">
+  <style>
+    .error-page{min-height:100svh;display:grid;place-items:center;background:var(--forest-deep);color:var(--paper);text-align:center}
+    .error-page .shell{max-width:640px}
+    .error-code{margin:0 0 12px;color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+    .error-page h1{color:var(--paper);font-size:clamp(2.4rem,7vw,4rem)}
+    .error-page p{color:rgba(251,249,244,.72)}
+    .error-mark{display:inline-grid;place-items:center;width:96px;height:96px;margin-bottom:26px;border:1px solid rgba(211,181,143,.4);border-radius:50%;color:var(--gold);font-family:var(--serif);font-size:2.2rem;font-style:italic}
+    .error-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+  </style>
 </head>
-<body><a class="skip" href="#main">Bỏ qua điều hướng</a><main id="main" class="page"><p class="code">500 · TẠM GIÁN ĐOẠN</p><h1>Dịch vụ đang tạm thời gián đoạn</h1><p>Vui lòng thử lại sau. Không hiển thị chi tiết lỗi máy chủ tại đây.</p><a href="/">Về trang chủ</a><a href="/catalog/">Mở cửa hàng</a></main></body>
+<body>
+  <div class="sm-grain" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+  <main id="main" class="error-page"><div class="shell">
+    <p class="error-mark" aria-hidden="true">SM</p>
+    <p class="error-code">500 · Tạm gián đoạn</p>
+    <h1>Dịch vụ đang tạm thời gián đoạn</h1>
+    <p>Vui lòng thử lại sau. Không hiển thị chi tiết lỗi máy chủ tại đây.</p>
+    <div class="error-actions"><a class="button button-cream" href="/">Về trang chủ</a><a class="button button-outline-light" href="/catalog/">Mở cửa hàng</a></div>
+  </div></main>
+</body>
 </html>

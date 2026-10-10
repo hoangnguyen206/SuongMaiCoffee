@@ -3,37 +3,273 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4efe5">
-  <meta name="description" content="Sương Mai Coffee Roasters — hương cà phê từ sương sớm Đà Lạt.">
+  <meta name="theme-color" content="#1C241C">
+  <meta name="description" content="Sương Mai Coffee Roasters — hương cà phê từ sương sớm Đà Lạt. Rang mỗi ngày, truy xuất nguồn gốc, giao tươi tận nơi.">
   <title>Sương Mai Coffee Roasters — Cà phê từ sương sớm Đà Lạt</title>
+  <!-- TODO(backend): thêm <link rel="canonical"> khi chốt domain production. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sương Mai Coffee Roasters">
+  <meta property="og:title" content="Sương Mai Coffee Roasters — Hương cà phê từ sương sớm Đà Lạt">
+  <meta property="og:description" content="Rang mỗi ngày tại Đà Lạt. Những hạt đang được yêu mến, câu chuyện vùng trồng và cách pha cho buổi sáng của bạn.">
+  <meta property="og:image" content="/assets/og-cover.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sương Mai Coffee Roasters — sương sớm trên đồi cà phê Đà Lạt">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/site-theme.css">
   <link rel="stylesheet" href="/home.css">
-  <link rel="stylesheet" href="/shared/placeholder-media.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Sương Mai Coffee Roasters",
+    "description": "Hương cà phê từ sương sớm Đà Lạt. Rang mỗi ngày, truy xuất nguồn gốc.",
+    "logo": "/assets/ui/logo.svg"
+  }
+  </script>
+  <!-- NOTE: JSON-LD Product cho 4 cà phê nổi bật do /home.js inject động từ API thật (không ghi giá/rating tĩnh). -->
   <script src="/catalog/api-client.js" defer></script>
-  <script src="/home.js" defer></script>
+  <script src="/shared/sm-ui.js" defer></script>
+  <script src="/shared/sm-motion.js" defer></script>
   <script src="/shared/site-account.js" defer></script>
+  <script src="/home.js" defer></script>
+  <noscript><style>.sm-preloader { display: none !important; }</style></noscript>
 </head>
 <body>
   <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
-  <header class="site-header" id="site-header">
+  <div class="sm-grain" aria-hidden="true"></div>
+  <div class="sm-preloader" aria-hidden="true"><div class="sm-preloader-brand">Sương Mai</div><p class="sm-preloader-sub">Đang rót sương sớm…</p><div class="sm-preloader-bar"><i></i></div></div>
+  <header class="site-header is-over-hero" id="site-header">
     <div class="header-inner shell">
-      <a class="wordmark" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></a>
+      <a class="wordmark wordmark-with-logo" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><img class="wordmark-logo" src="/assets/ui/logo.svg" alt="" width="49" height="40"><span class="wordmark-stack"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Mở menu"><span></span><span></span><span></span></button>
-      <nav class="primary-nav" id="primary-nav" aria-label="Điều hướng chính" data-account-nav><a href="#featured">Cà phê</a><a href="#story">Câu chuyện</a><a href="#brew">Cách pha</a><a href="#freshness">Độ tươi</a><a href="/catalog/">Cửa hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="/account/" data-account-link>Tài khoản</a><a href="/admin/" data-admin-link hidden>Quản trị</a><button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button><a class="nav-cart" href="/cart/">Giỏ hàng</a></nav>
+      <nav class="primary-nav" id="primary-nav" aria-label="Điều hướng chính" data-account-nav><a href="/#featured">Cà phê</a><a href="/#story">Câu chuyện</a><a href="/#brew">Cách pha</a><a href="/#freshness">Độ tươi</a><a href="/catalog/">Cửa hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="/account/" data-account-link>Tài khoản</a><a href="/admin/" data-admin-link hidden>Quản trị</a><button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button><a class="nav-cart" href="/cart/">Giỏ hàng</a></nav>
     </div>
   </header>
   <main id="main">
-    <section class="hero section-pad" aria-labelledby="hero-title"><div class="hero-inner shell"><div class="hero-copy reveal"><p class="eyebrow"><span class="eyebrow-line"></span> RANG MỖI NGÀY · ĐÀ LẠT</p><h1 id="hero-title">Hương cà phê từ <em>sương sớm</em> Đà Lạt</h1><p class="hero-description">Từ những hạt cà phê được tuyển chọn đến mẻ rang nhỏ thơm nồng — một khoảng lặng ấm áp trong ngày của bạn.</p><div class="hero-actions"><a class="button button-dark" href="#featured">Khám phá cà phê <span aria-hidden="true">↗</span></a><a class="button button-light" href="/catalog/">Tìm gu của bạn</a></div><div class="hero-note"><span class="note-mark" aria-hidden="true">✳</span><span>Chậm một nhịp.<br><strong>Thưởng thức trọn hương.</strong></span></div></div><div class="hero-art media-frame" data-asset-slot="/assets/hero/hero-dalat.webp" role="img" aria-label="Phong cảnh Đà Lạt trong sương sớm."><div class="hero-sun" aria-hidden="true"></div><div class="hero-ridge ridge-back" aria-hidden="true"></div><div class="hero-ridge ridge-front" aria-hidden="true"></div><div class="hero-plant" aria-hidden="true">✳</div><div class="asset-caption"><span class="caption-kicker">SƯƠNG SỚM · ĐÀ LẠT</span><span>ĐÀ LẠT · SƯƠNG SỚM</span></div><span class="hero-stamp" aria-hidden="true">SM<small>ROASTED<br>WITH CARE</small></span></div></div><a class="scroll-cue" href="#values"><span aria-hidden="true">↓</span> KÉO XUỐNG</a></section>
-    <section class="values section-pad" id="values" aria-label="Giá trị của Sương Mai"><div class="shell values-grid"><article class="value-item reveal"><span class="value-number">01</span><div><h2>Rang theo lô nhỏ</h2><p>Chăm chút từng mẻ để hương vị luôn rõ nét.</p></div></article><article class="value-item reveal"><span class="value-number">02</span><div><h2>Truy xuất nguồn gốc</h2><p>Biết vùng trồng, ngày rang và câu chuyện hạt.</p></div></article><article class="value-item reveal"><span class="value-number">03</span><div><h2>Đồng hành cùng nông hộ</h2><p>Trân trọng người vun trồng nên mùa cà phê.</p></div></article><article class="value-item reveal"><span class="value-number">04</span><div><h2>Giao hàng nhanh</h2><p>Cà phê mới rang sớm có mặt bên bạn.</p></div></article></div></section>
-    <section class="featured section-pad" id="featured" aria-labelledby="featured-title"><div class="shell"><div class="section-heading reveal"><div><p class="eyebrow">TỪ VƯỜN ĐẾN TÁCH</p><h2 id="featured-title">Những hạt đang được yêu mến</h2></div><a class="text-link" href="/catalog/">Xem tất cả sản phẩm <span aria-hidden="true">↗</span></a></div><p class="section-intro reveal">Khám phá những lựa chọn được Sương Mai tuyển chọn. Giá và tình trạng hàng được cập nhật tại cửa hàng.</p><p id="featured-status" class="featured-status" role="status" aria-live="polite">Đang tải cà phê nổi bật…</p><div id="featured-grid" class="product-grid" aria-live="polite"></div></div></section>
-    <section class="story section-pad" id="story" aria-labelledby="story-title"><div class="shell story-layout"><div class="story-visual media-frame reveal" data-asset-slot="/assets/story/story-origin.webp" role="img" aria-label="Vùng trồng cà phê trên cao nguyên."><div class="story-orbit orbit-one" aria-hidden="true"></div><div class="story-orbit orbit-two" aria-hidden="true"></div><div class="story-seed" aria-hidden="true">S</div><div class="asset-caption"><span class="caption-kicker">TỪ ĐẤT LÀNH</span><span>CAO NGUYÊN ĐÀ LẠT</span></div></div><div class="story-copy reveal"><p class="eyebrow">MỘT HÀNH TRÌNH CÓ CHỦ Ý</p><h2 id="story-title">Mỗi tách cà phê bắt đầu từ sự trân trọng</h2><p>Chúng tôi tin hương vị đẹp được tạo nên từ những lựa chọn tử tế: hiểu vùng đất, chọn hạt phù hợp, rang vừa đủ và dành thời gian thưởng thức.</p><a class="text-link" href="/catalog/">Tìm hiểu cà phê của chúng tôi <span aria-hidden="true">↗</span></a></div></div><div class="shell process-wrap reveal"><div class="process-heading"><p class="eyebrow">BỐN CHẶNG ĐƯỜNG</p><h3>Từ vùng trồng đến phút thưởng thức</h3></div><div class="process-tabs" role="tablist" aria-label="Các bước làm nên tách cà phê"><button class="process-tab is-active" id="tab-origin" role="tab" aria-selected="true" aria-controls="process-panel" tabindex="0" data-step="origin"><span>01</span> Vùng trồng</button><button class="process-tab" id="tab-select" role="tab" aria-selected="false" aria-controls="process-panel" tabindex="-1" data-step="select"><span>02</span> Chọn hạt</button><button class="process-tab" id="tab-roast" role="tab" aria-selected="false" aria-controls="process-panel" tabindex="-1" data-step="roast"><span>03</span> Rang</button><button class="process-tab" id="tab-brew" role="tab" aria-selected="false" aria-controls="process-panel" tabindex="-1" data-step="brew"><span>04</span> Pha thưởng thức</button></div><div class="process-panel" id="process-panel" role="tabpanel" aria-labelledby="tab-origin" tabindex="0"><div class="process-panel-art" data-asset-slot="/assets/story/process-origin.webp" aria-hidden="true"><span class="process-glyph">⌁</span></div><div class="process-panel-copy"><p class="eyebrow" id="process-count">CHẶNG 01</p><h4 id="process-name">Vùng trồng</h4><p id="process-description">Khí hậu cao nguyên và nhịp mùa tạo nên nét riêng cho mỗi vùng cà phê.</p></div></div></div></section>
-    <section class="freshness section-pad" id="freshness" aria-labelledby="freshness-title"><div class="shell freshness-layout"><div class="freshness-copy reveal"><p class="eyebrow">NGON NHẤT KHI ĐÚNG LÚC</p><h2 id="freshness-title">Ngày rang kể một câu chuyện</h2><p>Ngày rang giúp bạn hiểu hành trình của hạt cà phê và chọn thời điểm thưởng thức phù hợp. Sương Mai hiển thị mốc thưởng thức ngon nhất dựa trên ngày rang khi thông tin lô sẵn có.</p><p class="freshness-note"><span aria-hidden="true">✳</span> Mốc thưởng thức ngon nhất không phải hạn an toàn thực phẩm. Sau mốc này, cà phê chỉ đơn giản đã qua thời điểm được khuyến nghị thưởng thức ngon nhất.</p><a class="button button-light" href="/catalog/">Khám phá cà phê mới rang <span aria-hidden="true">↗</span></a></div><div class="freshness-art media-frame reveal" data-asset-slot="/assets/story/story-roast.webp" role="img" aria-label="Rang và pha cà phê thủ công."><div class="freshness-disc" aria-hidden="true"><span>ROAST<br>DATE</span><strong>+30</strong><small>BEST ENJOYED</small></div><div class="asset-caption"><span class="caption-kicker">RANG CÓ CHỦ Ý</span><span>RANG CÓ CHỦ Ý</span></div></div></div></section>
-    <section class="brew section-pad" id="brew" aria-labelledby="brew-title"><div class="shell brew-layout"><div class="brew-copy reveal"><p class="eyebrow">MỘT KHOẢNH KHẮC ĐỂ PHA</p><h2 id="brew-title">Cách pha nào hợp với buổi sáng của bạn?</h2><p>Chọn một nhịp pha, rồi để hương vị dẫn đường. Bạn có thể xem thêm lựa chọn và cách xay trong cửa hàng.</p><div class="brew-options" role="tablist" aria-label="Chọn cách pha"><button class="brew-option is-active" type="button" role="tab" aria-selected="true" aria-controls="brew-panel" id="brew-tab-phin" data-brew="phin">Phin</button><button class="brew-option" type="button" role="tab" aria-selected="false" aria-controls="brew-panel" id="brew-tab-pourover" data-brew="pourover" tabindex="-1">Pour over</button><button class="brew-option" type="button" role="tab" aria-selected="false" aria-controls="brew-panel" id="brew-tab-french" data-brew="french" tabindex="-1">French press</button></div></div><div class="brew-panel reveal" id="brew-panel" role="tabpanel" aria-labelledby="brew-tab-phin" tabindex="0"><div class="brew-vessel" aria-hidden="true"><span class="brew-steam">⌁</span><span class="brew-glyph">☕</span></div><div><p class="eyebrow" id="brew-kicker">CHẬM VÀ ĐẬM</p><h3 id="brew-name">Phin Việt Nam</h3><p id="brew-description">Một nhịp nhỏ, tròn vị và thân thuộc — hợp cho buổi sáng cần thêm vài phút thong thả.</p><a class="text-link" href="/catalog/">Chọn hạt để pha <span aria-hidden="true">↗</span></a></div></div></div></section>
-    <section class="attention section-pad" aria-labelledby="attention-title"><div class="shell attention-layout"><div class="attention-mark reveal" aria-hidden="true"><span>SM</span><small>CHÚ Ý ĐẾN<br>NHỮNG ĐIỀU NHỎ</small></div><div class="attention-copy reveal"><p class="eyebrow">ĐIỀU CHÚNG TÔI CHÚ Ý</p><h2 id="attention-title">Một mẻ rang tốt bắt đầu từ việc lắng nghe.</h2><p>Nghe hạt thay đổi trong lồng rang. Nhìn màu sắc chuyển mình. Ghi lại ngày rang và những gì cần nhớ để mỗi lần pha sau vẫn giữ được sự rõ ràng.</p><p>Không cần vội vàng để làm nên một tách cà phê đáng nhớ — chỉ cần đủ chăm chút ở những bước nhỏ.</p></div></div></section>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-media" data-hero-media>
+        <!-- TODO(asset): /assets/hero/hero-dalat.mp4 + /assets/hero/hero-dalat.webm (V1, 1920x1080 loop <6MB, muted) và /assets/hero/hero-dalat-mobile.mp4 (V1m, 720x1280 <3MB). Khi có file, video tự phát; hiện tại dùng poster + Ken Burns. -->
+        <video class="hero-video" muted loop playsinline autoplay preload="none" poster="/assets/hero/hero-dalat-1920.webp" data-hero-video aria-hidden="true" tabindex="-1">
+          <source src="/assets/hero/hero-dalat.webm" type="video/webm">
+          <source src="/assets/hero/hero-dalat.mp4" type="video/mp4">
+        </video>
+        <picture class="hero-poster" data-hero-poster>
+          <source media="(max-width: 700px)" srcset="/assets/hero/hero-dalat-768.webp">
+          <source media="(max-width: 1400px)" srcset="/assets/hero/hero-dalat-1200.webp">
+          <img src="/assets/hero/hero-dalat-1920.webp" alt="Sương sớm trôi trên đồi cà phê Đà Lạt lúc bình minh" width="1920" height="1080" fetchpriority="high" loading="eager">
+        </picture>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-mist mist-a" aria-hidden="true"></div>
+        <div class="hero-mist mist-b" aria-hidden="true"></div>
+      </div>
+      <div class="shell-wide hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow eyebrow-light"><span class="live-dot" aria-hidden="true"></span> Rang mỗi ngày · Đà Lạt</p>
+          <h1 id="hero-title" class="hero-title"><span class="line"><span>Hương cà phê</span></span> <span class="line"><span>từ <em>sương sớm</em></span></span> <span class="line"><span>Đà Lạt.</span></span></h1>
+          <p class="hero-description">Từ những hạt cà phê được tuyển chọn đến mẻ rang nhỏ thơm nồng — một khoảng lặng ấm áp trong ngày của bạn.</p>
+          <div class="hero-actions">
+            <a class="button button-cream" href="#featured">Khám phá cà phê <span aria-hidden="true">→</span></a>
+            <a class="button button-outline-light" href="/catalog/">Tìm gu của bạn</a>
+          </div>
+          <!-- TODO(asset): /assets/ui/avatar-1.webp, avatar-2.webp, avatar-3.webp (96x96) cho social-proof hero. Chưa có số liệu đánh giá thật nên không hiện rating/số lượng. -->
+          <p class="hero-proof"><span class="avatar-stack" aria-hidden="true"><i>SM</i><i>SM</i><i>SM</i></span> Từ xưởng rang Đà Lạt đến tách của bạn</p>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#values"><span aria-hidden="true">↓</span> Kéo xuống</a>
+    </section>
 
-    <section class="closing-cta section-pad" aria-labelledby="cta-title"><div class="shell cta-inner reveal"><p class="eyebrow">TÁCH TIẾP THEO CỦA BẠN</p><h2 id="cta-title">Tìm cà phê phù hợp với bạn</h2><p>Khám phá hương vị, chọn cách xay và bắt đầu một buổi sáng thật riêng.</p><div class="hero-actions"><a class="button button-cream" href="/catalog/">Xem tất cả sản phẩm <span aria-hidden="true">↗</span></a><a class="button button-outline-light" href="#contact">Liên hệ Sương Mai</a></div></div></section>
+    <section class="values" id="values" aria-label="Giá trị của Sương Mai">
+      <!-- TODO(backend): values counter (mẻ rang/ngày, % truy xuất, số nông hộ, giờ giao tươi) chỉ hiện khi có endpoint số liệu thật — hiện tại ẩn số, không bịa. -->
+      <div class="shell values-grid">
+        <article class="value-item reveal">
+          <span class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 3-2 4.5-2 7a4 4 0 0 0 8 .5C18.5 7 14 5.5 12 3z"/><path d="M12 21a6 6 0 0 1-6-6c0-2 1-3.5 2-4.5.3 1.5 1 2.5 2 3 .2-2 1.5-4 4-5.5"/></svg></span>
+          <div><h2>Rang theo lô nhỏ</h2><p>Chăm chút từng mẻ để hương vị luôn rõ nét.</p></div>
+        </article>
+        <article class="value-item reveal">
+          <span class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+          <div><h2>Truy xuất nguồn gốc</h2><p>Biết vùng trồng, ngày rang và câu chuyện hạt.</p></div>
+        </article>
+        <article class="value-item reveal">
+          <span class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8"/><path d="M12 13c0-4 3-7 8-7 0 4-3 7-8 7z"/><path d="M12 13c0-3-2.5-5.5-6-5.5 0 3 2.5 5.5 6 5.5z"/></svg></span>
+          <div><h2>Đồng hành cùng nông hộ</h2><p>Trân trọng người vun trồng nên mùa cà phê.</p></div>
+        </article>
+        <article class="value-item reveal">
+          <span class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></span>
+          <div><h2>Giao hàng nhanh</h2><p>Cà phê mới rang sớm có mặt bên bạn.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="featured section-pad" id="featured" aria-labelledby="featured-title">
+      <div class="shell-wide">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">Từ vườn đến tách</p><h2 id="featured-title" data-word-reveal>Những hạt đang được yêu mến</h2></div>
+          <a class="text-link" href="/catalog/">Xem tất cả sản phẩm <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="section-intro reveal">Khám phá những lựa chọn được Sương Mai tuyển chọn. Giá và tình trạng hàng được cập nhật tại cửa hàng.</p>
+        <p id="featured-status" class="featured-status status" role="status">Đang tải cà phê nổi bật…</p>
+        <div id="featured-pin" class="featured-pin"><div id="featured-grid" class="product-grid" aria-live="polite"></div></div>
+      </div>
+    </section>
+
+    <section class="story section-pad" id="story" aria-labelledby="story-title" data-story>
+      <div class="shell story-layout">
+        <div class="story-visual media-fallback reveal">
+          <img src="/assets/story/story-origin.webp" alt="Vườn cà phê Đà Lạt trong sương sớm" width="1200" height="900" loading="lazy" data-asset-slot="/assets/story/story-origin.webp">
+          <span class="fallback-mark" aria-hidden="true">SM</span>
+        </div>
+        <div class="story-copy reveal">
+          <p class="eyebrow">Một hành trình có chủ ý</p>
+          <h2 id="story-title">Mỗi tách cà phê bắt đầu từ sự trân trọng</h2>
+          <p>Chúng tôi tin hương vị đẹp được tạo nên từ những lựa chọn tử tế: hiểu vùng đất, chọn hạt phù hợp, rang vừa đủ và dành thời gian thưởng thức.</p>
+          <a class="text-link" href="/catalog/">Tìm hiểu cà phê của chúng tôi <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="shell process-wrap" id="process">
+        <div class="process-heading reveal"><p class="eyebrow">Bốn chặng đường</p><h3>Từ vùng trồng đến phút thưởng thức</h3></div>
+        <div class="process-stages reveal" data-process-stages>
+          <div class="process-tabs" role="tablist" aria-label="Các bước làm nên tách cà phê">
+            <button class="process-tab is-active" id="tab-origin" type="button" role="tab" aria-selected="true" aria-controls="process-panel" data-step="origin"><span aria-hidden="true">01</span> Vùng trồng</button>
+            <button class="process-tab" id="tab-select" type="button" role="tab" aria-selected="false" aria-controls="process-panel" tabindex="-1" data-step="select"><span aria-hidden="true">02</span> Chọn hạt</button>
+            <button class="process-tab" id="tab-roast" type="button" role="tab" aria-selected="false" aria-controls="process-panel" tabindex="-1" data-step="roast"><span aria-hidden="true">03</span> Rang</button>
+            <button class="process-tab" id="tab-brew" type="button" role="tab" aria-selected="false" aria-controls="process-panel" tabindex="-1" data-step="brew"><span aria-hidden="true">04</span> Pha thưởng thức</button>
+          </div>
+          <div class="process-progress" aria-hidden="true"><i data-process-progress></i></div>
+          <div class="process-panel" id="process-panel" role="tabpanel" aria-labelledby="tab-origin" tabindex="0">
+            <div class="process-panel-art media-fallback" data-asset-slot="/assets/story/process-farm.webp">
+              <img src="/assets/story/process-farm.webp" alt="" width="1000" height="1250" loading="lazy" data-step-image="origin">
+              <img src="/assets/story/process-select.webp" alt="" width="1000" height="1250" loading="lazy" data-step-image="select" hidden>
+              <img src="/assets/story/process-roast.webp" alt="" width="1000" height="1250" loading="lazy" data-step-image="roast" hidden>
+              <img src="/assets/story/process-brew.webp" alt="" width="1000" height="1250" loading="lazy" data-step-image="brew" hidden>
+              <span class="fallback-mark" aria-hidden="true">SM</span>
+            </div>
+            <div class="process-panel-copy"><p class="eyebrow" id="process-count">Chặng 01</p><h4 id="process-name">Vùng trồng</h4><p id="process-description">Khí hậu cao nguyên và nhịp mùa tạo nên nét riêng cho mỗi vùng cà phê.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="freshness section-pad" id="freshness" aria-labelledby="freshness-title">
+      <div class="shell freshness-layout">
+        <div class="freshness-copy reveal">
+          <p class="eyebrow">Ngon nhất khi đúng lúc</p>
+          <h2 id="freshness-title">Ngày rang kể một câu chuyện</h2>
+          <p>Ngày rang giúp bạn hiểu hành trình của hạt cà phê và chọn thời điểm thưởng thức phù hợp. Sương Mai hiển thị mốc thưởng thức ngon nhất dựa trên ngày rang khi thông tin lô sẵn có.</p>
+          <div class="freshness-timeline" role="group" aria-label="Chọn mốc ngày sau rang">
+            <button type="button" class="fresh-dot" data-fresh="day0" aria-pressed="false"><span aria-hidden="true">0</span>Ngày 0</button>
+            <button type="button" class="fresh-dot is-active" data-fresh="day7" aria-pressed="true"><span aria-hidden="true">7</span>Ngày 7</button>
+            <button type="button" class="fresh-dot" data-fresh="day14" aria-pressed="false"><span aria-hidden="true">14</span>Ngày 14</button>
+            <button type="button" class="fresh-dot" data-fresh="day30" aria-pressed="false"><span aria-hidden="true">30</span>Ngày 30</button>
+          </div>
+          <p class="freshness-tip" id="freshness-tip" role="status"><strong id="freshness-tip-name">Đang ở độ thơm nhất.</strong> <span id="freshness-tip-text">Hương tròn đầy — lúc hợp nhất cho pour over buổi sáng.</span></p>
+          <p class="freshness-note"><span aria-hidden="true">✳</span> Mốc thưởng thức ngon nhất không phải hạn an toàn thực phẩm. Sau mốc này, cà phê chỉ đơn giản đã qua thời điểm được khuyến nghị thưởng thức ngon nhất.</p>
+          <a class="button button-light" href="/catalog/">Khám phá cà phê mới rang <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="freshness-art media-fallback reveal">
+          <img src="/assets/story/story-roast.webp" alt="Mẻ rang mới đổ ra khay" width="1200" height="800" loading="lazy" data-asset-slot="/assets/story/story-roast.webp">
+          <div class="freshness-disc" aria-hidden="true"><i class="disc-ring ring-a"></i><i class="disc-ring ring-b"></i><span>ROAST<br>DATE</span><strong>+30</strong><small>BEST ENJOYED</small></div>
+          <span class="fallback-mark" aria-hidden="true">SM</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="brew section-pad" id="brew" aria-labelledby="brew-title">
+      <div class="shell brew-layout">
+        <div class="brew-copy reveal">
+          <p class="eyebrow">Một khoảnh khắc để pha</p>
+          <h2 id="brew-title">Cách pha nào hợp với buổi sáng của bạn?</h2>
+          <p>Chọn một nhịp pha, rồi để hương vị dẫn đường. Bạn có thể xem thêm lựa chọn và cách xay trong cửa hàng.</p>
+          <div class="brew-options" role="tablist" aria-label="Chọn cách pha">
+            <button class="brew-card is-active" type="button" role="tab" aria-selected="true" aria-controls="brew-panel" id="brew-tab-phin" data-brew="phin">
+              <span class="brew-thumb media-fallback"><img src="/assets/brew/phin.webp" alt="" width="800" height="600" loading="lazy"><span class="fallback-mark" aria-hidden="true">SM</span></span>
+              <span class="brew-card-name">Phin</span>
+            </button>
+            <button class="brew-card" type="button" role="tab" aria-selected="false" aria-controls="brew-panel" id="brew-tab-pourover" data-brew="pourover" tabindex="-1">
+              <span class="brew-thumb media-fallback"><img src="/assets/brew/pour-over.webp" alt="" width="800" height="600" loading="lazy"><span class="fallback-mark" aria-hidden="true">SM</span></span>
+              <span class="brew-card-name">Pour over</span>
+            </button>
+            <button class="brew-card" type="button" role="tab" aria-selected="false" aria-controls="brew-panel" id="brew-tab-french" data-brew="french" tabindex="-1">
+              <span class="brew-thumb media-fallback"><img src="/assets/brew/french-press.webp" alt="" width="800" height="600" loading="lazy"><span class="fallback-mark" aria-hidden="true">SM</span></span>
+              <span class="brew-card-name">French press</span>
+            </button>
+          </div>
+        </div>
+        <div class="brew-panel reveal" id="brew-panel" role="tabpanel" aria-labelledby="brew-tab-phin" tabindex="0">
+          <div class="brew-vessel media-fallback" aria-hidden="true">
+            <img src="/assets/brew/phin.webp" alt="" width="800" height="600" loading="lazy" data-brew-image>
+            <span class="fallback-mark">SM</span>
+          </div>
+          <div>
+            <p class="eyebrow" id="brew-kicker">Chậm và đậm</p>
+            <h3 id="brew-name">Phin Việt Nam</h3>
+            <p id="brew-description">Một nhịp nhỏ, tròn vị và thân thuộc — hợp cho buổi sáng cần thêm vài phút thong thả.</p>
+            <dl class="brew-recipe" aria-label="Công thức nhanh">
+              <div><dt>Tỉ lệ</dt><dd id="brew-ratio">1 : 10</dd></div>
+              <div><dt>Nhiệt độ</dt><dd id="brew-temp">92°C</dd></div>
+              <div><dt>Thời gian</dt><dd id="brew-time">5–7 phút</dd></div>
+            </dl>
+            <a class="button button-light" href="/catalog/?brew=phin" data-brew-cta>Mua hạt cho cách pha này <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="attention section-pad" aria-labelledby="attention-title">
+      <div class="shell attention-center reveal">
+        <p class="attention-mark" aria-hidden="true"><span>SM</span></p>
+        <p class="eyebrow eyebrow-center">Điều chúng tôi chú ý</p>
+        <h2 id="attention-title" data-word-reveal>Một mẻ rang tốt bắt đầu từ việc lắng nghe.</h2>
+        <p>Nghe hạt thay đổi trong lồng rang. Nhìn màu sắc chuyển mình. Ghi lại ngày rang và những gì cần nhớ để mỗi lần pha sau vẫn giữ được sự rõ ràng.</p>
+        <p>Không cần vội vàng để làm nên một tách cà phê đáng nhớ — chỉ cần đủ chăm chút ở những bước nhỏ.</p>
+      </div>
+    </section>
+
+    <section class="closing-cta section-pad" aria-labelledby="cta-title">
+      <div class="cta-bg media-fallback" aria-hidden="true">
+        <img src="/assets/cta/closing-hands-cup.webp" alt="" width="1920" height="1080" loading="lazy">
+        <span class="fallback-mark">SM</span>
+      </div>
+      <div class="shell cta-inner reveal">
+        <p class="eyebrow eyebrow-light eyebrow-center">Tách tiếp theo của bạn</p>
+        <h2 id="cta-title">Tìm cà phê phù hợp với bạn</h2>
+        <p>Khám phá hương vị, chọn cách xay và bắt đầu một buổi sáng thật riêng.</p>
+        <div class="hero-actions cta-actions">
+          <a class="button button-cream" href="/catalog/">Xem tất cả sản phẩm <span aria-hidden="true">↗</span></a>
+          <a class="button button-outline-light" href="#contact">Liên hệ Sương Mai</a>
+        </div>
+        <!-- TODO(backend): newsletter ngoài MVP — chỉ UI + validate client + toast. Khi có endpoint thật mới gắn fetch, không tự tạo bảng/API. -->
+        <form class="newsletter" id="newsletter-form" novalidate>
+          <label class="visually-hidden" for="newsletter-email">Email của bạn</label>
+          <input type="email" id="newsletter-email" name="email" placeholder="Email của bạn" autocomplete="email" required>
+          <button class="button button-cream" type="submit">Nhận ưu đãi mẻ rang mới</button>
+        </form>
+        <p class="newsletter-error" id="newsletter-error" role="alert" hidden></p>
+        <p class="microcopy">1 email/tuần. Không spam.</p>
+      </div>
+    </section>
   </main>
-  <footer class="site-footer" id="contact"><div class="shell footer-main"><div class="footer-brand"><a class="wordmark wordmark-light" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></a><p>Hương cà phê từ sương sớm Đà Lạt.</p></div><div class="footer-column"><h2>Khám phá</h2><a href="/catalog/">Cửa hàng</a><a href="/account/">Tài khoản</a><a href="/cart/">Giỏ hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a></div><div class="footer-column"><h2>Liên hệ</h2><p>Xưởng rang: Đà Lạt, Lâm Đồng</p></div><div class="footer-column"><h2>Ghé thăm</h2><a href="/catalog/">Chọn cà phê</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="#main">Về đầu trang ↑</a></div></div><div class="shell footer-bottom"><span>© Sương Mai Coffee Roasters</span><span>RANG TẠI ĐÀ LẠT · GIAO HÀNG TẬN NƠI</span></div></footer>
+  <footer class="site-footer" id="contact">
+    <div class="shell footer-main">
+      <div class="footer-brand">
+        <a class="wordmark wordmark-light" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></a>
+        <p>Hương cà phê từ sương sớm Đà Lạt.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Sương Mai trên Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5z"/></svg></a>
+          <a href="#" aria-label="Sương Mai trên Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm0-1.7a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm6.2-.3a1.1 1.1 0 1 1-2.3 0 1.1 1.1 0 0 1 2.3 0zM12 4.5c-2.5 0-2.9 0-3.9.1-1 .1-1.7.2-2.3.5-.6.2-1 .5-1.5 1-.4.4-.7.9-1 1.5-.2.6-.4 1.3-.5 2.3-.1 1-.1 1.4-.1 3.9s0 2.9.1 3.9c.1 1 .2 1.7.5 2.3.2.6.5 1 1 1.5.4.4.9.7 1.5 1 .6.2 1.3.4 2.3.5 1 .1 1.4.1 3.9.1s2.9 0 3.9-.1c1-.1 1.7-.2 2.3-.5.6-.2 1-.5 1.5-1 .4-.4.7-.9 1-1.5.2-.6.4-1.3.5-2.3.1-1 .1-1.4.1-3.9s0-2.9-.1-3.9c-.1-1-.2-1.7-.5-2.3a3.7 3.7 0 0 0-1-1.5 3.7 3.7 0 0 0-1.5-1c-.6-.2-1.3-.4-2.3-.5-1-.1-1.4-.1-3.9-.1z"/></svg></a>
+          <a href="#" aria-label="Sương Mai trên TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 4.5c.4 2 1.8 3.4 3.9 3.6v2.7c-1.5 0-2.8-.5-3.9-1.3v6.6c0 3.4-2.6 5.9-5.9 5.9-3.2 0-5.7-2.5-5.7-5.7 0-3.3 2.7-5.9 6.1-5.7v2.8c-1.8-.2-3.3 1.1-3.3 2.9 0 1.6 1.3 2.9 2.9 2.9 1.7 0 3-1.3 3-3.1V4.5h2.9z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-column"><h2>Khám phá</h2><a href="/catalog/">Cửa hàng</a><a href="/account/">Tài khoản</a><a href="/cart/">Giỏ hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a></div>
+      <div class="footer-column"><h2>Liên hệ</h2><p>Xưởng rang: Đà Lạt, Lâm Đồng</p></div>
+      <div class="footer-column"><h2>Ghé thăm</h2><a href="/catalog/">Chọn cà phê</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="#main">Về đầu trang ↑</a></div>
+    </div>
+    <div class="shell footer-bottom"><span>© Sương Mai Coffee Roasters</span><span>RANG TẠI ĐÀ LẠT · GIAO HÀNG TẬN NƠI</span></div>
+  </footer>
 </body>
 </html>

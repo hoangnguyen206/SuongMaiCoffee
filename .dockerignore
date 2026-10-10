@@ -15,3 +15,5 @@ _apply_review.py
 tests
 docs
 public/checkout/checkout-mock.js
+# Anh goc chua toi uu (ban web-ready nam trong public/assets/)
+assets

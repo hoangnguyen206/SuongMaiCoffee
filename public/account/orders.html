@@ -3,19 +3,111 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Lịch sử đơn hàng của bạn.">
+  <meta name="description" content="Lịch sử đơn hàng của bạn tại Sương Mai Coffee Roasters.">
+  <meta name="robots" content="noindex, nofollow">
   <title>Đơn hàng của tôi — Sương Mai</title>
-  <link rel="stylesheet" href="orders.css">
-  <script src="../cart/cart-api.js" defer></script>
-  <script src="orders.js" defer></script>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../shared/site-theme.css">
+  <link rel="stylesheet" href="/shared/site-theme.css">
+  <link rel="stylesheet" href="/account/orders.css">
+  <script src="/shared/sm-ui.js" defer></script>
+  <script src="/shared/sm-motion.js" defer></script>
+  <script src="/shared/site-account.js" defer></script>
+  <script src="/account/account-api.js" defer></script>
+  <script src="/cart/cart-api.js" defer></script>
+  <script src="/catalog/api-client.js" defer></script>
+  <script src="/account/orders.js" defer></script>
+  <noscript><style>.sm-preloader { display: none !important; }</style></noscript>
 </head>
 <body>
+  <div class="sm-grain" aria-hidden="true"></div>
+  <div class="sm-preloader" aria-hidden="true">
+    <div class="sm-preloader-brand">Sương Mai</div>
+    <p class="sm-preloader-sub">Đang rót sương sớm…</p>
+    <div class="sm-preloader-bar"><i></i></div>
+  </div>
   <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
-  <header><a href="/">Sương Mai <span>COFFEE ROASTERS</span></a><nav><a href="/catalog/">Cửa hàng</a><a href="/cart/">Giỏ hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a></nav></header>
-  <main id="main" class="page"><p class="eyebrow">TÀI KHOẢN</p><h1>Đơn hàng của tôi</h1><p id="status" role="status" aria-live="polite">Đang tải…</p><section id="orders" aria-live="polite"></section></main>
-  <footer>Rang tại Đà Lạt · giao hàng tận nơi</footer>
+  <header class="site-header" id="site-header">
+    <div class="header-inner shell">
+      <a class="wordmark wordmark-with-logo" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><img class="wordmark-logo" src="/assets/ui/logo.svg" alt="" width="49" height="40"><span class="wordmark-stack"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Mở menu"><span></span><span></span><span></span></button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Điều hướng chính" data-account-nav><a href="/#featured">Cà phê</a><a href="/#story">Câu chuyện</a><a href="/#brew">Cách pha</a><a href="/#freshness">Độ tươi</a><a href="/catalog/">Cửa hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="/account/" data-account-link>Tài khoản</a><a href="/admin/" data-admin-link hidden>Quản trị</a><button class="nav-logout" type="button" data-logout hidden>Đăng xuất</button><a class="nav-cart" href="/cart/">Giỏ hàng</a></nav>
+    </div>
+  </header>
+  <main id="main" class="orders-main shell">
+    <nav aria-label="Đường dẫn"><ol class="breadcrumb"><li><a href="/">Trang chủ</a></li><li><a href="/account/">Tài khoản</a></li><li><span aria-current="page">Đơn hàng</span></li></ol></nav>
+    <div class="orders-head">
+      <div>
+        <p class="eyebrow">Tài khoản</p>
+        <h1>Đơn hàng của tôi</h1>
+        <p id="status" class="hint" role="status" aria-live="polite">Đang tải đơn hàng…</p>
+      </div>
+      <a class="button button-outline" href="/account/">← Về tài khoản</a>
+    </div>
+
+    <div id="orders-auth" class="panel auth-needed" hidden>
+      <h2>Bạn chưa đăng nhập</h2>
+      <p>Đăng nhập để xem lịch sử đơn hàng, hoặc tra cứu nhanh bằng mã đơn và số điện thoại.</p>
+      <p class="auth-needed-actions"><a class="button" href="/account/">Đăng nhập</a><a class="button button-outline" href="/orders/lookup/">Tra cứu bằng mã đơn</a></p>
+    </div>
+
+    <div id="orders-body" hidden>
+      <form id="orders-toolbar" class="orders-toolbar" role="search" aria-label="Tìm và lọc đơn hàng">
+        <div class="field toolbar-search">
+          <label for="orders-q">Tìm theo mã đơn</label>
+          <input id="orders-q" name="q" type="search" autocomplete="off" placeholder="VD: SM260511…">
+        </div>
+        <div class="field">
+          <label for="orders-status">Trạng thái</label>
+          <select id="orders-status" name="status">
+            <option value="">Tất cả</option>
+            <option value="pending">Chờ xác nhận</option>
+            <option value="confirmed">Đã xác nhận</option>
+            <option value="roasting">Đang rang</option>
+            <option value="shipping">Đang giao</option>
+            <option value="completed">Đã giao</option>
+            <option value="cancelled">Đã hủy</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="orders-range">Thời gian</label>
+          <select id="orders-range" name="range">
+            <option value="all">Tất cả</option>
+            <option value="30">30 ngày qua</option>
+            <option value="180">6 tháng qua</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="orders-sort">Sắp xếp</label>
+          <select id="orders-sort" name="sort">
+            <option value="newest">Mới nhất</option>
+            <option value="oldest">Cũ nhất</option>
+            <option value="value">Giá trị cao nhất</option>
+          </select>
+        </div>
+        <button id="orders-clear" class="button button-sm button-outline" type="button" hidden>Xóa lọc</button>
+      </form>
+      <p id="orders-count" class="hint" role="status" aria-live="polite"></p>
+      <section id="orders" class="order-card-list" aria-live="polite" aria-label="Danh sách đơn hàng"></section>
+      <div class="orders-more"><button id="orders-more" class="button button-outline" type="button" hidden>Xem thêm</button></div>
+    </div>
+  </main>
+  <footer class="site-footer" id="contact">
+    <div class="shell footer-main">
+      <div class="footer-brand">
+        <a class="wordmark wordmark-light" href="/" aria-label="Sương Mai Coffee Roasters — trang chủ"><span class="wordmark-name">Sương Mai</span><span class="wordmark-sub">COFFEE ROASTERS</span></a>
+        <p>Hương cà phê từ sương sớm Đà Lạt.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Sương Mai trên Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5z"/></svg></a>
+          <a href="#" aria-label="Sương Mai trên Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm0-1.7a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm6.2-.3a1.1 1.1 0 1 1-2.3 0 1.1 1.1 0 0 1 2.3 0zM12 4.5c-2.5 0-2.9 0-3.9.1-1 .1-1.7.2-2.3.5-.6.2-1 .5-1.5 1-.4.4-.7.9-1 1.5-.2.6-.4 1.3-.5 2.3-.1 1-.1 1.4-.1 3.9s0 2.9.1 3.9c.1 1 .2 1.7.5 2.3.2.6.5 1 1 1.5.4.4.9.7 1.5 1 .6.2 1.3.4 2.3.5 1 .1 1.4.1 3.9.1s2.9 0 3.9-.1c1-.1 1.7-.2 2.3-.5.6-.2 1-.5 1.5-1 .4-.4.7-.9 1-1.5.2-.6.4-1.3.5-2.3.1-1 .1-1.4.1-3.9s0-2.9-.1-3.9c-.1-1-.2-1.7-.5-2.3a3.7 3.7 0 0 0-1-1.5 3.7 3.7 0 0 0-1.5-1c-.6-.2-1.3-.4-2.3-.5-1-.1-1.4-.1-3.9-.1z"/></svg></a>
+          <a href="#" aria-label="Sương Mai trên TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 4.5c.4 2 1.8 3.4 3.9 3.6v2.7c-1.5 0-2.8-.5-3.9-1.3v6.6c0 3.4-2.6 5.9-5.9 5.9-3.2 0-5.7-2.5-5.7-5.7 0-3.3 2.7-5.9 6.1-5.7v2.8c-1.8-.2-3.3 1.1-3.3 2.9 0 1.6 1.3 2.9 2.9 2.9 1.7 0 3-1.3 3-3.1V4.5h2.9z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-column"><h2>Khám phá</h2><a href="/catalog/">Cửa hàng</a><a href="/account/">Tài khoản</a><a href="/cart/">Giỏ hàng</a><a href="/orders/lookup/">Tra cứu đơn hàng</a></div>
+      <div class="footer-column"><h2>Liên hệ</h2><p>Xưởng rang: Đà Lạt, Lâm Đồng</p></div>
+      <div class="footer-column"><h2>Ghé thăm</h2><a href="/catalog/">Chọn cà phê</a><a href="/orders/lookup/">Tra cứu đơn hàng</a><a href="#main">Về đầu trang ↑</a></div>
+    </div>
+    <div class="shell footer-bottom"><span>© Sương Mai Coffee Roasters</span><span>RANG TẠI ĐÀ LẠT · GIAO HÀNG TẬN NƠI</span></div>
+  </footer>
 </body>
 </html>
