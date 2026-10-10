@@ -21,8 +21,7 @@
     status.textContent = message;
     const box = document.createElement('div');
     box.className = 'card empty-state';
-    // TODO(asset): order-not-found.svg chưa có — dùng tạm icon hạt cà phê.
-    box.innerHTML = '<img src="/assets/ui/icon-bean.svg" alt="" width="72" height="72" loading="lazy">' +
+    box.innerHTML = '<img src="/assets/ui/order-not-found.svg" alt="" width="72" height="72" loading="lazy">' +
       `<h3>${esc(message)}</h3>` +
       (loginHint
         ? '<p><a class="button" href="/account/">Đăng nhập để tiếp tục</a> <a class="button button-outline" href="/orders/lookup/">Tra cứu bằng mã đơn</a></p>'

@@ -118,17 +118,15 @@ html.sm-anim .hero-title.is-inview .line:nth-child(3) > span { transition-delay:
   font-size: .92rem;
 }
 .avatar-stack { display: inline-flex; }
-.avatar-stack i {
-  display: inline-grid; place-items: center;
+.avatar-stack img {
   width: 34px; height: 34px;
   margin-left: -10px;
   border: 2px solid rgba(251, 249, 244, .85);
   border-radius: 50%;
-  background: linear-gradient(145deg, var(--clay), var(--rust));
-  color: var(--paper);
-  font-size: .6rem; font-weight: 700; font-style: normal;
+  object-fit: cover;
+  background: var(--cream);
 }
-.avatar-stack i:first-child { margin-left: 0; }
+.avatar-stack img:first-child { margin-left: 0; }
 .scroll-cue {
   position: absolute; z-index: 2;
   left: 50%; bottom: 22px;

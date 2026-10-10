@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Không tìm thấy">
+  <circle cx="50" cy="50" r="27" fill="#FBF9F4" stroke="#2E3A2C" stroke-width="4"/>
+  <line x1="69" y1="69" x2="90" y2="90" stroke="#2E3A2C" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="50" cy="50" rx="10" ry="14" fill="none" stroke="#7E5233" stroke-width="3"/>
+  <path d="M50 36c-8 9 8 19 0 28" fill="none" stroke="#7E5233" stroke-width="3" stroke-linecap="round"/>
+</svg>

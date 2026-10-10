@@ -144,8 +144,7 @@
     if (!list.length) {
       const empty = document.createElement('div');
       empty.className = 'card empty-state';
-      // TODO(asset): empty-search.svg chưa có — dùng tạm icon hạt cà phê.
-      empty.innerHTML = '<img src="/assets/ui/icon-bean.svg" alt="" width="72" height="72" loading="lazy">' +
+      empty.innerHTML = '<img src="/assets/ui/empty-search.svg" alt="" width="72" height="72" loading="lazy">' +
         '<h3>Không tìm thấy đơn phù hợp.</h3><p>Thử đổi từ khóa hoặc nới điều kiện lọc nhé.</p>';
       empty.querySelector('img').addEventListener('error', event => event.target.remove(), { once: true });
       container.append(empty);

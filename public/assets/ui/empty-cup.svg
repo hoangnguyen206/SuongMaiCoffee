@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Tách cà phê">
+  <style>
+    .steam{fill:none;stroke:#B8875B;stroke-width:3;stroke-linecap:round;stroke-dasharray:5 7;animation:sm-rise 1.6s linear infinite}
+    .steam.s2{animation-delay:-.8s}
+    @keyframes sm-rise{to{stroke-dashoffset:-24}}
+    @media (prefers-reduced-motion:reduce){.steam{animation:none}}
+  </style>
+  <ellipse cx="80" cy="122" rx="46" ry="9" fill="none" stroke="#2E3A2C" stroke-width="3"/>
+  <path d="M46 72h68v20c0 18-15 28-34 28S46 110 46 92z" fill="#F4EFE5" stroke="#2E3A2C" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M114 80c13 0 13 20-2 22" fill="none" stroke="#2E3A2C" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="80" cy="72" rx="34" ry="7" fill="#7E5233"/>
+  <ellipse cx="80" cy="72" rx="34" ry="7" fill="none" stroke="#2E3A2C" stroke-width="3"/>
+  <path class="steam" d="M68 54c-5-7 5-11 0-18s5-11 0-18"/>
+  <path class="steam s2" d="M92 56c-5-7 5-11 0-18s5-11 0-18"/>
+</svg>

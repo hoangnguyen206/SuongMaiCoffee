@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Avatar khách hàng 3">
+  <defs>
+    <clipPath id="sm-av3"><circle cx="48" cy="48" r="45"/></clipPath>
+  </defs>
+  <circle cx="48" cy="48" r="45" fill="#D3B58F"/>
+  <g clip-path="url(#sm-av3)">
+    <circle cx="48" cy="39" r="17" fill="#2E3A2C"/>
+    <path d="M12 98c2-21 16-34 36-34s34 13 36 34z" fill="#F4EFE5"/>
+  </g>
+  <circle cx="48" cy="48" r="45" fill="none" stroke="#2E3A2C" stroke-opacity=".2" stroke-width="2"/>
+</svg>

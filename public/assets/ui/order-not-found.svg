@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Không tìm thấy đơn hàng">
+  <path d="M28 56h64v40a4 4 0 0 1-4 4H32a4 4 0 0 1-4-4z" fill="#F4EFE5" stroke="#2E3A2C" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M28 56l10-16h44l10 16" fill="#E6DECE" stroke="#2E3A2C" stroke-width="3" stroke-linejoin="round"/>
+  <line x1="60" y1="40" x2="60" y2="56" stroke="#2E3A2C" stroke-width="2"/>
+  <line x1="60" y1="56" x2="60" y2="100" stroke="#B8875B" stroke-width="3" stroke-dasharray="6 4"/>
+  <circle cx="94" cy="27" r="14" fill="#B8875B"/>
+  <text x="94" y="34" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="21" font-weight="bold" fill="#FBF9F4">?</text>
+</svg>
