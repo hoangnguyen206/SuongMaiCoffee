@@ -51,8 +51,11 @@
     const video = document.querySelector('[data-hero-video]');
     if (!media || !video) return;
     const conn = navigator.connection || {};
-    if (window.innerWidth < 700 || conn.saveData || isReduced()) return;
-    fetch('/assets/hero/hero-dalat.mp4', { method: 'HEAD' }).then((res) => {
+    if (conn.saveData || isReduced()) return;
+    const probe = window.innerWidth < 700
+      ? '/assets/hero/hero-dalat-mobile.mp4'
+      : '/assets/hero/hero-dalat.mp4';
+    fetch(probe, { method: 'HEAD' }).then((res) => {
       if (!res.ok) return;
       media.classList.add('has-video');
       video.preload = 'auto';

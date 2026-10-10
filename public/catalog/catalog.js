@@ -1012,7 +1012,29 @@
     }
   });
 
+  // Video hero: chi load khi file that ton tai (HEAD check); save-data /
+  // reduced-motion thi dung anh poster. Khong bao gio hien icon video vo.
+  function initShopHeroVideo() {
+    const media = document.querySelector('[data-shop-hero-media]');
+    const video = document.querySelector('[data-shop-hero-video]');
+    if (!media || !video) return;
+    const conn = navigator.connection || {};
+    const reduced = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
+    if (conn.saveData || reduced) return;
+    const probe = window.innerWidth < 700
+      ? '/assets/hero/hero-dalat-mobile.mp4'
+      : '/assets/hero/hero-dalat.mp4';
+    fetch(probe, { method: 'HEAD' }).then((res) => {
+      if (!res.ok) return;
+      media.classList.add('has-video');
+      video.preload = 'auto';
+      const play = video.play && video.play();
+      if (play && play.catch) play.catch(() => media.classList.remove('has-video'));
+    }).catch(() => {});
+  }
+
   // -- Boot ------------------------------------------------------------------
+  initShopHeroVideo();
   loadFilters().then(() => {
     applyQueryFilters();
     renderFilterOptions();

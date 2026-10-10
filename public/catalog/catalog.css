@@ -19,7 +19,10 @@
   color: var(--paper);
 }
 .shop-hero-media { position: absolute; inset: 0; }
-.shop-hero-media img { width: 100%; height: 100%; object-fit: cover; }
+.shop-hero-media img, .shop-hero-video { width: 100%; height: 100%; object-fit: cover; }
+.shop-hero-video { display: none; }
+.shop-hero-media.has-video .shop-hero-video { display: block; }
+.shop-hero-media.has-video [data-shop-hero-poster] { display: none; }
 .shop-hero::after {
   content: "";
   position: absolute;

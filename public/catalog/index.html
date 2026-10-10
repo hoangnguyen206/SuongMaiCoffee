@@ -48,12 +48,17 @@
   </header>
 
   <main id="catalog-main" tabindex="-1">
-    <!-- TODO(asset): hero catalog đang dùng ảnh tĩnh hero-dalat-1200.webp; khi có /assets/hero/hero-dalat-1920.mp4 (V1) + bản mobile (V1m) thì thêm <video> nền, giữ ảnh này làm poster. -->
+    <!-- Hero catalog: video nen V1/V1m + poster 16:9; anh tinh giu lam fallback. JS chi bat khi file ton tai (HEAD check). -->
     <section class="shop-hero" aria-labelledby="catalog-title">
-      <div class="shop-hero-media" aria-hidden="true">
+      <div class="shop-hero-media" data-shop-hero-media aria-hidden="true">
+        <video class="shop-hero-video" muted loop playsinline autoplay preload="none" poster="/assets/hero/hero-dalat-poster.webp" data-shop-hero-video tabindex="-1">
+          <source src="/assets/hero/hero-dalat-mobile.mp4" type="video/mp4" media="(max-width: 700px)">
+          <source src="/assets/hero/hero-dalat.webm" type="video/webm">
+          <source src="/assets/hero/hero-dalat.mp4" type="video/mp4">
+        </video>
         <img src="/assets/hero/hero-dalat-1200.webp"
              srcset="/assets/hero/hero-dalat-768.webp 768w, /assets/hero/hero-dalat-1200.webp 1200w, /assets/hero/hero-dalat-1920.webp 1920w"
-             sizes="100vw" alt="" width="1200" height="630" fetchpriority="high" loading="eager" onerror="this.remove()">
+             sizes="100vw" alt="" width="1200" height="630" fetchpriority="high" loading="eager" data-shop-hero-poster onerror="this.remove()">
       </div>
       <div class="shell shop-hero-inner">
         <nav aria-label="Breadcrumb"><ol class="breadcrumb breadcrumb-light">

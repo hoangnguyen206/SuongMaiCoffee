@@ -54,8 +54,9 @@
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-media" data-hero-media>
-        <!-- TODO(asset): /assets/hero/hero-dalat.mp4 + /assets/hero/hero-dalat.webm (V1, 1920x1080 loop <6MB, muted) và /assets/hero/hero-dalat-mobile.mp4 (V1m, 720x1280 <3MB). Khi có file, video tự phát; hiện tại dùng poster + Ken Burns. -->
-        <video class="hero-video" muted loop playsinline autoplay preload="none" poster="/assets/hero/hero-dalat-1920.webp" data-hero-video aria-hidden="true" tabindex="-1">
+        <!-- Hero video V1/V1m + poster 16:9. JS chi bat khi file ton tai (HEAD check); mobile/save-data/reduced-motion dung poster + Ken Burns. -->
+        <video class="hero-video" muted loop playsinline autoplay preload="none" poster="/assets/hero/hero-dalat-poster.webp" data-hero-video aria-hidden="true" tabindex="-1">
+          <source src="/assets/hero/hero-dalat-mobile.mp4" type="video/mp4" media="(max-width: 700px)">
           <source src="/assets/hero/hero-dalat.webm" type="video/webm">
           <source src="/assets/hero/hero-dalat.mp4" type="video/mp4">
         </video>
